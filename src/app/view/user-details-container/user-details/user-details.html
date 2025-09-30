@@ -1,0 +1,138 @@
+<div class="user-details-container" *ngIf="user">
+  <h2>User Details</h2>
+
+  
+  <div *ngIf="!isEditing">
+    <div class="detail-row">
+      <span class="label">ID:</span>
+      <span class="value">{{ user.id }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Name:</span>
+      <span class="value">{{ user.name }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Email:</span>
+      <span class="value">{{ user.email }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Role:</span>
+      <span class="value">{{ user.role }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Phone:</span>
+      <span class="value">{{ user.phone ? user.phone : '----' }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Address:</span>
+      <span class="value">{{ user.address ? user.address : '----' }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Habits:</span>
+      <div class="value">
+        <ng-container *ngIf="user.habits && user.habits.length > 0; else emptyHabits">
+          <mat-chip-set role="list">
+            <mat-chip *ngFor="let habit of user.habits" selectable="false" removable="false">
+              {{ habit }}
+            </mat-chip>
+          </mat-chip-set>
+        </ng-container>
+        <ng-template #emptyHabits>----</ng-template>
+      </div>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Sample:</span>
+      <div class="value">
+        <ng-container *ngIf="user.sample && user.sample.length > 0; else emptySample">
+          <div *ngFor="let item of user.sample" class="sample-view-box">
+            <div class="fake-input">{{ item.key || '----' }}</div>
+            <div class="fake-input">{{ item.value || '----' }}</div>
+          </div>
+        </ng-container>
+        <ng-template #emptySample>
+          <div class="sample-view-box">
+            <div class="fake-input">----</div>
+            <div class="fake-input">----</div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button mat-stroked-button color="accent" (click)="goBack()">Back to Dashboard</button>
+      <button mat-stroked-button color="accent" (click)="enableEdit()">Edit</button>
+    </div>
+  </div>
+
+
+  <form *ngIf="isEditing" [formGroup]="editForm" (ngSubmit)="saveUser()">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name" placeholder="Enter name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" placeholder="Enter email" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Role</mat-label>
+      <input matInput type="text" formControlName="role" placeholder="Enter role" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Phone</mat-label>
+      <input matInput type="text" formControlName="phone" placeholder="Enter phone number" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Address</mat-label>
+      <input matInput type="text" formControlName="address" placeholder="Enter address" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Habits</mat-label>
+      <input matInput type="text" formControlName="habits" placeholder="e.g. Reading, Coding, Gym" />
+    </mat-form-field>
+
+ 
+    <div class="detail-row">
+      <span class="label">Sample:</span>
+      <div formArrayName="sample" class="sample-container">
+        <div *ngFor="let group of sampleArray.controls; let i = index" [formGroupName]="i" class="sample-row">
+          <mat-form-field appearance="outline" class="sample-input">
+            <mat-label>Key</mat-label>
+            <input matInput type="text" formControlName="key" placeholder="Key" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="sample-input">
+            <mat-label>Value</mat-label>
+            <input matInput type="text" formControlName="value" placeholder="Value" />
+          </mat-form-field>
+
+          <button type="button" class="delete-btn" (click)="removeSample(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <button type="button" class="add-btn" (click)="addSample()">+ Add More</button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button mat-stroked-button color="warn" type="submit">Save</button>
+      <button mat-stroked-button color="warn" type="button" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<p *ngIf="!user" class="loading-text">Loading...</p>

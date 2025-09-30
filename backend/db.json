@@ -1,0 +1,97 @@
+{
+  "users": [
+    {
+      "id": "883602",
+      "name": "Luffy ",
+      "email": "luffy@gmail.com",
+      "role": "Captain",
+      "phone": "",
+      "address": "",
+      "habits": [
+        "reading",
+        "gym",
+        "test"
+      ],
+      "habitsInput": "reading, gym, test",
+      "sample": [
+        {
+          "key": "Gumu ",
+          "value": "Gumuno"
+        }
+      ]
+    },
+    {
+      "id": "280783",
+      "name": "Zoro",
+      "email": "zoro@gmail.com",
+      "role": "Swords Men",
+      "habits": [
+        "sword",
+        "gym"
+      ],
+      "habitsInput": "",
+      "phone": "9876543210",
+      "address": "",
+      "sample": []
+    },
+    {
+      "id": "268257",
+      "name": "Vinsmoke Sanji",
+      "email": "vinsmokesanji@gmail.com",
+      "role": "Cook",
+      "sample": [
+        {
+          "key": "Hello",
+          "value": "Blue"
+        }
+      ],
+      "phone": "",
+      "address": "",
+      "habits": []
+    },
+    {
+      "id": "986021",
+      "name": "Ussop",
+      "email": "ussop@gmail.com",
+      "role": "Sniper"
+    },
+    {
+      "id": "818610",
+      "name": "Nami",
+      "email": "nami@gmail.com",
+      "role": "Navigator"
+    },
+    {
+      "id": "371669",
+      "name": "Tony Tony Chopper",
+      "email": "tonytonychopper@gmail.com",
+      "role": "Doctor"
+    },
+    {
+      "id": "143134",
+      "name": "Brook",
+      "email": "brook@gmail.com",
+      "role": "Musician"
+    },
+    {
+      "id": "692717",
+      "name": "Nico Robin",
+      "email": "nicorobin@gmail.com",
+      "role": "Archaeologist"
+    },
+    {
+      "id": "979081",
+      "name": "Franky",
+      "email": "franky@gmail.com",
+      "role": "Shipwright"
+    },
+    {
+      "id": "496330",
+      "name": "Jimbei",
+      "email": "jimbei@gmail.com",
+      "role": "Wenchman"
+    }
+  ],
+  "profiles": [],
+  "reports": []
+}

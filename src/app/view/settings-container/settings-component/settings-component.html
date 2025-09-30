@@ -1,0 +1,49 @@
+
+<div class="spinner-overlay" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="settings-container" *ngIf="!loading">
+  <h2>User Settings</h2>
+
+
+  <mat-card class="settings-section">
+    <h3>Account</h3>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" value="zara@example.com" disabled>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Change Password</mat-label>
+      <input matInput type="password" [(ngModel)]="settings.password">
+    </mat-form-field>
+  </mat-card>
+
+
+  <mat-card class="settings-section">
+    <h3>Preferences</h3>
+    <mat-slide-toggle [(ngModel)]="settings.darkMode" (change)="toggleDarkMode()">
+      Enable Dark Mode
+    </mat-slide-toggle>
+
+    <br><br>
+
+    <mat-slide-toggle [(ngModel)]="settings.notifications">
+      Receive Notifications
+    </mat-slide-toggle>
+  </mat-card>
+
+  
+  <mat-card class="settings-section">
+    <h3>Security</h3>
+    <button mat-stroked-button color="warn">Enable 2FA</button>
+    <br><br>
+    <button mat-stroked-button color="primary">View Login History</button>
+  </mat-card>
+
+
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="saveSettings()">Save Changes</button>
+  </div>
+</div>

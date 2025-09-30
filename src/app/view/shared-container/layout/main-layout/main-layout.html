@@ -1,0 +1,19 @@
+<app-toolbar></app-toolbar>
+
+
+<mat-sidenav-container class="dashboard-container">
+
+  <mat-sidenav mode="side" opened class="sidebar">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="spinner-overlay" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <div class="content" *ngIf="!loading">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

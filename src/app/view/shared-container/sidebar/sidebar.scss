@@ -1,0 +1,37 @@
+.sidebar-nav a {
+  display: flex;
+  align-items: center;   
+  gap: 12px;
+  border-radius: 8px;
+  margin: 4px 0;
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #444;
+  line-height: 1.2;      
+  transition: all 0.3s ease;
+}
+
+.sidebar-nav a mat-icon {
+  font-size: 20px;
+  color: #666;
+  transition: color 0.3s ease;
+  display: inline-flex;   
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle; 
+}
+
+.sidebar-nav a span {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;         
+}
+
+.sidebar-nav {
+  height: 100vh;          
+  overflow-y: auto;       
+  overflow-x: hidden;     
+  padding-right: 4px;     
+  box-sizing: border-box;        
+}

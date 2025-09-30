@@ -1,0 +1,19 @@
+.dashboard-container {
+  height: calc(100vh - 64px);
+  position: relative;
+}
+
+
+.detail-sidenav {
+  width: 380px;
+  box-shadow: -6px 0 24px rgba(0,0,0,0.12);
+  background: #fff;
+  padding: 0;
+  z-index: 2000;
+}
+
+
+mat-sidenav-container {
+  height: 100%;
+}
+ 

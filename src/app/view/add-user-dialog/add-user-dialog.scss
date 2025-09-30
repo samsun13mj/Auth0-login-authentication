@@ -1,0 +1,18 @@
+.dialog-form { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 15px; 
+      padding: 10px; 
+      min-width: 300px;
+    }
+    .actions { 
+      display: flex; 
+      justify-content: flex-end; 
+      gap: 10px; 
+      margin-top: 10px;
+    }
+    h2 { 
+      margin-bottom: 10px; 
+      font-weight: bold;
+      text-align: center;
+    }

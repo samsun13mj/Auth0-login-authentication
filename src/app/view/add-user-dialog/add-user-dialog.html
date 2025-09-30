@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Add User</h2>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="dialog-form">
+      
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter name">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Enter email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <input matInput formControlName="role" placeholder="Enter role">
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-stroked-button color="warn" type="submit" [disabled]="userForm.invalid">
+          Add
+        </button>
+        <button mat-stroked-button color="warn" type="button" (click)="dialogRef.close()">
+          Cancel
+        </button>
+      </div>
+    </form>
