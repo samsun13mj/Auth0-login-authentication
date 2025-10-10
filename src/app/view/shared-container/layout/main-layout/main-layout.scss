@@ -1,10 +1,56 @@
+/* ---- Sidebar ---- */
+.sidebar {
+  width: 250px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  position: fixed;
+  top: 64px; 
+  left: 0;
+  bottom: 0;
+  border-radius: 0 !important; 
+}
+
+/* ---- Toolbar ---- */
+mat-toolbar.custom-toolbar {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px; 
+  z-index: 1000;
+  background-color: #1e38fa;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* ---- Main Content Scroll ---- */
+.main-content {
+  margin-left: 20px; 
+  padding: 16px;
+  padding-top: 80px; 
+  height: calc(100vh - 64px); 
+  overflow-y: auto; 
+  box-sizing: border-box;
+}
+
+/* ---- User Details Sidenav ---- */
 .user-details-sidenav {
   position: fixed !important;
   top: 0;
   right: 0;
   width: 380px;
   height: 100vh;
-  border-radius: 0 !important;
+  border-radius: 0 !important; 
   box-shadow: -6px 0 18px rgba(0, 0, 0, 0.15);
   z-index: 2000;
   background: #ffffff !important;
@@ -43,6 +89,10 @@
   transform: rotate(90deg);
 }
 
-.sidebar {
-  width: 200px;
+#notification-button{
+  color: white;
 }
+#account_circle{
+  color: white;
+}
+

@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -27,7 +27,7 @@ import { SidenavService } from '../../../service/sidenav-service';
   templateUrl: './dashboard-component.html',
   styleUrls: ['./dashboard-component.scss']
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'email', 'role'];
   dataSource = new MatTableDataSource<any>([]);
   loading = false;
@@ -39,8 +39,12 @@ export class DashboardComponent implements AfterViewInit {
     private sidenavService: SidenavService
   ) {}
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.fetchUsers();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   fetchUsers(): void {
@@ -48,7 +52,10 @@ export class DashboardComponent implements AfterViewInit {
     this.userService.getUsers().subscribe({
       next: (users) => {
         this.dataSource.data = users;
-        this.dataSource.paginator = this.paginator;
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+        });
+
         this.loading = false;
       },
       error: () => {

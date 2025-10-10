@@ -1,6 +1,4 @@
-<app-toolbar></app-toolbar>
-
-<mat-sidenav-container class="dashboard-container">
+<mat-sidenav-container class="dashboard-container" fullscreen>
 
   <!-- LEFT sidebar -->
   <mat-sidenav mode="side" opened class="sidebar">
@@ -9,29 +7,54 @@
 
   <!-- MAIN content area -->
   <mat-sidenav-content>
-    <div class="spinner-overlay" *ngIf="loading">
-      <mat-spinner></mat-spinner>
-    </div>
 
-    <div class="content" *ngIf="!loading">
+    <!-- Toolbar -->
+    <mat-toolbar class="custom-toolbar">
+      <span>Bezohminds</span>
+      <span class="spacer"></span> 
+
+      <button mat-icon-button id="notification-button">
+        <mat-icon>notifications</mat-icon>
+      </button>
+
+      <button mat-icon-button id="account_circle" [matMenuTriggerFor]="profileMenu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+
+      <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item routerLink="/profile">
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <!-- Content wrapper -->
+    <div class="main-content">
       <router-outlet></router-outlet>
     </div>
+
   </mat-sidenav-content>
 
   <!-- RIGHT sidebar: user details panel -->
- <mat-sidenav
-  #userDetailsSidenav
-  mode="over"
-  position="end"
-  class="user-details-sidenav"
->
-  <div class="sidenav-wrapper">
-    <div class="close-row">
-      <button mat-icon-button (click)="closeUserSidenav()">
-        <mat-icon>close</mat-icon>
-      </button>
+  <mat-sidenav
+    #userDetailsSidenav
+    mode="over"
+    position="end"
+    class="user-details-sidenav"
+  >
+    <div class="sidenav-wrapper">
+      <div class="close-row">
+        <button mat-icon-button (click)="closeUserSidenav()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <app-user-details-sidenav [user]="_sidenavUser"></app-user-details-sidenav>
     </div>
-    <app-user-details-sidenav [user]="_sidenavUser"></app-user-details-sidenav>
-  </div>
-</mat-sidenav>
+  </mat-sidenav>
 
+</mat-sidenav-container>
