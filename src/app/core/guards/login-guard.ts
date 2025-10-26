@@ -11,7 +11,7 @@ export class LoginGuard implements CanActivate {
     return new Promise((resolve) => {
       onAuthStateChanged(this.auth, (user) => {console.log(user);
         if (user) {
-          this.router.navigate(['/dashboard']); 
+          this.router.navigate(['/dashboard']);
           resolve(false);
         } else {
           resolve(true); 

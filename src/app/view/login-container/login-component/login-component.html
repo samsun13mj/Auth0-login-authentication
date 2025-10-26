@@ -1,24 +1,33 @@
-<div class="login-container">
-  <mat-card class="design">
-    <h2>Login</h2>
-    <form [formGroup]="form" (ngSubmit)="login()">
+<div class="login-wrapper">
+  <mat-card class="login-card">
+    <div class="brand">
+      <h1>Bezohminds</h1>
+      <p>Welcome back! Please login to continue.</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="login()" class="login-form">
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email">
+        <mat-label>Email address</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Enter your email">
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Password</mat-label>
-        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Enter your password">
         <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
           <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
       </mat-form-field>
 
-      <div class="button-group">
-        <button mat-stroked-button color="warn" type="submit">Login</button>
-        <button mat-stroked-button color="warn" type="button" (click)="signup()">Signup</button>
+      <button mat-flat-button color="primary" class="login-btn" type="submit">Login</button>
+
+      <div class="divider">
+        <span>or</span>
       </div>
+
+      <button mat-stroked-button color="primary" class="signup-btn" type="button" (click)="signup()">
+        Create New Account
+      </button>
     </form>
   </mat-card>
 </div>

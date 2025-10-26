@@ -1,49 +1,63 @@
-
 <div class="spinner-overlay" *ngIf="loading">
-  <mat-spinner></mat-spinner>
+  <mat-spinner diameter="60"></mat-spinner>
 </div>
 
-<div class="settings-container" *ngIf="!loading">
-  <h2>User Settings</h2>
+<div class="settings-wrapper" *ngIf="!loading">
+  <h2 class="page-title">User Settings</h2>
 
-
+  <!-- Account Section -->
   <mat-card class="settings-section">
     <h3>Account</h3>
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Email</mat-label>
-      <input matInput type="email" value="luffy@example.com" disabled>
-    </mat-form-field>
+    <div class="section-body">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" value="luffy@example.com" disabled />
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Change Password</mat-label>
-      <input matInput type="password" [(ngModel)]="settings.password">
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Change Password</mat-label>
+        <input matInput type="password" [(ngModel)]="settings.password" />
+      </mat-form-field>
+    </div>
   </mat-card>
 
-
+  <!-- Theme Section -->
   <mat-card class="settings-section">
-    <h3>Preferences</h3>
-    <mat-slide-toggle [(ngModel)]="settings.darkMode" (change)="toggleDarkMode()">
-      Enable Dark Mode
-    </mat-slide-toggle>
+    <h3>Theme & Appearance</h3>
+    <div class="section-body">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Select Theme</mat-label>
+        <mat-select [(ngModel)]="settings.theme" (selectionChange)="applyTheme()">
+          <mat-option value="default">Default</mat-option>
+          <mat-option value="blue">Ocean Blue</mat-option>
+          <mat-option value="green">Forest Green</mat-option>
+          <mat-option value="custom">Custom</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <br><br>
+      <!-- Custom Theme -->
+      <div *ngIf="settings.theme === 'custom'" class="custom-colors">
+        <div class="color-picker">
+          <label>Primary</label>
+          <input type="color" [(ngModel)]="customColors.primary" (change)="applyCustomTheme()" />
+        </div>
 
-    <mat-slide-toggle [(ngModel)]="settings.notifications">
-      Receive Notifications
-    </mat-slide-toggle>
+        <div class="color-picker">
+          <label>Accent</label>
+          <input type="color" [(ngModel)]="customColors.accent" (change)="applyCustomTheme()" />
+        </div>
+
+        <div class="color-picker">
+          <label>Background</label>
+          <input type="color" [(ngModel)]="customColors.background" (change)="applyCustomTheme()" />
+        </div>
+      </div>
+    </div>
   </mat-card>
-
-  
-  <mat-card class="settings-section">
-    <h3>Security</h3>
-    <button mat-stroked-button color="warn">Enable 2FA</button>
-    <br><br>
-    <button mat-stroked-button color="primary">View Login History</button>
-  </mat-card>
-
 
   <div class="actions">
-    <button mat-raised-button color="primary" (click)="saveSettings()">Save Changes</button>
-  </div>
+  <button mat-raised-button class="save-btn" (click)="saveSettings()">
+    Save Changes
+  </button>
 </div>
+

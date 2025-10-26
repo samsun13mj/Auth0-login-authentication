@@ -1,42 +1,90 @@
-body, html {
-  margin: 0;
-  height: 100%;
-}
-
-.login-container {
+.login-wrapper {
   display: flex;
-  justify-content: center; 
-  align-items: center;     
-  height: 100vh;           
-  background-color: #ffffff; 
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(120deg, #f0f2f5, #dfe3ee);
 }
 
-mat-card {
-  width: 350px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+.login-card {
+  width: 400px;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.brand {
+  text-align: center;
+  margin-bottom: 30px;
+
+  h1 {
+    font-size: 36px;
+    color: #1877f2;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 15px;
+    color: #606770;
+  }
 }
 
 .full-width {
   width: 100%;
-  background-color: #ffffff;
+  margin-bottom: 20px;
 }
 
+.login-btn {
+  width: 100%;
+  height: 45px;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: #1877f2;
+  color: white;
+  font-weight: bold;
+  transition: background 0.3s ease;
 
-.button-group {
+  &:hover {
+    background-color: #166fe5;
+  }
+}
+
+.signup-btn {
+  width: 100%;
+  height: 45px;
+  font-size: 15px;
+  border-radius: 8px;
+  color: #1877f2;
+  border: 1px solid #1877f2;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #f0f2f5;
+  }
+}
+
+.divider {
   display: flex;
-  gap: 10px;  
-  margin-top: 10px;
-}
+  align-items: center;
+  text-align: center;
+  color: #8a8d91;
+  font-size: 14px;
+  margin: 15px 0;
 
-.button-group button {
-  flex: 1;    
-}
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #dadde1;
+  }
 
-.overall {
-  background-color: white;
-}
+  &:not(:empty)::before {
+    margin-right: 10px;
+  }
 
-.design {
-  background-color: #ffffff;
+  &:not(:empty)::after {
+    margin-left: 10px;
+  }
 }
