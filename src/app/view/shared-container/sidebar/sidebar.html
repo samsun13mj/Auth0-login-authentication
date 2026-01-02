@@ -36,13 +36,23 @@
     <span>Calendar</span>
   </a>
 
-  <!-- Data Section -->
-  <a mat-list-item routerLink="/analytics" routerLinkActive="active-link">
+  <!-- Data Section (ADMIN ONLY) -->
+  <a
+    mat-list-item
+    routerLink="/analytics"
+    routerLinkActive="active-link"
+    *ngIf="roleService.isAdmin$ | async"
+  >
     <mat-icon>analytics</mat-icon>
     <span>Analytics</span>
   </a>
 
-  <a mat-list-item routerLink="/reports" routerLinkActive="active-link">
+  <a
+    mat-list-item
+    routerLink="/reports"
+    routerLinkActive="active-link"
+    *ngIf="roleService.isAdmin$ | async"
+  >
     <mat-icon>bar_chart</mat-icon>
     <span>Reports</span>
   </a>

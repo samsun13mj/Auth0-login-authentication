@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { Auth, onAuthStateChanged } from '@angular/fire/auth';
-import { firstValueFrom, Observable } from 'rxjs';
+import { AuthService } from '../../service/auth-service';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class LoginGuard implements CanActivate {
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  canActivate(): Promise<boolean> {
-    return new Promise((resolve) => {
-      onAuthStateChanged(this.auth, (user) => {console.log(user);
-        if (user) {
+  canActivate() {
+    return this.authService.isLoggedIn$().pipe(
+      tap(isLoggedIn => {
+        if (isLoggedIn) {
           this.router.navigate(['/dashboard']);
-          resolve(false);
-        } else {
-          resolve(true); 
         }
-      });
-    });
+      }),
+      map(isLoggedIn => !isLoggedIn)
+    );
   }
 }

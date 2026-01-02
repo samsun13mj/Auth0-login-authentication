@@ -1,4 +1,4 @@
-<mat-sidenav-container class="dashboard-container" fullscreen>
+<mat-sidenav-container class="dashboard-container">
 
   <!-- LEFT sidebar -->
   <mat-sidenav mode="side" opened class="sidebar">
@@ -6,18 +6,22 @@
   </mat-sidenav>
 
   <!-- MAIN content area -->
-  <mat-sidenav-content>
+  <mat-sidenav-content class="content-area">
 
     <!-- Toolbar -->
     <mat-toolbar class="custom-toolbar">
       <span>Bezohminds</span>
-      <span class="spacer"></span> 
+      <span class="spacer"></span>
 
       <button mat-icon-button id="notification-button">
         <mat-icon>notifications</mat-icon>
       </button>
 
-      <button mat-icon-button id="account_circle" [matMenuTriggerFor]="profileMenu">
+      <button
+        mat-icon-button
+        id="account_circle"
+        [matMenuTriggerFor]="profileMenu"
+      >
         <mat-icon>account_circle</mat-icon>
       </button>
 
@@ -40,7 +44,7 @@
 
   </mat-sidenav-content>
 
-  <!-- RIGHT sidebar: user details panel -->
+  <!-- RIGHT sidebar -->
   <mat-sidenav
     #userDetailsSidenav
     mode="over"
@@ -53,7 +57,10 @@
           <mat-icon>close</mat-icon>
         </button>
       </div>
-      <app-user-details-sidenav [user]="_sidenavUser"></app-user-details-sidenav>
+
+      <app-user-details-sidenav
+        [user]="_sidenavUser">
+      </app-user-details-sidenav>
     </div>
   </mat-sidenav>
 

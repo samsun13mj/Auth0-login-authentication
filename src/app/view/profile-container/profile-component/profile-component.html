@@ -1,48 +1,61 @@
-<div class="spinner-overlay" *ngIf="loading">
-  <mat-spinner></mat-spinner>
-</div>
+<div class="profile-wrapper">
 
-<div class="profile-container" *ngIf="!loading">
+  <!-- LOADER -->
+  <div class="spinner-overlay" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
 
-  <mat-card class="profile-header">
-    <div class="profile-pic">
-      <img [src]="user.profilePic" alt="Profile Picture">
+  <!-- PROFILE CONTENT -->
+  <div class="profile-container" *ngIf="!loading">
 
-      <input 
-        type="file" 
-        accept="image/*" 
-        (change)="onFileSelected($event)" 
-        hidden 
-        #fileInput
-      >
+    <mat-card class="profile-header">
+      <div class="profile-pic">
+        <img [src]="user.profilePic" alt="Profile Picture">
 
-      <button mat-raised-button color="primary" (click)="fileInput.click()">Change Picture</button>
-    </div>
-    <div class="profile-info">
-      <h2>{{ user.name }}</h2>
-      <p><strong>Age:</strong> {{ user.age }}</p>
-      <p><strong>Occupation:</strong> {{ user.job }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
-      <p><strong>Location:</strong> {{ user.location }}</p>
-    </div>
-  </mat-card>
+        <input
+          type="file"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+          hidden
+          #fileInput
+        >
 
-  <mat-card class="profile-section">
-    <h3>About</h3>
-    <p>{{ user.about }}</p>
-  </mat-card>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="fileInput.click()"
+        >
+          Change Picture
+        </button>
+      </div>
 
-  <mat-card class="profile-section">
-    <h3>Skills</h3>
-    <ul>
-      <li *ngFor="let skill of user.skills">{{ skill }}</li>
-    </ul>
-  </mat-card>
+      <div class="profile-info">
+        <h2>{{ user.name }}</h2>
+        <p><strong>Age:</strong> {{ user.age }}</p>
+        <p><strong>Occupation:</strong> {{ user.job }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Location:</strong> {{ user.location }}</p>
+      </div>
+    </mat-card>
 
-  <mat-card class="profile-section">
-    <h3>Recent Activity</h3>
-    <ul>
-      <li *ngFor="let activity of user.activities">{{ activity }}</li>
-    </ul>
-  </mat-card>
+    <mat-card class="profile-section">
+      <h3>About</h3>
+      <p>{{ user.about }}</p>
+    </mat-card>
+
+    <mat-card class="profile-section">
+      <h3>Skills</h3>
+      <ul>
+        <li *ngFor="let skill of user.skills">{{ skill }}</li>
+      </ul>
+    </mat-card>
+
+    <mat-card class="profile-section">
+      <h3>Recent Activity</h3>
+      <ul>
+        <li *ngFor="let activity of user.activities">{{ activity }}</li>
+      </ul>
+    </mat-card>
+
+  </div>
 </div>

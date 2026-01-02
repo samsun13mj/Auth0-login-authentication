@@ -1,56 +1,81 @@
-import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  AfterViewInit,
+  OnDestroy
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { SidebarComponent } from '../../../shared-container/sidebar/sidebar';
-import { SidenavService } from '../../../../service/sidenav-service';
+import { MatMenuModule } from '@angular/material/menu';
+
+import { AuthService } from '@auth0/auth0-angular';
+
+import { SidebarComponent } from '../../sidebar/sidebar';
 import { UserDetailsSidenavComponent } from '../../../user-details-container/user-details/user-details';
-import { MatToolbarModule } from '@angular/material/toolbar'; 
-import { MatMenuModule } from '@angular/material/menu';     
-import { AuthService } from '../../../../service/auth-service';
+import { SidenavService } from '../../../../service/sidenav-service';
 
 @Component({
   selector: 'app-main-layout',
   standalone: true,
   imports: [
-     CommonModule,
+    CommonModule,
+    RouterModule,
+
     MatSidenavModule,
-    MatProgressSpinnerModule,
+    MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatToolbarModule,   
-    MatMenuModule,      
-    RouterModule,          
-    SidebarComponent,          
-    UserDetailsSidenavComponent,                        
+    MatMenuModule,
+
+    SidebarComponent,
+    UserDetailsSidenavComponent
   ],
   templateUrl: './main-layout.html',
   styleUrls: ['./main-layout.scss']
 })
-export class MainLayoutComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('userDetailsSidenav') userDetailsSidenav!: MatSidenav;
+export class MainLayoutComponent
+  implements AfterViewInit, OnDestroy {
+
+  @ViewChild('userDetailsSidenav')
+  userDetailsSidenav!: MatSidenav;
 
   private subs = new Subscription();
   _sidenavUser: any = null;
-  loading = false;
 
-  constructor(private sidenavService: SidenavService, private authService: AuthService, private router: Router) {}
+  constructor(
+    private sidenavService: SidenavService,
+    private auth: AuthService
+  ) {}
 
   ngAfterViewInit(): void {
+
+    /* 🔴 TEMP DEBUG — SEE JWT TOKEN */
+    this.auth.getAccessTokenSilently().subscribe(token => {
+      console.log('JWT ACCESS TOKEN:', token);
+    });
+
+    /* 🔴 TEMP DEBUG — SEE AUTH0 USER OBJECT */
+    this.auth.user$.subscribe(user => {
+      console.log('AUTH0 USER OBJECT:', user);
+    });
+
+    /* ✅ EXISTING CODE — DO NOT CHANGE */
     const s = this.sidenavService.payload$.subscribe(payload => {
       this._sidenavUser = payload.user || null;
+
       setTimeout(() => {
-        if (payload.open) {
-          this.userDetailsSidenav?.open();
-        } else {
-          this.userDetailsSidenav?.close();
-        }
+        payload.open
+          ? this.userDetailsSidenav.open()
+          : this.userDetailsSidenav.close();
       });
     });
+
     this.subs.add(s);
   }
 
@@ -59,9 +84,11 @@ export class MainLayoutComponent implements AfterViewInit, OnDestroy {
   }
 
   logout() {
-    this.authService.logout().then(() => {
-      this.router.navigate(['/login']);
-    }).catch(err => console.error('Logout failed:', err));
+    this.auth.logout({
+      logoutParams: {
+        returnTo: window.location.origin
+      }
+    });
   }
 
   ngOnDestroy(): void {

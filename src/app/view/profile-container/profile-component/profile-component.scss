@@ -1,3 +1,29 @@
+/* ============================= */
+/* WRAPPER (SCOPES THE LOADER)  */
+/* ============================= */
+.profile-wrapper {
+  position: relative;
+  min-height: calc(100vh - 64px); /* below fixed navbar */
+}
+
+/* ============================= */
+/* LOADER OVERLAY               */
+/* ============================= */
+.spinner-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2;
+}
+
+/* ============================= */
+/* PROFILE CONTENT              */
+/* ============================= */
 .profile-container {
   display: flex;
   flex-direction: column;
@@ -7,15 +33,17 @@
   margin: 0 auto;
 }
 
+/* ============================= */
+/* HEADER CARD                  */
+/* ============================= */
 .profile-header {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  gap: 30px;
   padding: 30px;
   background: #fcfcfc;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  gap: 30px;
 }
 
 .profile-pic {
@@ -46,7 +74,7 @@
 
 .profile-info {
   h2 {
-    margin: 0 0 10px 0;
+    margin: 0 0 10px;
     font-size: 1.8rem;
     color: #333;
   }
@@ -62,6 +90,9 @@
   }
 }
 
+/* ============================= */
+/* SECTIONS                     */
+/* ============================= */
 .profile-section {
   padding: 20px;
   border-radius: 12px;
@@ -74,7 +105,8 @@
     font-size: 1.2rem;
   }
 
-  p, ul {
+  p,
+  ul {
     font-size: 15px;
     color: #444;
   }
@@ -90,17 +122,4 @@
       border-radius: 8px;
     }
   }
-}
-
-.spinner-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
 }
