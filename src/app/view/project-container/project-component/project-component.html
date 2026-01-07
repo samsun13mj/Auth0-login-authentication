@@ -1,1 +1,75 @@
-<p>project-component works!</p>
+<div class="project-container">
+
+  <!-- FULL PAGE LOADER -->
+  <div class="page-loader" *ngIf="isLoading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h2>Project – Users</h2>
+    <button class="add-btn" (click)="openAddUserDialog()" [disabled]="isLoading">
+      + Add User
+    </button>
+  </div>
+
+  <!-- EDIT USER -->
+  <div class="edit-wrapper" *ngIf="isEdit">
+    <h3>Edit User</h3>
+
+    <form class="edit-form" [formGroup]="userForm" (ngSubmit)="submit()">
+
+      <div class="edit-row">
+        <div class="field">
+          <label>Name</label>
+          <input formControlName="name" />
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input formControlName="email" />
+        </div>
+      </div>
+
+      <div class="field full">
+        <label>Role</label>
+        <input formControlName="role" />
+      </div>
+
+      <div class="edit-actions">
+        <button type="button" class="cancel" (click)="resetForm()">Cancel</button>
+        <button type="submit" class="update">Update User</button>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- USER LIST -->
+  <div class="list">
+    <div class="item" *ngFor="let user of users">
+
+      <div>
+        <strong>{{ user.name }}</strong>
+        <p>{{ user.email }}</p>
+        <small>{{ user.role }}</small>
+      </div>
+
+      <div class="actions">
+        <button class="edit-btn" (click)="editUser(user)" [disabled]="isLoading">
+          Edit
+        </button>
+
+        <button
+          class="delete-btn"
+          (click)="deleteUser(user)"
+          [disabled]="isLoading"
+          title="Delete user"
+        >
+          🗑
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

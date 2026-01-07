@@ -1,1 +1,57 @@
-<p>reports-component works!</p>
+<div class="reports-container">
+
+  <!-- HEADER -->
+  <div class="reports-header">
+    <h2>Reports</h2>
+
+    <div class="auth-actions">
+      <button
+        class="login-btn"
+        *ngIf="!(user$ | async)"
+        (click)="login()"
+      >
+        Login
+      </button>
+
+      <button
+        class="logout-btn"
+        *ngIf="user$ | async"
+        (click)="logout()"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <!-- USER DETAILS -->
+  <div class="user-card" *ngIf="user$ | async as user; else loggedOut">
+
+    <div class="user-header">
+      <img
+        class="avatar"
+        [src]="user.picture"
+        alt="User avatar"
+      />
+
+      <div class="user-info">
+        <h3>{{ user.name }}</h3>
+        <p>{{ user.email }}</p>
+      </div>
+    </div>
+
+    <div class="json-box">
+      <h4>Auth0 User Details</h4>
+      <pre>{{ user | json }}</pre>
+    </div>
+
+  </div>
+
+  <!-- LOGGED OUT STATE -->
+  <ng-template #loggedOut>
+    <div class="empty-state">
+      <p>You are not logged in</p>
+      <span>Please login to view reports</span>
+    </div>
+  </ng-template>
+
+</div>

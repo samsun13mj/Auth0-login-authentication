@@ -1,63 +1,123 @@
-<div class="spinner-overlay" *ngIf="loading">
-  <mat-spinner diameter="60"></mat-spinner>
-</div>
+<div class="settings-page">
 
-<div class="settings-wrapper" *ngIf="!loading">
-  <h2 class="page-title">User Settings</h2>
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h2>Appearance</h2>
+      <p>Customize how your application looks and feels.</p>
+    </div>
+  </div>
 
-  <!-- Account Section -->
-  <mat-card class="settings-section">
-    <h3>Account</h3>
-    <div class="section-body">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" value="luffy@example.com" disabled />
-      </mat-form-field>
+  <!-- PRESET THEMES -->
+  <mat-card class="settings-card">
+    <div class="card-header">
+      <h3>Preset Themes</h3>
+      <span>Select a ready-made color palette</span>
+    </div>
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Change Password</mat-label>
-        <input matInput type="password" [(ngModel)]="settings.password" />
-      </mat-form-field>
+    <div class="preset-grid">
+      <button
+        class="preset-card"
+        (click)="applyPreset('default')"
+      >
+        <div class="preview default"></div>
+        <div class="info">
+          <strong>Default</strong>
+          <small>Clean & balanced</small>
+        </div>
+      </button>
+
+      <button
+        class="preset-card"
+        (click)="applyPreset('ocean')"
+      >
+        <div class="preview ocean"></div>
+        <div class="info">
+          <strong>Ocean Blue</strong>
+          <small>Cool & focused</small>
+        </div>
+      </button>
+
+      <button
+        class="preset-card"
+        (click)="applyPreset('gold')"
+      >
+        <div class="preview gold"></div>
+        <div class="info">
+          <strong>Treasure Gold</strong>
+          <small>Premium feel</small>
+        </div>
+      </button>
     </div>
   </mat-card>
 
-  <!-- Theme Section -->
-  <mat-card class="settings-section">
-    <h3>Theme & Appearance</h3>
-    <div class="section-body">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Select Theme</mat-label>
-        <mat-select [(ngModel)]="settings.theme" (selectionChange)="applyTheme()">
-          <mat-option value="default">Default</mat-option>
-          <mat-option value="blue">Ocean Blue</mat-option>
-          <mat-option value="green">Forest Green</mat-option>
-          <mat-option value="custom">Custom</mat-option>
-        </mat-select>
-      </mat-form-field>
+  <!-- CUSTOM THEME -->
+  <mat-card class="settings-card">
+    <div class="card-header">
+      <h3>Custom Theme</h3>
+      <span>Create your own palette</span>
+    </div>
 
-      <!-- Custom Theme -->
-      <div *ngIf="settings.theme === 'custom'" class="custom-colors">
-        <div class="color-picker">
-          <label>Primary</label>
-          <input type="color" [(ngModel)]="customColors.primary" (change)="applyCustomTheme()" />
-        </div>
+    <!-- PREVIEW BAR -->
+    <div
+      class="custom-preview"
+      [style.background]="
+        'linear-gradient(90deg,' +
+        customTheme.primary + ',' +
+        customTheme.accent + ')'
+      "
+    ></div>
 
-        <div class="color-picker">
-          <label>Accent</label>
-          <input type="color" [(ngModel)]="customColors.accent" (change)="applyCustomTheme()" />
-        </div>
+    <div class="color-grid">
+      <div class="color-item">
+        <label>Primary</label>
+        <input type="color" [(ngModel)]="customTheme.primary" />
+        <span>{{ customTheme.primary }}</span>
+      </div>
 
-        <div class="color-picker">
-          <label>Background</label>
-          <input type="color" [(ngModel)]="customColors.background" (change)="applyCustomTheme()" />
-        </div>
+      <div class="color-item">
+        <label>Accent</label>
+        <input type="color" [(ngModel)]="customTheme.accent" />
+        <span>{{ customTheme.accent }}</span>
+      </div>
+
+      <div class="color-item">
+        <label>Background</label>
+        <input type="color" [(ngModel)]="customTheme.background" />
+        <span>{{ customTheme.background }}</span>
+      </div>
+
+      <div class="color-item">
+        <label>Highlight</label>
+        <input type="color" [(ngModel)]="customTheme.highlight" />
+        <span>{{ customTheme.highlight }}</span>
       </div>
     </div>
+
+    <div class="card-actions">
+      <button
+        mat-raised-button
+        class="apply-btn"
+        (click)="applyCustom()"
+      >
+        Apply Custom Theme
+      </button>
+    </div>
   </mat-card>
 
-  <div class="actions">
-  <button mat-raised-button class="save-btn" (click)="saveSettings()">
-    Save Changes
-  </button>
-</div>
+  <!-- MODE -->
+  <mat-card class="settings-card">
+    <div class="mode-row">
+      <div>
+        <h3>Dark Mode</h3>
+        <span>Reduce eye strain in low-light environments</span>
+      </div>
 
+      <mat-slide-toggle
+        [(ngModel)]="darkMode"
+        (change)="toggleDark()"
+      ></mat-slide-toggle>
+    </div>
+  </mat-card>
+
+</div>

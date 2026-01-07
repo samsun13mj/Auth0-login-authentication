@@ -2,96 +2,66 @@
   "users": [
     {
       "id": "883602",
-      "name": "Luffy ",
+      "name": "Luffy",
       "email": "luffy@gmail.com",
-      "role": "Captain",
-      "phone": "",
-      "address": "",
-      "habits": [
-        "reading",
-        "gym",
-        "test"
-      ],
-      "habitsInput": "reading, gym, test",
-      "sample": [
-        {
-          "key": "Gumu ",
-          "value": "Gumuno"
-        }
-      ]
+      "role": "Admin"
     },
     {
       "id": "280783",
       "name": "Zoro",
       "email": "zoro@gmail.com",
-      "role": "Swords Men",
-      "habits": [
-        "sword",
-        "gym"
-      ],
-      "habitsInput": "",
-      "phone": "9876543210",
-      "address": "",
-      "sample": []
+      "role": "User"
     },
     {
       "id": "268257",
       "name": "Vinsmoke Sanji",
       "email": "vinsmokesanji@gmail.com",
-      "role": "Cook",
-      "sample": [
-        {
-          "key": "Hello",
-          "value": "Blue"
-        }
-      ],
-      "phone": "",
-      "address": "",
-      "habits": []
+      "role": "User"
     },
     {
       "id": "986021",
       "name": "Ussop",
       "email": "ussop@gmail.com",
-      "role": "Sniper"
+      "role": "User"
     },
     {
       "id": "818610",
       "name": "Nami",
       "email": "nami@gmail.com",
-      "role": "Navigator"
+      "role": "User"
     },
     {
       "id": "371669",
       "name": "Tony Tony Chopper",
       "email": "tonytonychopper@gmail.com",
-      "role": "Doctor"
+      "role": "User"
     },
     {
       "id": "143134",
       "name": "Brook",
       "email": "brook@gmail.com",
-      "role": "Musician"
+      "role": "User"
     },
     {
       "id": "692717",
       "name": "Nico Robin",
       "email": "nicorobin@gmail.com",
-      "role": "Archaeologist"
+      "role": "User"
     },
     {
       "id": "979081",
       "name": "Franky",
       "email": "franky@gmail.com",
-      "role": "Shipwright"
+      "role": "User"
     },
     {
       "id": "496330",
-      "name": "Jimbei",
-      "email": "jimbei@gmail.com",
-      "role": "Wenchman"
+      "name": "Jinbei",
+      "email": "jinbei@gmail.com",
+      "role": "User"
     }
   ],
+  "tasks": [],
   "profiles": [],
   "reports": []
 }

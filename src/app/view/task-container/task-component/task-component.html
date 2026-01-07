@@ -1,1 +1,60 @@
-<p>task-component works!</p>
+<div class="page">
+
+  <h2>Assign Task</h2>
+
+  <div class="card">
+
+    <label>Task Title</label>
+    <input
+      type="text"
+      [(ngModel)]="task.title"
+      placeholder="Enter task title"
+    />
+
+    <label>Description</label>
+    <textarea
+      [(ngModel)]="task.description"
+      placeholder="Enter task description"
+    ></textarea>
+
+    <label>Assign To</label>
+    <select [(ngModel)]="task.assignedTo">
+      <option [ngValue]="null">Select User</option>
+
+      @for (user of users; track user.id) {
+        <option [ngValue]="user.id">
+          {{ user.name }}
+        </option>
+      }
+    </select>
+
+    <button (click)="assignTask()">Assign Task</button>
+
+  </div>
+
+  <h2 class="section-title">Assigned Tasks</h2>
+
+  <ul class="task-list">
+    @for (t of tasks; track t.id) {
+      <li>
+        <div>
+          <strong>{{ t.title }}</strong>
+          <p>User ID: {{ t.assignedTo }}</p>
+          <p class="status" [class.done]="t.completed">
+            {{ t.completed ? 'Completed' : 'Pending' }}
+          </p>
+        </div>
+
+        <div class="actions">
+          <button class="done-btn" (click)="finishTask(t.id)" [disabled]="t.completed">
+            Finish
+          </button>
+          <button class="delete-btn" (click)="deleteTask(t.id)">
+            Delete
+          </button>
+        </div>
+      </li>
+    }
+  </ul>
+
+</div>

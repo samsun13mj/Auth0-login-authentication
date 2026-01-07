@@ -1,113 +1,69 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, NgIf } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
+import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
+import { ThemeService, AppTheme } from '../../../service/theme-service';
+
+/** ✅ Explicit preset keys */
+type PresetKey = 'default' | 'ocean' | 'gold';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  templateUrl: './settings-component.html',
-  styleUrls: ['./settings-component.scss'],
   imports: [
     CommonModule,
-    MatCardModule,
-    MatProgressSpinnerModule,
-    MatSlideToggleModule,
-    MatFormFieldModule,
-    MatInputModule,
     FormsModule,
+    MatCardModule,
     MatButtonModule,
-    MatSelectModule,
-    MatOptionModule,
-    NgIf
-  ]
+    MatSlideToggleModule
+  ],
+  templateUrl: './settings-component.html',
+  styleUrls: ['./settings-component.scss']
 })
-export class SettingsComponent implements OnInit {
-  loading = true;
+export class SettingsComponent {
 
-  settings = {
-    darkMode: false,
-    notifications: true,
-    password: '',
-    theme: 'default'
-  };
+  darkMode = localStorage.getItem('dark-mode') === 'true';
 
-  customColors = {
-    primary: '#3f51b5',
-    accent: '#ff4081',
-    background: '#ffffff'
-  };
-
-  ngOnInit() {
-    this.loadPreferences();
-    setTimeout(() => (this.loading = false), 1000);
-  }
-
-  loadPreferences() {
-    const savedTheme = localStorage.getItem('theme');
-    const savedColors = localStorage.getItem('customColors');
-    const savedDarkMode = localStorage.getItem('darkMode');
-
-    if (savedTheme) this.settings.theme = savedTheme;
-    if (savedColors) this.customColors = JSON.parse(savedColors);
-    if (savedDarkMode === 'true') this.settings.darkMode = true;
-
-    this.applyTheme();
-  }
-
-  toggleDarkMode() {
-    this.settings.darkMode
-      ? document.body.classList.add('dark-mode')
-      : document.body.classList.remove('dark-mode');
-    localStorage.setItem('darkMode', String(this.settings.darkMode));
-  }
-
-  applyTheme() {
-    document.body.removeAttribute('style');
-    localStorage.setItem('theme', this.settings.theme);
-
-    switch (this.settings.theme) {
-      case 'blue':
-        this.setTheme('#1976d2', '#90caf9', '#e3f2fd');
-        break;
-      case 'green':
-        this.setTheme('#388e3c', '#a5d6a7', '#e8f5e9');
-        break;
-      case 'custom':
-        this.applyCustomTheme();
-        break;
-      default:
-        this.setTheme('#3f51b5', '#ff4081', '#ffffff');
-        break;
+  /** ✅ Typed presets (NO index signature issue) */
+  presets: Record<PresetKey, AppTheme> = {
+    default: {
+      primary: '#3B82F6',
+      accent: '#9333EA',
+      background: '#ffffff',
+      highlight: '#2563eb'
+    },
+    ocean: {
+      primary: '#0284C7',
+      accent: '#0EA5E9',
+      background: '#E0F2FE',
+      highlight: '#0369A1'
+    },
+    gold: {
+      primary: '#EAB308',
+      accent: '#FACC15',
+      background: '#FEFCE8',
+      highlight: '#CA8A04'
     }
+  };
+
+  /** ✅ Safe access */
+  customTheme: AppTheme = { ...this.presets['default'] };
+
+  constructor(private themeService: ThemeService) {}
+
+  applyPreset(key: PresetKey): void {
+    this.themeService.setTheme(this.presets[key]);
   }
 
-  setTheme(primary: string, accent: string, background: string) {
-    document.body.style.setProperty('--primary-color', primary);
-    document.body.style.setProperty('--accent-color', accent);
-    document.body.style.setProperty('--background-color', background);
+  applyCustom(): void {
+    this.themeService.setTheme(this.customTheme);
   }
 
-  applyCustomTheme() {
-    this.setTheme(
-      this.customColors.primary,
-      this.customColors.accent,
-      this.customColors.background
-    );
-    localStorage.setItem('customColors', JSON.stringify(this.customColors));
-  }
-
-  saveSettings() {
-    localStorage.setItem('theme', this.settings.theme);
-    localStorage.setItem('darkMode', String(this.settings.darkMode));
-    localStorage.setItem('customColors', JSON.stringify(this.customColors));
-    alert('✅ Settings saved successfully!');
+  toggleDark(): void {
+    this.themeService.toggleDarkMode(this.darkMode);
   }
 }

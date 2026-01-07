@@ -2,14 +2,26 @@ import { Routes } from '@angular/router';
 import { authGuardFn } from '@auth0/auth0-angular';
 import { MainLayoutComponent } from './view/shared-container/layout/main-layout/main-layout';
 import { DashboardComponent } from './view/dashboard-container/dashboard-component/dashboard-component';
-import { adminGuard } from './core/guards/admin-guard'; // ✅ ADD THIS
+import { adminGuard } from './core/guards/admin-guard';
 
 export const routes: Routes = [
+
+
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
   {
-    path: '',
+    path: 'login',
+    loadComponent: () =>
+      import('./view/login-container/login-component/login-component')
+        .then(m => m.LoginComponent)
+  },
+
+  {
+    path: 'app',
     component: MainLayoutComponent,
     canActivate: [authGuardFn],
     children: [
+
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
       { path: 'dashboard', component: DashboardComponent },
@@ -52,13 +64,13 @@ export const routes: Routes = [
       {
         path: 'calendar',
         loadComponent: () =>
-          import('./view/calander-container/calander-component/calander-component')
-            .then(m => m.CalanderComponent)
+          import('./view/calendar-container/calendar-component/calendar-component')
+            .then(m => m.CalendarComponent)
       },
 
       {
         path: 'analytics',
-        canActivate: [adminGuard], // 🔥 ADMIN ONLY
+        canActivate: [adminGuard],
         loadComponent: () =>
           import('./view/analytics-container/analytics-component/analytics-component')
             .then(m => m.AnalyticsComponent)
@@ -94,5 +106,6 @@ export const routes: Routes = [
     ]
   },
 
-  { path: '**', redirectTo: '' }
+  // ❗ FALLBACK
+  { path: '**', redirectTo: 'login' }
 ];

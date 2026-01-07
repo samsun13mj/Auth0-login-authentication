@@ -1,37 +1,38 @@
 <mat-nav-list class="sidebar-nav">
+
   <!-- Main Section -->
-  <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link">
+  <a mat-list-item routerLink="/app/dashboard" routerLinkActive="active-link">
     <mat-icon>dashboard</mat-icon>
     <span>Dashboard</span>
   </a>
 
-  <a mat-list-item routerLink="/profile" routerLinkActive="active-link">
+  <a mat-list-item routerLink="/app/profile" routerLinkActive="active-link">
     <mat-icon>person</mat-icon>
     <span>Profile</span>
   </a>
 
-  <a mat-list-item routerLink="/messages" routerLinkActive="active-link">
+  <a mat-list-item routerLink="/app/messages" routerLinkActive="active-link">
     <mat-icon>chat</mat-icon>
     <span>Messages</span>
   </a>
 
-  <a mat-list-item routerLink="/notifications" routerLinkActive="active-link">
+  <a mat-list-item routerLink="/app/notifications" routerLinkActive="active-link">
     <mat-icon>notifications</mat-icon>
     <span>Notifications</span>
   </a>
 
   <!-- Work Section -->
-  <a mat-list-item routerLink="/tasks" routerLinkActive="active-link">
+  <a mat-list-item routerLink="/app/tasks" routerLinkActive="active-link">
     <mat-icon>check_circle</mat-icon>
     <span>Tasks</span>
   </a>
 
-  <a mat-list-item routerLink="/projects" routerLinkActive="active-link">
+  <a mat-list-item routerLink="/app/projects" routerLinkActive="active-link">
     <mat-icon>work_outline</mat-icon>
     <span>Projects</span>
   </a>
 
-  <a mat-list-item routerLink="/calendar" routerLinkActive="active-link">
+  <a mat-list-item routerLink="/app/calendar" routerLinkActive="active-link">
     <mat-icon>calendar_today</mat-icon>
     <span>Calendar</span>
   </a>
@@ -39,7 +40,7 @@
   <!-- Data Section (ADMIN ONLY) -->
   <a
     mat-list-item
-    routerLink="/analytics"
+    routerLink="/app/analytics"
     routerLinkActive="active-link"
     *ngIf="roleService.isAdmin$ | async"
   >
@@ -49,7 +50,7 @@
 
   <a
     mat-list-item
-    routerLink="/reports"
+    routerLink="/app/reports"
     routerLinkActive="active-link"
     *ngIf="roleService.isAdmin$ | async"
   >
@@ -57,19 +58,20 @@
     <span>Reports</span>
   </a>
 
-  <a mat-list-item routerLink="/files" routerLinkActive="active-link">
+  <a mat-list-item routerLink="/app/files" routerLinkActive="active-link">
     <mat-icon>folder</mat-icon>
     <span>Files</span>
   </a>
 
   <!-- Support Section -->
-  <a mat-list-item routerLink="/settings" routerLinkActive="active-link">
+  <a mat-list-item routerLink="/app/settings" routerLinkActive="active-link">
     <mat-icon>settings</mat-icon>
     <span>Settings</span>
   </a>
 
-  <a mat-list-item routerLink="/help" routerLinkActive="active-link">
+  <a mat-list-item routerLink="/app/help" routerLinkActive="active-link">
     <mat-icon>help_outline</mat-icon>
     <span>Help & Support</span>
   </a>
+
 </mat-nav-list>

@@ -1,14 +1,14 @@
-import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
-import { CommonModule, NgIf } from '@angular/common';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
+
 import { UserService } from '../../../service/user-service';
 import { SidenavService } from '../../../service/sidenav-service';
 
@@ -16,10 +16,8 @@ import { SidenavService } from '../../../service/sidenav-service';
   selector: 'app-dashboard-component',
   standalone: true,
   imports: [
-    CommonModule,
-    NgIf,
+    CommonModule,              
     MatCardModule,
-    MatButtonModule,
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
@@ -31,7 +29,8 @@ import { SidenavService } from '../../../service/sidenav-service';
   templateUrl: './dashboard-component.html',
   styleUrls: ['./dashboard-component.scss']
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
+export class DashboardComponent implements OnInit {
+
   displayedColumns: string[] = ['id', 'name', 'email', 'role'];
   dataSource = new MatTableDataSource<any>([]);
   loading = false;
@@ -47,18 +46,21 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.fetchUsers();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-  }
-
   fetchUsers(): void {
     this.loading = true;
+
     this.userService.getUsers().subscribe({
       next: (users) => {
         this.dataSource.data = users;
-        this.dataSource.paginator = this.paginator;
+
         this.dataSource.filterPredicate = (data, filter) =>
           data.name.toLowerCase().includes(filter);
+
+        // ✅ paginator AFTER DOM render
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+        });
+
         this.loading = false;
       },
       error: () => {
@@ -68,8 +70,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    this.dataSource.filter = filterValue;
+    const value = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
+
+    this.dataSource.filter = value;
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   openUserDetails(user: any): void {

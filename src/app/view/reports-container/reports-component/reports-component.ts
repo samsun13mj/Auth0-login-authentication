@@ -1,33 +1,29 @@
 import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { NgIf, AsyncPipe, JsonPipe } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
+  selector: 'app-reports',
   standalone: true,
   imports: [NgIf, AsyncPipe, JsonPipe],
-  template: `
-    <h2>Reports Page (Auth0)</h2>
-
-    <button (click)="login()">Login</button>
-    <button (click)="logout()">Logout</button>
-
-    <pre *ngIf="user$ | async as user">
-{{ user | json }}
-    </pre>
-  `
+  templateUrl: './reports-component.html',
+  styleUrls: ['./reports-component.scss']
 })
 export class ReportsComponent {
-  user$;
+
+  user$!: Observable<any>;
 
   constructor(private auth: AuthService) {
+    // ✅ SAFE INITIALIZATION
     this.user$ = this.auth.user$;
   }
 
-  login() {
+  login(): void {
     this.auth.loginWithRedirect();
   }
 
-  logout() {
+  logout(): void {
     this.auth.logout({
       logoutParams: {
         returnTo: window.location.origin

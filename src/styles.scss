@@ -1,5 +1,5 @@
 /* ===================================== */
-/* ANGULAR MATERIAL M3 THEME SETUP       */
+/* ANGULAR MATERIAL M3 BASE THEME        */
 /* ===================================== */
 
 @use '@angular/material' as mat;
@@ -16,73 +16,76 @@ html {
 }
 
 /* ===================================== */
+/* APP DESIGN TOKENS (REACT STYLE)       */
+/* SINGLE SOURCE OF TRUTH                */
+/* ===================================== */
+
+:root {
+  /* APP TOKENS */
+  --app-primary: #3B82F6;
+  --app-accent: #9333EA;
+  --app-background: #ffffff;
+  --app-highlight: #2563eb;
+
+  /* MATERIAL M3 TOKEN MAPPING */
+  --mat-sys-primary: var(--app-primary);
+  --mat-sys-secondary: var(--app-accent);
+  --mat-sys-background: var(--app-background);
+  --mat-sys-surface: var(--app-background);
+  --mat-sys-on-surface: #000000;
+}
+
+/* ===================================== */
 /* GLOBAL RESET                          */
 /* ===================================== */
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #ffffff;
-  color: #000000;
-  transition: background 0.3s, color 0.3s;
+  background-color: var(--app-background);
+  color: var(--mat-sys-on-surface);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ===================================== */
-/* 🔥 FORCE MATERIAL 3 TO PURE WHITE     */
-/* (THIS REMOVES THE PINK COMPLETELY)    */
+/* GLOBAL USAGE                          */
 /* ===================================== */
 
-html {
-  --mat-sys-background: #ffffff !important;
-  --mat-sys-surface: #ffffff !important;
-
-  /* 🔥 MAIN PINK SOURCE */
-  --mat-sys-surface-container: #ffffff !important;
-  --mat-sys-surface-container-low: #ffffff !important;
-  --mat-sys-surface-container-high: #ffffff !important;
-  --mat-sys-surface-container-highest: #ffffff !important;
-
-  --mat-sys-on-surface: #000000 !important;
+a,
+.active,
+.highlight {
+  color: var(--app-highlight);
 }
 
 /* ===================================== */
-/* ENSURE ALL MAIN LAYOUTS ARE WHITE     */
+/* MATERIAL LAYOUTS                      */
 /* ===================================== */
 
 mat-sidenav-container,
 mat-sidenav-content,
-.mat-mdc-drawer-content,
 .mat-mdc-drawer,
+.mat-mdc-drawer-content,
 .mat-mdc-dialog-container,
 .mat-mdc-menu-panel {
-  background-color: #ffffff !important;
+  background-color: var(--app-background);
 }
-
-/* ===================================== */
-/* CARDS & PANELS                        */
-/* ===================================== */
 
 mat-card {
-  background-color: #ffffff !important;
-  color: #000000 !important;
+  background-color: var(--app-background);
+  color: var(--mat-sys-on-surface);
 }
 
 /* ===================================== */
-/* OPTIONAL DARK MODE SUPPORT            */
+/* DARK MODE                             */
 /* ===================================== */
 
 body.dark-mode {
-  background-color: #121212;
-  color: #ffffff;
-}
-
-body.dark-mode mat-card,
-body.dark-mode mat-sidenav-container,
-body.dark-mode mat-sidenav-content {
-  background-color: #1e1e1e !important;
-  color: #ffffff !important;
+  --app-background: #121212;
+  --mat-sys-surface: #1e1e1e;
+  --mat-sys-on-surface: #ffffff;
 }

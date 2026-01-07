@@ -1,104 +1,19 @@
 <div class="page-wrapper">
   <div class="login-card">
 
-    <!-- HEADER -->
     <div class="header">
       <div class="icon-box">
-        <span class="material-symbols-outlined">
-          {{ isSignup ? 'person_add' : 'lock' }}
-        </span>
+        <span class="material-symbols-outlined">lock</span>
       </div>
-      <h1>{{ isSignup ? 'Create account' : 'Welcome back' }}</h1>
-      <p>
-        {{ isSignup
-          ? 'Fill the details to create an account.'
-          : 'Please enter your details to sign in.' }}
-      </p>
+
+      <h1>Welcome to Bezohminds</h1>
+      <p>Please sign in to continue</p>
     </div>
 
-    <!-- FORM -->
-    <form [formGroup]="form" (ngSubmit)="submit()">
-
-      <!-- EMAIL -->
-      <div class="field">
-        <label>Email Address</label>
-        <div class="input-wrapper">
-          <input
-            type="email"
-            formControlName="email"
-            placeholder="Name@company.com"
-          />
-          <span class="material-symbols-outlined">mail</span>
-        </div>
-
-        <small *ngIf="email?.touched && email?.hasError('required')">
-          Email is required
-        </small>
-        <small *ngIf="email?.touched && email?.hasError('email')">
-          Enter a valid email address
-        </small>
-      </div>
-
-      <!-- PASSWORD -->
-      <div class="field">
-        <label>Password</label>
-        <div class="input-wrapper">
-          <input
-            [type]="showPassword ? 'text' : 'password'"
-            formControlName="password"
-            placeholder="••••••••"
-          />
-          <button type="button" (click)="showPassword = !showPassword">
-            <span class="material-symbols-outlined">
-              {{ showPassword ? 'visibility_off' : 'visibility' }}
-            </span>
-          </button>
-        </div>
-
-        <small *ngIf="password?.touched && password?.hasError('required')">
-          Password is required
-        </small>
-        <small *ngIf="password?.touched && password?.hasError('minlength')">
-          Password must be at least 6 characters
-        </small>
-      </div>
-
-      <!-- CONFIRM PASSWORD -->
-      <div class="field" *ngIf="isSignup">
-        <label>Confirm Password</label>
-        <div class="input-wrapper">
-          <input
-            type="password"
-            formControlName="confirmPassword"
-            placeholder="••••••••"
-          />
-          <span class="material-symbols-outlined">lock</span>
-        </div>
-
-        <small *ngIf="error">{{ error }}</small>
-      </div>
-
-      <!-- GLOBAL ERROR -->
-      <p class="error" *ngIf="!isSignup && error">{{ error }}</p>
-
-      <!-- BUTTON -->
-      <button class="submit-btn" type="submit">
-        <span class="btn-text">
-          {{ isSignup ? 'Sign up' : 'Sign in' }}
-        </span>
-        <span class="material-symbols-outlined btn-icon">
-          arrow_forward
-        </span>
-      </button>
-    </form>
-
-    <!-- FOOTER -->
-    <p class="footer">
-      {{ isSignup ? 'Already have an account?' : 'Don’t have an account?' }}
-      <a (click)="toggleMode()">
-        {{ isSignup ? 'Sign in' : 'Sign up' }}
-      </a>
-    </p>
+    <button class="login-btn" (click)="login()">
+      <span class="material-symbols-outlined">login</span>
+      Continue with Auth0
+    </button>
 
   </div>
 </div>
