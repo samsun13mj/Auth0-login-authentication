@@ -1,10 +1,14 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  OnInit,
+  AfterViewInit
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
@@ -16,20 +20,19 @@ import { SidenavService } from '../../../service/sidenav-service';
   selector: 'app-dashboard-component',
   standalone: true,
   imports: [
-    CommonModule,              
+    CommonModule,
     MatCardModule,
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    MatFormFieldModule,
     MatInputModule,
     RouterModule
   ],
   templateUrl: './dashboard-component.html',
   styleUrls: ['./dashboard-component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['id', 'name', 'email', 'role'];
   dataSource = new MatTableDataSource<any>([]);
@@ -46,6 +49,10 @@ export class DashboardComponent implements OnInit {
     this.fetchUsers();
   }
 
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
   fetchUsers(): void {
     this.loading = true;
 
@@ -55,11 +62,6 @@ export class DashboardComponent implements OnInit {
 
         this.dataSource.filterPredicate = (data, filter) =>
           data.name.toLowerCase().includes(filter);
-
-        // ✅ paginator AFTER DOM render
-        setTimeout(() => {
-          this.dataSource.paginator = this.paginator;
-        });
 
         this.loading = false;
       },

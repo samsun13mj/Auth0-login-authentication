@@ -8,16 +8,14 @@
       <button
         class="login-btn"
         *ngIf="!(user$ | async)"
-        (click)="login()"
-      >
+        (click)="login()">
         Login
       </button>
 
       <button
-        class="logout-btn"
+        class="logout-btn"  
         *ngIf="user$ | async"
-        (click)="logout()"
-      >
+        (click)="logout()">
         Logout
       </button>
     </div>
@@ -30,8 +28,7 @@
       <img
         class="avatar"
         [src]="user.picture"
-        alt="User avatar"
-      />
+        alt="User avatar"/>
 
       <div class="user-info">
         <h3>{{ user.name }}</h3>

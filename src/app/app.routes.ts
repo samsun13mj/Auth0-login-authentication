@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { authGuardFn } from '@auth0/auth0-angular';
+
 import { MainLayoutComponent } from './view/shared-container/layout/main-layout/main-layout';
 import { DashboardComponent } from './view/dashboard-container/dashboard-component/dashboard-component';
 import { adminGuard } from './core/guards/admin-guard';
 
 export const routes: Routes = [
-
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
@@ -19,10 +19,12 @@ export const routes: Routes = [
   {
     path: 'app',
     component: MainLayoutComponent,
-    canActivate: [authGuardFn],
+    canActivate: [authGuardFn], // ✅ CORRECT USAGE
+
     children: [
 
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      // ❌ NO EMPTY REDIRECT HERE
+      // { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
       { path: 'dashboard', component: DashboardComponent },
 
@@ -98,14 +100,13 @@ export const routes: Routes = [
       },
 
       {
-        path: 'help',
+        path: 'diagram',
         loadComponent: () =>
-          import('./view/help-container/help-component/help-component')
-            .then(m => m.HelpComponent)
+          import('./view/diagram-container/diagram-component/diagram-component')
+            .then(m => m.DiagramComponent)
       }
     ]
   },
 
-  // ❗ FALLBACK
   { path: '**', redirectTo: 'login' }
 ];

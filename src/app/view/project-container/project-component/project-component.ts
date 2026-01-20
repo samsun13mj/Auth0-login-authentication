@@ -1,6 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+  FormGroup
+} from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { UserService } from '../../../service/user-service';
@@ -25,6 +35,8 @@ export class ProjectComponent implements OnInit {
   selectedUserId!: number;
 
   userForm!: FormGroup;
+
+  @ViewChild('editSection') editSection!: ElementRef;
 
   constructor(
     private fb: FormBuilder,
@@ -72,7 +84,13 @@ export class ProjectComponent implements OnInit {
     this.isEdit = true;
     this.selectedUserId = user.id;
     this.userForm.patchValue(user);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    setTimeout(() => {
+      this.editSection?.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    });
   }
 
   /** 🗑 DELETE USER */

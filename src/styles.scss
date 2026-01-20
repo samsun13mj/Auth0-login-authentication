@@ -89,3 +89,36 @@ body.dark-mode {
   --mat-sys-surface: #1e1e1e;
   --mat-sys-on-surface: #ffffff;
 }
+
+/* ===================================== */
+/* MATERIAL MENU – PROFESSIONAL WHITE UI */
+/* ===================================== */
+
+.mat-mdc-menu-panel {
+  --mdc-menu-container-color: #ffffff;
+  --mdc-menu-item-label-text-color: #1f2937;
+  --mdc-menu-item-leading-icon-color: #4b5563;
+  --mdc-menu-item-hover-state-layer-color: #f3f4f6;
+
+  background-color: #ffffff !important;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  padding: 6px 0;
+}
+
+/* Menu item spacing */
+.mat-mdc-menu-item {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 16px;
+}
+
+/* Logout danger style */
+.mat-mdc-menu-item.logout {
+  color: #dc2626;
+}
+
+.mat-mdc-menu-item.logout mat-icon {
+  color: #dc2626;
+}
+

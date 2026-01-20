@@ -14,7 +14,7 @@
   </div>
 
   <!-- EDIT USER -->
-  <div class="edit-wrapper" *ngIf="isEdit">
+  <div class="edit-wrapper" *ngIf="isEdit" #editSection>
     <h3>Edit User</h3>
 
     <form class="edit-form" [formGroup]="userForm" (ngSubmit)="submit()">

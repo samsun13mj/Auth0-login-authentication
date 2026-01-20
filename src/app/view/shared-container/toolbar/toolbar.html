@@ -1,21 +1,44 @@
-<mat-toolbar  class="custom-toolbar">
-  <span>Bezohminds</span>
+<mat-toolbar class="custom-toolbar">
+  <span class="brand">Bezohminds</span>
   <span class="spacer"></span>
 
-  <button class="custom-toolbar" mat-icon-button>
+  <button mat-icon-button class="toolbar-icon">
     <mat-icon>notifications</mat-icon>
   </button>
 
-  <button class="custom-toolbar" mat-icon-button [matMenuTriggerFor]="profileMenu">
+  <!-- 🔑 ADD TEMPLATE REF HERE -->
+  <button
+    mat-icon-button
+    class="toolbar-icon"
+    [matMenuTriggerFor]="profileMenu"
+    #menuTrigger="matMenuTrigger"
+  >
     <mat-icon>account_circle</mat-icon>
   </button>
 
-  <mat-menu #profileMenu="matMenu">
-    <button mat-menu-item routerLink="/profile">
+  <mat-menu
+    #profileMenu="matMenu"
+    class="profile-menu"
+    xPosition="before"
+  >
+    <!-- ✅ PASS TRIGGER, NOT MENU -->
+    <button
+      mat-menu-item
+      type="button"
+      (click)="goToProfile(menuTrigger)"
+    >
       <mat-icon>person</mat-icon>
       <span>Profile</span>
     </button>
-    <button mat-menu-item (click)="logout()">
+
+    <mat-divider></mat-divider>
+
+    <button
+      mat-menu-item
+      class="logout"
+      type="button"
+      (click)="logout()"
+    >
       <mat-icon>logout</mat-icon>
       <span>Logout</span>
     </button>

@@ -1,1 +1,53 @@
-<p>files-component works!</p>
+<div class="upload-card">
+
+  <h2>Upload Timesheet</h2>
+  <p class="subtitle">Upload Excel file (.xlsx or .xls)</p>
+
+  <!-- DROP ZONE -->
+  <label
+    class="drop-zone"
+    [class.dragging]="isDragging"
+    [class.disabled]="loading"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave()"
+    (drop)="onDrop($event)">
+
+    <input
+      type="file"
+      accept=".xlsx,.xls"
+      hidden
+      [disabled]="loading"
+      (change)="onFileUpload($event)"/>
+
+    <div class="drop-content">
+      <span class="icon">
+        {{ loading ? '⏳' : '📁' }}
+      </span>
+
+      <p class="title">
+        {{ loading ? 'Uploading timesheet…' : 'Drag & drop your file here' }}
+      </p>
+
+      <p class="desc" *ngIf="!loading">
+        or click to browse
+      </p>
+    </div>
+
+  </label>
+
+  <!-- FILE NAME -->
+  <p class="file-name" *ngIf="selectedFile">
+    Selected file:
+    <strong>{{ selectedFile.name }}</strong>
+  </p>
+
+  <!-- STATUS -->
+  <p class="success" *ngIf="successMessage">
+    ✅ {{ successMessage }}
+  </p>
+
+  <p class="error" *ngIf="errorMessage">
+    ❌ {{ errorMessage }}
+  </p>
+
+</div>

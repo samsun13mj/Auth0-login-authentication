@@ -1,37 +1,75 @@
-.spacer {
-  flex: 1 1 auto;
-}
-
-mat-toolbar {
-  padding-left: 8px; 
-}
-
-mat-toolbar span:first-child {
-  font-weight: bold;
-  font-size: 20px; 
-}
-
-.custom-toolbar {
-  background-color: #1e38fa; 
-  color: white; 
-}
-.spacer {
-  flex: 1 1 auto;
-}
-
-mat-toolbar {
-  padding-left: 8px;
-}
-
-mat-toolbar span:first-child {
-  font-weight: bold;
-  font-size: 20px;
-}
-
+/* Toolbar layout */
 .custom-toolbar {
   background-color: #1e38fa;
-  color: white;
+  color: #ffffff;
+  padding: 0 16px;
 }
 
+/* Brand */
+.brand {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
 
+/* Spacer */
+.spacer {
+  flex: 1 1 auto;
+}
 
+/* Toolbar icons */
+.toolbar-icon {
+  color: #ffffff;
+  margin-left: 6px;
+}
+
+/* ========================= */
+/* PROFILE MENU (IMPORTANT) */
+/* ========================= */
+
+::ng-deep .profile-menu {
+  margin-top: 8px;
+}
+
+/* Menu panel */
+::ng-deep .profile-menu .mat-mdc-menu-panel {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 6px 0;
+  min-width: 180px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* Menu items */
+::ng-deep .profile-menu .mat-mdc-menu-item {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+  padding: 10px 16px;
+  gap: 12px;
+}
+
+/* Icons inside menu */
+::ng-deep .profile-menu mat-icon {
+  font-size: 20px;
+  color: #4b5563;
+}
+
+/* Hover effect */
+::ng-deep .profile-menu .mat-mdc-menu-item:hover {
+  background-color: #f3f4f6;
+}
+
+/* Logout emphasis */
+::ng-deep .profile-menu .logout {
+  color: #dc2626;
+}
+
+::ng-deep .profile-menu .logout mat-icon {
+  color: #dc2626;
+}
+
+/* Divider spacing */
+::ng-deep .profile-menu .mat-divider {
+  margin: 6px 0;
+}

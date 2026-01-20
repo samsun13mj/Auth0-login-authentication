@@ -29,7 +29,7 @@ export class AddUserDialogComponent {
       email: ['', [Validators.required, Validators.email]],
       role: ['', Validators.required]
     });
-  }
+  } 
 
   submit(): void {
     if (this.form.invalid) return;
