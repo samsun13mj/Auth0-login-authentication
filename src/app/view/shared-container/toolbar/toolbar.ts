@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
-import { AuthService } from '../../../service/auth-service';
+
+import { NotificationService } from '../../../service/notification-container/notification-service';
+import { AuthService } from '@auth0/auth0-angular'; // ✅ FIXED
 
 @Component({
   selector: 'app-toolbar',
@@ -23,23 +26,42 @@ import { AuthService } from '../../../service/auth-service';
   templateUrl: './toolbar.html',
   styleUrls: ['./toolbar.scss']
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements OnInit {
+
+  notifications: any[] = [];
+  unreadCount = 0;
 
   constructor(
+    private notify: NotificationService,
     private router: Router,
-    private authService: AuthService
+    private auth: AuthService   // ✅ AUTH0
   ) {}
 
-  // ✅ CORRECT MENU CLOSE
-  goToProfile(trigger: MatMenuTrigger) {
-  trigger.closeMenu();
-  this.router.navigate(['/app/profile']);
-}
+  ngOnInit(): void {
+    this.notify.notifications$.subscribe(res => {
+      this.notifications = res;
+    });
 
+    this.notify.unreadCount$.subscribe(count => {
+      this.unreadCount = count;
+    });
+
+    this.notify.load();
+  }
+
+  openNotification(n: any): void {
+    if (!n.read) {
+      this.notify.markAsRead(n.id).subscribe();
+    }
+
+    this.router.navigate(['/app/notifications']);
+  }
 
   logout() {
-    this.authService.logout()
-      .then(() => this.router.navigate(['/login']))
-      .catch(err => console.error('Logout failed:', err));
+    this.auth.logout({
+      logoutParams: {
+        returnTo: window.location.origin
+      }
+    });
   }
 }

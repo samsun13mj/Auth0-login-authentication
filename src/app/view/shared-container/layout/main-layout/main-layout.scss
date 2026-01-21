@@ -28,25 +28,15 @@ mat-sidenav-content {
 }
 
 /* ============================= */
-/* TOOLBAR                      */
+/* TOOLBAR (app-toolbar)        */
 /* ============================= */
-mat-toolbar.custom-toolbar {
+app-toolbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 64px;
   z-index: 1000;
-  background-color: #1e38fa;
-  color: white;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  box-sizing: border-box;
-}
-
-.spacer {
-  flex: 1 1 auto;
 }
 
 /* ============================= */
@@ -57,13 +47,10 @@ mat-toolbar.custom-toolbar {
   padding: 16px;
   padding-top: 80px;
 
-  /* use ONE height rule only */
   height: calc(100vh - 64px);
-
   overflow-y: auto;
   box-sizing: border-box;
 
-  /* neat scroll (kept) */
   scroll-behavior: smooth;
   scrollbar-width: thin;
 }
@@ -131,15 +118,4 @@ mat-toolbar.custom-toolbar {
 .close-row button:hover {
   background: #f0f0f0;
   transform: rotate(90deg);
-}
-
-/* ============================= */
-/* ICON COLORS                  */
-/* ============================= */
-#notification-button {
-  color: white;
-}
-
-#account_circle {
-  color: white;
 }

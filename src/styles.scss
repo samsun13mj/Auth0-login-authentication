@@ -16,23 +16,27 @@ html {
 }
 
 /* ===================================== */
-/* APP DESIGN TOKENS (REACT STYLE)       */
-/* SINGLE SOURCE OF TRUTH                */
+/* APP DESIGN TOKENS (SINGLE SOURCE)     */
 /* ===================================== */
 
 :root {
-  /* APP TOKENS */
   --app-primary: #3B82F6;
   --app-accent: #9333EA;
   --app-background: #ffffff;
   --app-highlight: #2563eb;
 
-  /* MATERIAL M3 TOKEN MAPPING */
+  /* MATERIAL M3 TOKEN BRIDGE */
   --mat-sys-primary: var(--app-primary);
   --mat-sys-secondary: var(--app-accent);
+
   --mat-sys-background: var(--app-background);
   --mat-sys-surface: var(--app-background);
-  --mat-sys-on-surface: #000000;
+  --mat-sys-surface-container: var(--app-background);
+  --mat-sys-surface-container-high: var(--app-background);
+  --mat-sys-surface-container-low: var(--app-background);
+
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-on-surface: #111827;
 }
 
 /* ===================================== */
@@ -53,7 +57,7 @@ body {
 }
 
 /* ===================================== */
-/* GLOBAL USAGE                          */
+/* GLOBAL LINKS                          */
 /* ===================================== */
 
 a,
@@ -63,7 +67,7 @@ a,
 }
 
 /* ===================================== */
-/* MATERIAL LAYOUTS                      */
+/* MATERIAL BASE LAYOUTS                 */
 /* ===================================== */
 
 mat-sidenav-container,
@@ -81,39 +85,90 @@ mat-card {
 }
 
 /* ===================================== */
+/* TOOLBAR THEME                         */
+/* ===================================== */
+
+mat-toolbar,
+.mat-mdc-toolbar {
+  background: linear-gradient(
+    90deg,
+    var(--app-primary),
+    var(--app-accent)
+  ) !important;
+  color: #ffffff !important;
+}
+
+mat-toolbar mat-icon {
+  color: #ffffff;
+}
+
+/* ===================================== */
+/* SIDENAV THEME                         */
+/* ===================================== */
+
+mat-sidenav,
+.mat-mdc-drawer {
+  background-color: var(--app-background) !important;
+  color: var(--mat-sys-on-surface);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+mat-sidenav a,
+mat-sidenav button {
+  color: var(--mat-sys-on-surface);
+}
+
+mat-sidenav .active {
+  background-color: color-mix(
+    in srgb,
+    var(--app-primary) 15%,
+    transparent
+  );
+  color: var(--app-primary);
+}
+
+/* ===================================== */
 /* DARK MODE                             */
 /* ===================================== */
 
 body.dark-mode {
-  --app-background: #121212;
-  --mat-sys-surface: #1e1e1e;
-  --mat-sys-on-surface: #ffffff;
+  --app-background: #0f172a;
+
+  --mat-sys-background: #0f172a;
+  --mat-sys-surface: #111827;
+
+  --mat-sys-surface-container: #111827;
+  --mat-sys-surface-container-high: #1f2937;
+
+  --mat-sys-on-surface: #e5e7eb;
+}
+
+/* DARK TOOLBAR */
+body.dark-mode mat-toolbar {
+  background: #020617 !important;
+  color: #e5e7eb !important;
+}
+
+/* DARK SIDENAV */
+body.dark-mode mat-sidenav {
+  background-color: #020617 !important;
+  color: #e5e7eb;
 }
 
 /* ===================================== */
-/* MATERIAL MENU – PROFESSIONAL WHITE UI */
+/* MATERIAL MENU (WHITE / DARK SAFE)     */
 /* ===================================== */
 
 .mat-mdc-menu-panel {
-  --mdc-menu-container-color: #ffffff;
-  --mdc-menu-item-label-text-color: #1f2937;
-  --mdc-menu-item-leading-icon-color: #4b5563;
-  --mdc-menu-item-hover-state-layer-color: #f3f4f6;
+  --mdc-menu-container-color: var(--mat-sys-surface);
+  --mdc-menu-item-label-text-color: var(--mat-sys-on-surface);
+  --mdc-menu-item-leading-icon-color: var(--mat-sys-on-surface);
 
-  background-color: #ffffff !important;
   border-radius: 12px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
   padding: 6px 0;
 }
 
-/* Menu item spacing */
-.mat-mdc-menu-item {
-  font-size: 14px;
-  font-weight: 500;
-  padding: 10px 16px;
-}
-
-/* Logout danger style */
 .mat-mdc-menu-item.logout {
   color: #dc2626;
 }
@@ -121,4 +176,3 @@ body.dark-mode {
 .mat-mdc-menu-item.logout mat-icon {
   color: #dc2626;
 }
-

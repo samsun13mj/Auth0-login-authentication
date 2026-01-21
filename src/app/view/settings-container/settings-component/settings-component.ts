@@ -32,7 +32,7 @@ export class SettingsComponent {
   presets: Record<PresetKey, AppTheme> = {
     default: {
       primary: '#3B82F6',
-      accent: '#9333EA',
+      accent: '#3B82F6',
       background: '#ffffff',
       highlight: '#2563eb'
     },

@@ -1,15 +1,18 @@
-/* GLOBAL FIX */
-*,
-*::before,
-*::after {
+/* GLOBAL */
+* {
   box-sizing: border-box;
 }
 
+/* PAGE GRID */
 .page {
   padding: 24px;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 32px;
+  align-items: start;
 }
 
-/* Titles */
+/* TITLES */
 h2 {
   margin-bottom: 16px;
   font-size: 22px;
@@ -18,13 +21,11 @@ h2 {
 }
 
 .section-title {
-  margin-top: 32px;
+  margin: 32px 0 16px;
 }
 
-/* Card */
+/* LEFT CARD */
 .card {
-  max-width: 520px;
-  width: 100%;
   background: #ffffff;
   padding: 24px;
   border-radius: 14px;
@@ -32,17 +33,15 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  overflow: hidden;
 }
 
-/* Labels */
+/* FORM */
 label {
   font-size: 14px;
   font-weight: 500;
   color: #374151;
 }
 
-/* Inputs */
 input,
 textarea,
 select {
@@ -58,10 +57,9 @@ textarea {
   min-height: 90px;
 }
 
-/* Button */
+/* BUTTON */
 button {
   padding: 12px;
-  width: 100%;
   border-radius: 12px;
   border: none;
   background: linear-gradient(135deg, #2563eb, #1d4ed8);
@@ -71,11 +69,44 @@ button {
   cursor: pointer;
 }
 
-/* Task List */
+/* STATS */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card h3 {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.stat-card p {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.stat-card.completed p {
+  color: #16a34a;
+}
+
+.stat-card.pending p {
+  color: #dc2626;
+}
+
+/* TASK LIST */
 .task-list {
   list-style: none;
   padding: 0;
-  max-width: 520px;
 }
 
 .task-list li {
@@ -88,7 +119,7 @@ button {
   align-items: center;
 }
 
-/* Status */
+/* STATUS */
 .status {
   font-size: 13px;
   color: #dc2626;
@@ -98,7 +129,7 @@ button {
   color: #16a34a;
 }
 
-/* Actions */
+/* ACTIONS */
 .actions {
   display: flex;
   gap: 8px;
@@ -106,18 +137,24 @@ button {
 
 .done-btn {
   background: #16a34a;
-  color: #fff;
 }
 
 .delete-btn {
   background: #dc2626;
-  color: #fff;
 }
 
 .done-btn,
 .delete-btn {
-  border: none;
   padding: 6px 12px;
   border-radius: 8px;
+  color: #fff;
+  border: none;
   cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
 }

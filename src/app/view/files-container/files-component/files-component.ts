@@ -49,6 +49,11 @@ export class FilesComponent {
 
   /* HANDLE FILE */
   handleFile(file: File) {
+
+    this.loading = false;
+    this.errorMessage = '';
+    this.successMessage = '';
+
     if (!file.name.match(/\.(xls|xlsx)$/)) {
       this.errorMessage = 'Only Excel files (.xls, .xlsx) are allowed';
       return;
@@ -56,12 +61,9 @@ export class FilesComponent {
 
     this.selectedFile = file;
     this.loading = true;
-    this.successMessage = '';
-    this.errorMessage = '';
 
     const reader = new FileReader();
 
-    // ✅ CORRECT WAY TO READ EXCEL
     reader.onload = (e: any) => {
       try {
         const buffer = new Uint8Array(e.target.result);
@@ -70,46 +72,49 @@ export class FilesComponent {
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
 
+        /* 🔥 FIX: Explicit headers */
         const jsonData: any[] = XLSX.utils.sheet_to_json(sheet, {
+          header: ['employeeId', 'date', 'hoursWorked', 'project'],
           defval: '',
           raw: true
         });
 
-        console.log('Excel Data:', jsonData); // DEBUG
+        /* remove empty rows */
+        const cleanedData = jsonData.filter(
+          r => r.employeeId && r.date
+        );
 
-        this.processTimesheet(jsonData);
+        if (!cleanedData.length) {
+          throw new Error('Empty or invalid Excel structure');
+        }
+
+        this.processTimesheet(cleanedData);
 
       } catch (err) {
         console.error(err);
         this.loading = false;
-        this.errorMessage = 'Invalid Excel file';
+        this.errorMessage = 'Invalid Excel file structure';
       }
     };
 
-    // ❗ THIS LINE WAS WRONG BEFORE
     reader.readAsArrayBuffer(file);
   }
 
   /* DATE FIX */
-  excelDateToISO(date: any): string {
-    if (typeof date === 'string') return date;
+  excelDateToISO(value: any): string {
+    if (typeof value === 'string') return value;
 
     const jsDate = new Date(
-      Math.round((date - 25569) * 86400 * 1000)
+      Math.round((value - 25569) * 86400 * 1000)
     );
 
     return jsDate.toISOString().split('T')[0];
   }
 
   /* PROCESS DATA */
-  processTimesheet(timesheetData: any[]) {
-    if (!timesheetData.length) {
-      this.loading = false;
-      this.errorMessage = 'Excel file is empty';
-      return;
-    }
+  processTimesheet(rows: any[]) {
 
-    const uploadDate = this.excelDateToISO(timesheetData[0].date);
+    const uploadDate = this.excelDateToISO(rows[0].date);
 
     this.api.getReportsByDate(uploadDate).subscribe(oldReports => {
 
@@ -119,7 +124,7 @@ export class FilesComponent {
 
       this.api.getUsers().subscribe(users => {
 
-        const reports = timesheetData
+        const reports = rows
           .map(row => {
             const user = users.find(
               u => String(u.id) === String(row.employeeId)
@@ -135,10 +140,10 @@ export class FilesComponent {
               project: row.project
             };
           })
-          .filter(r => r !== null);
+          .filter(Boolean);
 
-        reports.forEach(report => {
-          this.api.addReport(report).subscribe();
+        reports.forEach(r => {
+          this.api.addReport(r).subscribe();
         });
 
         this.loading = false;

@@ -1,53 +1,96 @@
-<div class="upload-card">
+<div class="page">
 
-  <h2>Upload Timesheet</h2>
-  <p class="subtitle">Upload Excel file (.xlsx or .xls)</p>
+  <!-- LEFT -->
+  <div class="left">
+    <div class="upload-card">
 
-  <!-- DROP ZONE -->
-  <label
-    class="drop-zone"
-    [class.dragging]="isDragging"
-    [class.disabled]="loading"
-    (dragover)="onDragOver($event)"
-    (dragleave)="onDragLeave()"
-    (drop)="onDrop($event)">
+      <h2>Upload Timesheet</h2>
+      <p class="subtitle">Upload Excel file (.xlsx or .xls)</p>
 
-    <input
-      type="file"
-      accept=".xlsx,.xls"
-      hidden
-      [disabled]="loading"
-      (change)="onFileUpload($event)"/>
+      <label
+        class="drop-zone"
+        [class.dragging]="isDragging"
+        [class.disabled]="loading"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave()"
+        (drop)="onDrop($event)">
 
-    <div class="drop-content">
-      <span class="icon">
-        {{ loading ? '⏳' : '📁' }}
-      </span>
+        <input
+          type="file"
+          accept=".xlsx,.xls"
+          hidden
+          [disabled]="loading"
+          (change)="onFileUpload($event)"/>
 
-      <p class="title">
-        {{ loading ? 'Uploading timesheet…' : 'Drag & drop your file here' }}
+        <div class="drop-content">
+          <span class="icon">
+            {{ loading ? '⏳' : '📁' }}
+          </span>
+
+          <p class="title">
+            {{ loading ? 'Uploading timesheet…' : 'Drag & drop your file here' }}
+          </p>
+
+          <p class="desc" *ngIf="!loading">
+            or click to browse
+          </p>
+        </div>
+      </label>
+
+      <p class="file-name" *ngIf="selectedFile">
+        Selected file:
+        <strong>{{ selectedFile.name }}</strong>
       </p>
 
-      <p class="desc" *ngIf="!loading">
-        or click to browse
+      <p class="success" *ngIf="successMessage">
+        ✅ {{ successMessage }}
       </p>
+
+      <p class="error" *ngIf="errorMessage">
+        ❌ {{ errorMessage }}
+      </p>
+
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+
+    <!-- GUIDELINES -->
+    <div class="info-card">
+      <h3>Upload Guidelines</h3>
+      <ul>
+        <li>Only Excel files (.xls, .xlsx)</li>
+        <li>Date must be valid Excel date</li>
+        <li>Employee ID must exist</li>
+        <li>One file per day</li>
+      </ul>
     </div>
 
-  </label>
+    <!-- SUMMARY -->
+    <div class="info-card">
+      <h3>Upload Summary</h3>
+      <p><strong>Status:</strong> {{ loading ? 'Processing' : 'Idle' }}</p>
+      <p><strong>Selected File:</strong> {{ selectedFile?.name || 'None' }}</p>
+    </div>
 
-  <!-- FILE NAME -->
-  <p class="file-name" *ngIf="selectedFile">
-    Selected file:
-    <strong>{{ selectedFile.name }}</strong>
-  </p>
+    <!-- ACTIVITY -->
+    <div class="info-card">
+      <h3>Recent Activity</h3>
 
-  <!-- STATUS -->
-  <p class="success" *ngIf="successMessage">
-    ✅ {{ successMessage }}
-  </p>
+      <div class="activity-item">
+        📄 Timesheet uploaded
+      </div>
 
-  <p class="error" *ngIf="errorMessage">
-    ❌ {{ errorMessage }}
-  </p>
+      <div class="activity-item success">
+        ✔ Reports generated
+      </div>
+
+      <div class="activity-item error">
+        ✖ Duplicate date removed
+      </div>
+    </div>
+
+  </div>
 
 </div>

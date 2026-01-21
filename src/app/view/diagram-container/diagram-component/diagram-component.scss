@@ -1,0 +1,11 @@
+/* diagram.component.scss */
+.diagram-wrapper {
+  height: calc(100vh - 64px); /* minus toolbar */
+  background: #f4f6f8;
+}
+
+#paper {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ddd;
+}

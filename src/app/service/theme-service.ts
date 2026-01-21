@@ -38,16 +38,25 @@ export class ThemeService {
   private applyTheme(theme: AppTheme): void {
     const root = document.documentElement;
 
+    /* App tokens */
     root.style.setProperty('--app-primary', theme.primary);
     root.style.setProperty('--app-accent', theme.accent);
     root.style.setProperty('--app-background', theme.background);
     root.style.setProperty('--app-highlight', theme.highlight);
 
-    /* Material M3 bridge */
+    /* Material M3 FULL bridge */
     root.style.setProperty('--mat-sys-primary', theme.primary);
     root.style.setProperty('--mat-sys-secondary', theme.accent);
+
     root.style.setProperty('--mat-sys-background', theme.background);
     root.style.setProperty('--mat-sys-surface', theme.background);
+
+    root.style.setProperty('--mat-sys-surface-container', theme.background);
+    root.style.setProperty('--mat-sys-surface-container-high', theme.background);
+    root.style.setProperty('--mat-sys-surface-container-low', theme.background);
+
+    root.style.setProperty('--mat-sys-on-primary', '#ffffff');
+    root.style.setProperty('--mat-sys-on-surface', '#111827');
   }
 
   toggleDarkMode(enabled: boolean): void {

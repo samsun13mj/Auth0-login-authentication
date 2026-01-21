@@ -1,1 +1,87 @@
-<p>notification-component works!</p>
+<div class="notification-page">
+
+  <!-- LEFT LIST -->
+  <div class="notify-list">
+    <h3>Notifications</h3>
+
+    @for (n of notifications; track n.id) {
+      <div
+        class="item"
+        [class.unread]="!n.read"
+        [class.active]="selected?.id === n.id"
+        (click)="select(n)">
+
+        <p class="message">{{ n.message }}</p>
+        <small>{{ n.createdAt | date:'short' }}</small>
+      </div>
+    }
+
+    @if (notifications.length === 0) {
+      <div class="empty">🎉 No notifications</div>
+    }
+  </div>
+
+  <!-- DETAILS -->
+  <div class="notify-details">
+
+    @if (selected) {
+
+      <h3>Notification Details</h3>
+
+      <div class="detail-card">
+
+        <!-- COMMON -->
+        <p class="detail-message">{{ selected.message }}</p>
+
+        <div class="meta">
+          <span><strong>Date:</strong> {{ selected.createdAt | date:'fullDate' }}</span>
+          <span><strong>Status:</strong> {{ selected.read ? 'Read' : 'Unread' }}</span>
+          <span><strong>Type:</strong> {{ selected.type }}</span>
+        </div>
+
+        <!-- USER DETAILS -->
+        @if (selected.type === 'USER') {
+          <div class="detail-section">
+            <h4>User Details</h4>
+            <p><strong>Name:</strong> {{ selected.payload?.name }}</p>
+            <p><strong>Email:</strong> {{ selected.payload?.email }}</p>
+            <p><strong>Role:</strong> {{ selected.payload?.role }}</p>
+          </div>
+        }
+
+        <!-- TASK DETAILS -->
+        @if (selected.type === 'TASK' || selected.type === 'DONE') {
+          <div class="detail-section">
+            <h4>Task Details</h4>
+            <p><strong>Title:</strong> {{ selected.payload?.title }}</p>
+            <p><strong>Description:</strong> {{ selected.payload?.description }}</p>
+            <p><strong>Assigned To:</strong> {{ selected.payload?.assignedTo }}</p>
+          </div>
+        }
+
+        <!-- ACTIONS -->
+        <div class="actions">
+          @if (!selected.read) {
+            <button class="read-btn" (click)="markRead(selected)">
+              Mark as read
+            </button>
+          }
+
+          <button class="delete-btn" (click)="delete(selected)">
+            Delete
+          </button>
+        </div>
+
+      </div>
+
+    } @else {
+
+      <div class="placeholder">
+        📩 Select a notification to view details
+      </div>
+
+    }
+
+  </div>
+
+</div>

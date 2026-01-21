@@ -2,45 +2,55 @@
   <span class="brand">Bezohminds</span>
   <span class="spacer"></span>
 
-  <button mat-icon-button class="toolbar-icon">
-    <mat-icon>notifications</mat-icon>
-  </button>
-
-  <!-- 🔑 ADD TEMPLATE REF HERE -->
+  <!-- 🔔 NOTIFICATION BELL -->
   <button
     mat-icon-button
-    class="toolbar-icon"
-    [matMenuTriggerFor]="profileMenu"
-    #menuTrigger="matMenuTrigger"
-  >
-    <mat-icon>account_circle</mat-icon>
+    class="notification-btn"
+    [matMenuTriggerFor]="notificationMenu">
+
+    <mat-icon>notifications</mat-icon>
+
+    @if (unreadCount > 0) {
+      <span class="badge">{{ unreadCount }}</span>
+    }
   </button>
 
-  <mat-menu
-    #profileMenu="matMenu"
-    class="profile-menu"
-    xPosition="before"
-  >
-    <!-- ✅ PASS TRIGGER, NOT MENU -->
-    <button
-      mat-menu-item
-      type="button"
-      (click)="goToProfile(menuTrigger)"
-    >
-      <mat-icon>person</mat-icon>
-      <span>Profile</span>
-    </button>
+  <!-- 🔔 NOTIFICATION MENU -->
+  <mat-menu #notificationMenu="matMenu" class="notification-menu">
+
+    @if (notifications.length === 0) {
+      <div class="empty">No notifications</div>
+    }
+
+    @for (n of notifications; track n.id) {
+      <button mat-menu-item (click)="openNotification(n)">
+        <span class="dot" [class.unread]="!n.read"></span>
+        {{ n.message }}
+      </button>
+    }
 
     <mat-divider></mat-divider>
 
-    <button
-      mat-menu-item
-      class="logout"
-      type="button"
-      (click)="logout()"
-    >
+    <button mat-menu-item routerLink="/app/notifications">
+      View all notifications
+    </button>
+  </mat-menu>
+
+  <!-- 👤 PROFILE -->
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="profileMenu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item routerLink="/app/profile">
+      <mat-icon>person</mat-icon>
+      Profile
+    </button>
+    <button mat-menu-item (click)="logout()">
       <mat-icon>logout</mat-icon>
-      <span>Logout</span>
+      Logout
     </button>
   </mat-menu>
 </mat-toolbar>

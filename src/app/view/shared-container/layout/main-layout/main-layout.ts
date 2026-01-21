@@ -19,6 +19,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { SidebarComponent } from '../../sidebar/sidebar';
 import { UserDetailsSidenavComponent } from '../../../user-details-container/user-details/user-details';
 import { SidenavService } from '../../../../service/sidenav-service';
+import { ToolbarComponent } from '../../toolbar/toolbar';
 
 @Component({
   selector: 'app-main-layout',
@@ -32,7 +33,7 @@ import { SidenavService } from '../../../../service/sidenav-service';
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-
+    ToolbarComponent,
     SidebarComponent,
     UserDetailsSidenavComponent
   ],

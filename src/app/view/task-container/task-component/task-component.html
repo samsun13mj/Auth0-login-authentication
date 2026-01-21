@@ -1,60 +1,98 @@
 <div class="page">
 
-  <h2>Assign Task</h2>
+  <!-- LEFT COLUMN -->
+  <div class="left">
 
-  <div class="card">
+    <h2>Assign Task</h2>
 
-    <label>Task Title</label>
-    <input
-      type="text"
-      [(ngModel)]="task.title"
-      placeholder="Enter task title"
-    />
+    <div class="card">
 
-    <label>Description</label>
-    <textarea
-      [(ngModel)]="task.description"
-      placeholder="Enter task description"
-    ></textarea>
+      <label>Task Title</label>
+      <input
+        type="text"
+        [(ngModel)]="task.title"
+        placeholder="Enter task title"
+      />
 
-    <label>Assign To</label>
-    <select [(ngModel)]="task.assignedTo">
-      <option [ngValue]="null">Select User</option>
+      <label>Description</label>
+      <textarea
+        [(ngModel)]="task.description"
+        placeholder="Enter task description"
+      ></textarea>
 
-      @for (user of users; track user.id) {
-        <option [ngValue]="user.id">
-          {{ user.name }}
-        </option>
-      }
-    </select>
+      <label>Assign To</label>
+      <select [(ngModel)]="task.assignedTo">
+        <option [ngValue]="null">Select User</option>
 
-    <button (click)="assignTask()">Assign Task</button>
+        @for (user of users; track user.id) {
+          <option [ngValue]="user.id">
+            {{ user.name }}
+          </option>
+        }
+      </select>
 
+      <button (click)="assignTask()">Assign Task</button>
+
+    </div>
   </div>
 
-  <h2 class="section-title">Assigned Tasks</h2>
+  <!-- RIGHT COLUMN -->
+  <div class="right">
 
-  <ul class="task-list">
-    @for (t of tasks; track t.id) {
-      <li>
-        <div>
-          <strong>{{ t.title }}</strong>
-          <p>User ID: {{ t.assignedTo }}</p>
-          <p class="status" [class.done]="t.completed">
-            {{ t.completed ? 'Completed' : 'Pending' }}
-          </p>
-        </div>
+    <!-- STATS -->
+    <div class="stats">
 
-        <div class="actions">
-          <button class="done-btn" (click)="finishTask(t.id)" [disabled]="t.completed">
-            Finish
-          </button>
-          <button class="delete-btn" (click)="deleteTask(t.id)">
-            Delete
-          </button>
-        </div>
-      </li>
-    }
-  </ul>
+      <div class="stat-card">
+        <h3>Total Tasks</h3>
+        <p>{{ tasks.length }}</p>
+      </div>
+
+      <div class="stat-card completed">
+        <h3>Completed</h3>
+        <p>{{ completedCount }}</p>
+      </div>
+
+      <div class="stat-card pending">
+        <h3>Pending</h3>
+        <p>{{ pendingCount }}</p>
+      </div>
+
+    </div>
+
+    <!-- TASK LIST -->
+    <h2 class="section-title">Assigned Tasks</h2>
+
+    <ul class="task-list">
+      @for (t of tasks; track t.id) {
+        <li>
+          <div>
+            <strong>{{ t.title }}</strong>
+            <p>User ID: {{ t.assignedTo }}</p>
+            <p class="status" [class.done]="t.completed">
+              {{ t.completed ? 'Completed' : 'Pending' }}
+            </p>
+          </div>
+
+          <div class="actions">
+            <button
+              class="done-btn"
+              (click)="finishTask(t.id)"
+              [disabled]="t.completed"
+            >
+              Finish
+            </button>
+
+            <button
+              class="delete-btn"
+              (click)="deleteTask(t.id)"
+            >
+              Delete
+            </button>
+          </div>
+        </li>
+      }
+    </ul>
+
+  </div>
 
 </div>

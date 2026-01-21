@@ -1,56 +1,30 @@
 <mat-sidenav-container class="dashboard-container">
 
-  <!-- LEFT sidebar -->
+  <!-- LEFT SIDEBAR -->
   <mat-sidenav mode="side" opened class="sidebar">
     <app-sidebar></app-sidebar>
   </mat-sidenav>
 
-  <!-- MAIN content area -->
+  <!-- MAIN CONTENT -->
   <mat-sidenav-content class="content-area">
 
-    <!-- Toolbar -->
-    <mat-toolbar class="custom-toolbar">
-      <span>Bezohminds</span>
-      <span class="spacer"></span>
+    <!-- FIXED TOOLBAR -->
+    <app-toolbar></app-toolbar>
 
-      <button mat-icon-button id="notification-button">
-        <mat-icon>notifications</mat-icon>
-      </button>
-
-      <button
-        mat-icon-button
-        id="account_circle"
-        [matMenuTriggerFor]="profileMenu"
-      >
-        <mat-icon>account_circle</mat-icon>
-      </button>
-
-      <mat-menu #profileMenu="matMenu">
-        <button mat-menu-item routerLink="/app/profile">
-          <mat-icon>person</mat-icon>
-          <span>Profile</span>
-        </button>
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>logout</mat-icon>
-          <span>Logout</span>
-        </button>
-      </mat-menu>
-    </mat-toolbar>
-
-    <!-- Content wrapper -->
+    <!-- PAGE CONTENT (SCROLL OWNER) -->
     <div class="main-content">
       <router-outlet></router-outlet>
     </div>
 
   </mat-sidenav-content>
 
-  <!-- RIGHT sidebar -->
+  <!-- RIGHT SIDENAV -->
   <mat-sidenav
     #userDetailsSidenav
     mode="over"
     position="end"
-    class="user-details-sidenav"
-  >
+    class="user-details-sidenav">
+
     <div class="sidenav-wrapper">
       <div class="close-row">
         <button mat-icon-button (click)="closeUserSidenav()">
@@ -62,6 +36,7 @@
         [user]="_sidenavUser">
       </app-user-details-sidenav>
     </div>
+
   </mat-sidenav>
 
 </mat-sidenav-container>

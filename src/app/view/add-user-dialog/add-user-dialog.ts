@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+  FormGroup
+} from '@angular/forms';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { UserService } from '../../service/user-service';
+import { NotificationService } from '../../service/notification-container/notification-service';
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -22,6 +28,7 @@ export class AddUserDialogComponent {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private notify: NotificationService,
     private dialogRef: MatDialogRef<AddUserDialogComponent>
   ) {
     this.form = this.fb.group({
@@ -29,12 +36,25 @@ export class AddUserDialogComponent {
       email: ['', [Validators.required, Validators.email]],
       role: ['', Validators.required]
     });
-  } 
+  }
 
   submit(): void {
     if (this.form.invalid) return;
 
-    this.userService.addUser(this.form.value).subscribe(() => {
+    this.userService.addUser(this.form.value).subscribe((user: any) => {
+
+      // 🔔 USER NOTIFICATION WITH PAYLOAD
+      this.notify.create({
+        userId: null,
+        type: 'USER',
+        message: `New user added: ${user.name}`,
+        payload: {
+          name: user.name,
+          email: user.email,
+          role: user.role
+        }
+      }).subscribe();
+
       this.dialogRef.close(true);
     });
   }
