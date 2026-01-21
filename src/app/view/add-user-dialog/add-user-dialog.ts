@@ -7,7 +7,7 @@ import {
   FormGroup
 } from '@angular/forms';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
-import { UserService } from '../../service/user-container/user-service';
+import { UserService, User } from '../../service/user-container/user-service';
 import { NotificationService } from '../../service/notification-container/notification-service';
 
 @Component({
@@ -38,21 +38,28 @@ export class AddUserDialogComponent {
     });
   }
 
+  /** ✅ 6-DIGIT NUMERIC STRING (json-server safe) */
+  private generateSixDigitId(): string {
+    return String(Math.floor(100000 + Math.random() * 900000));
+  }
+
   submit(): void {
     if (this.form.invalid) return;
 
-    this.userService.addUser(this.form.value).subscribe((user: any) => {
+    const payload: User = {
+      id: this.generateSixDigitId(),
+      name: this.form.value.name,
+      email: this.form.value.email,
+      role: this.form.value.role
+    };
 
-      // 🔔 USER NOTIFICATION WITH PAYLOAD
+    this.userService.addUser(payload).subscribe(user => {
+
       this.notify.create({
         userId: null,
         type: 'USER',
         message: `New user added: ${user.name}`,
-        payload: {
-          name: user.name,
-          email: user.email,
-          role: user.role
-        }
+        payload: user
       }).subscribe();
 
       this.dialogRef.close(true);

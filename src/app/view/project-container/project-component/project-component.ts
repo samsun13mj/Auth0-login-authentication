@@ -12,8 +12,9 @@ import {
   FormGroup
 } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { finalize } from 'rxjs/operators';
 
-import { UserService } from '../../../service/user-container/user-service';
+import { UserService, User } from '../../../service/user-container/user-service';
 import { AddUserDialogComponent } from '../../add-user-dialog/add-user-dialog';
 
 @Component({
@@ -29,10 +30,10 @@ import { AddUserDialogComponent } from '../../add-user-dialog/add-user-dialog';
 })
 export class ProjectComponent implements OnInit {
 
-  users: any[] = [];
+  users: User[] = [];
   isEdit = false;
   isLoading = false;
-  selectedUserId!: number;
+  selectedUserId!: string;
 
   userForm!: FormGroup;
 
@@ -56,16 +57,15 @@ export class ProjectComponent implements OnInit {
 
   loadUsers(): void {
     this.isLoading = true;
-    this.userService.getUsers().subscribe({
-      next: (res) => {
-        this.users = res;
-        this.isLoading = false;
-      },
-      error: () => this.isLoading = false
-    });
+
+    this.userService.getUsers()
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe({
+        next: users => this.users = users,
+        error: err => console.error('Load users failed', err)
+      });
   }
 
-  /** ➕ OPEN ADD USER DIALOG */
   openAddUserDialog(): void {
     const dialogRef = this.dialog.open(AddUserDialogComponent, {
       width: '480px',
@@ -73,14 +73,11 @@ export class ProjectComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.loadUsers();
-      }
+      if (result) this.loadUsers();
     });
   }
 
-  /** ✏️ EDIT USER */
-  editUser(user: any): void {
+  editUser(user: User): void {
     this.isEdit = true;
     this.selectedUserId = user.id;
     this.userForm.patchValue(user);
@@ -93,26 +90,38 @@ export class ProjectComponent implements OnInit {
     });
   }
 
-  /** 🗑 DELETE USER */
-  deleteUser(user: any): void {
+  deleteUser(user: User): void {
     if (!confirm(`Delete ${user.name}?`)) return;
 
     this.isLoading = true;
-    this.userService.deleteUser(user.id).subscribe(() => {
-      this.loadUsers();
-    });
+
+    this.userService.deleteUser(user.id)
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe({
+        next: () => this.loadUsers(),
+        error: err => console.error('Delete failed', err)
+      });
   }
 
-  /** ✅ UPDATE USER */
   submit(): void {
     if (this.userForm.invalid) return;
 
     this.isLoading = true;
+
+    const payload: User = {
+      id: this.selectedUserId,
+      ...this.userForm.value
+    };
+
     this.userService
-      .updateUser(this.selectedUserId, this.userForm.value)
-      .subscribe(() => {
-        this.resetForm();
-        this.loadUsers();
+      .updateUser(this.selectedUserId, payload)
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe({
+        next: () => {
+          this.resetForm();
+          this.loadUsers();
+        },
+        error: err => console.error('Update failed', err)
       });
   }
 
@@ -121,3 +130,4 @@ export class ProjectComponent implements OnInit {
     this.isEdit = false;
   }
 }
+  
