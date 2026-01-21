@@ -1,66 +1,54 @@
-<div class="settings-page">
+<div class="settings-wrapper">
 
   <!-- HEADER -->
-  <div class="page-header">
-    <div>
-      <h2>Appearance</h2>
-      <p>Customize how your application looks and feels.</p>
-    </div>
+  <div class="settings-header">
+    <h2>Appearance</h2>
+    <p>Personalize colors, themes, and display preferences</p>
   </div>
 
   <!-- PRESET THEMES -->
-  <mat-card class="settings-card">
-    <div class="card-header">
+  <section class="settings-section">
+    <div class="section-header">
       <h3>Preset Themes</h3>
-      <span>Select a ready-made color palette</span>
+      <span>Quickly switch between curated themes</span>
     </div>
 
-    <div class="preset-grid">
-      <button
-        class="preset-card"
-        (click)="applyPreset('default')"
-      >
-        <div class="preview default"></div>
-        <div class="info">
+    <div class="theme-grid">
+      <div class="theme-tile default" (click)="applyPreset('default')">
+        <div class="theme-bar"></div>
+        <div class="theme-info">
           <strong>Default</strong>
           <small>Clean & balanced</small>
         </div>
-      </button>
+      </div>
 
-      <button
-        class="preset-card"
-        (click)="applyPreset('ocean')"
-      >
-        <div class="preview ocean"></div>
-        <div class="info">
+      <div class="theme-tile ocean" (click)="applyPreset('ocean')">
+        <div class="theme-bar"></div>
+        <div class="theme-info">
           <strong>Ocean Blue</strong>
           <small>Cool & focused</small>
         </div>
-      </button>
+      </div>
 
-      <button
-        class="preset-card"
-        (click)="applyPreset('gold')"
-      >
-        <div class="preview gold"></div>
-        <div class="info">
+      <div class="theme-tile gold" (click)="applyPreset('gold')">
+        <div class="theme-bar"></div>
+        <div class="theme-info">
           <strong>Treasure Gold</strong>
           <small>Premium feel</small>
         </div>
-      </button>
+      </div>
     </div>
-  </mat-card>
+  </section>
 
   <!-- CUSTOM THEME -->
-  <mat-card class="settings-card">
-    <div class="card-header">
+  <section class="settings-section glass">
+    <div class="section-header">
       <h3>Custom Theme</h3>
-      <span>Create your own palette</span>
+      <span>Design your own color palette</span>
     </div>
 
-    <!-- PREVIEW BAR -->
     <div
-      class="custom-preview"
+      class="gradient-preview"
       [style.background]="
         'linear-gradient(90deg,' +
         customTheme.primary + ',' +
@@ -68,49 +56,45 @@
       "
     ></div>
 
-    <div class="color-grid">
-      <div class="color-item">
+    <div class="color-picker-grid">
+      <div class="picker">
         <label>Primary</label>
         <input type="color" [(ngModel)]="customTheme.primary" />
-        <span>{{ customTheme.primary }}</span>
+        <code>{{ customTheme.primary }}</code>
       </div>
 
-      <div class="color-item">
+      <div class="picker">
         <label>Accent</label>
         <input type="color" [(ngModel)]="customTheme.accent" />
-        <span>{{ customTheme.accent }}</span>
+        <code>{{ customTheme.accent }}</code>
       </div>
 
-      <div class="color-item">
+      <div class="picker">
         <label>Background</label>
         <input type="color" [(ngModel)]="customTheme.background" />
-        <span>{{ customTheme.background }}</span>
+        <code>{{ customTheme.background }}</code>
       </div>
 
-      <div class="color-item">
+      <div class="picker">
         <label>Highlight</label>
         <input type="color" [(ngModel)]="customTheme.highlight" />
-        <span>{{ customTheme.highlight }}</span>
+        <code>{{ customTheme.highlight }}</code>
       </div>
     </div>
 
-    <div class="card-actions">
-      <button
-        mat-raised-button
-        class="apply-btn"
-        (click)="applyCustom()"
-      >
-        Apply Custom Theme
+    <div class="actions">
+      <button mat-raised-button class="apply-btn" (click)="applyCustom()">
+        Apply Theme
       </button>
     </div>
-  </mat-card>
+  </section>
 
-  <!-- MODE -->
-  <mat-card class="settings-card">
-    <div class="mode-row">
+  <!-- DARK MODE -->
+  <section class="settings-section compact">
+    <div class="toggle-row">
       <div>
         <h3>Dark Mode</h3>
-        <span>Reduce eye strain in low-light environments</span>
+        <span>Optimized for low-light environments</span>
       </div>
 
       <mat-slide-toggle
@@ -118,6 +102,6 @@
         (change)="toggleDark()"
       ></mat-slide-toggle>
     </div>
-  </mat-card>
+  </section>
 
 </div>

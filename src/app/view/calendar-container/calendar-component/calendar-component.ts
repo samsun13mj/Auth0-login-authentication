@@ -6,7 +6,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-import { CalendarService, CalendarEvent } from '../../../service/calendar-service';
+import { CalendarService, CalendarEvent } from '../../../service/calendar-container/calendar-service';
 
 @Component({
   selector: 'app-calendar',

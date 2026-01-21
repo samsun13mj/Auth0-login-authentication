@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TaskService } from '../../../service/task-servise';
+import { TaskService } from '../../../service/task-container/task-service';
 import { NotificationService } from '../../../service/notification-container/notification-service';
 
 @Component({

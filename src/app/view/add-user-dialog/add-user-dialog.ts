@@ -7,7 +7,7 @@ import {
   FormGroup
 } from '@angular/forms';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
-import { UserService } from '../../service/user-service';
+import { UserService } from '../../service/user-container/user-service';
 import { NotificationService } from '../../service/notification-container/notification-service';
 
 @Component({

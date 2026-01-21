@@ -13,8 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 
-import { UserService } from '../../../service/user-service';
-import { SidenavService } from '../../../service/sidenav-service';
+import { UserService } from '../../../service/user-container/user-service';
+import { SidenavService } from '../../../service/sidenav-container/sidenav-service';
 
 @Component({
   selector: 'app-dashboard-component',

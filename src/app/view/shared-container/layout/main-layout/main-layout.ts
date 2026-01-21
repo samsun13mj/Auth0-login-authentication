@@ -18,7 +18,7 @@ import { AuthService } from '@auth0/auth0-angular';
 
 import { SidebarComponent } from '../../sidebar/sidebar';
 import { UserDetailsSidenavComponent } from '../../../user-details-container/user-details/user-details';
-import { SidenavService } from '../../../../service/sidenav-service';
+import { SidenavService } from '../../../../service/sidenav-container/sidenav-service';
 import { ToolbarComponent } from '../../toolbar/toolbar';
 
 @Component({

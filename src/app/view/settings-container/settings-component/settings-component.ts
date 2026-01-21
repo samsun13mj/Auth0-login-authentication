@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-import { ThemeService, AppTheme } from '../../../service/theme-service';
+import { ThemeService, AppTheme } from '../../../service/theme-container/theme-service';
 
 /** ✅ Explicit preset keys */
 type PresetKey = 'default' | 'ocean' | 'gold';

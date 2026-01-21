@@ -13,7 +13,7 @@ import {
 } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
-import { UserService } from '../../../service/user-service';
+import { UserService } from '../../../service/user-container/user-service';
 import { AddUserDialogComponent } from '../../add-user-dialog/add-user-dialog';
 
 @Component({
