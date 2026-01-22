@@ -1,16 +1,29 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpRequest } from '@angular/common/http';
 
-import { AuthInterceptor } from './auth-interceptor';
+import { authInterceptor } from './auth-interceptor';
 
-describe('AuthInterceptor', () => {
-  let service: AuthInterceptor;
+describe('authInterceptor', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AuthInterceptor);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(authInterceptor).toBeTruthy();
+  });
+
+  it('should intercept request', () => {
+    const req = new HttpRequest('GET', '/test');
+
+    const next = {
+      handle: jasmine.createSpy('handle')
+    };
+
+    TestBed.runInInjectionContext(() => {
+      authInterceptor(req, next as any);
+    });
+
+    expect(next.handle).toHaveBeenCalled();
   });
 });

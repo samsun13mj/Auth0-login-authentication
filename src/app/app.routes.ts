@@ -3,7 +3,7 @@ import { authGuardFn } from '@auth0/auth0-angular';
 
 import { MainLayoutComponent } from './view/shared-container/layout/main-layout/main-layout';
 import { DashboardComponent } from './view/dashboard-container/dashboard-component/dashboard-component';
-import { adminGuard } from './core/guards/admin-guard';
+import { adminGuard } from './core/guards/admin-container/admin-guard';
 
 export const routes: Routes = [
 
