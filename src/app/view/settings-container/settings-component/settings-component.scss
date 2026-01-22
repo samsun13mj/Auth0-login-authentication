@@ -68,9 +68,23 @@
 /* PRESET GRID */
 .theme-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* 👈 force 3 columns */
   gap: 22px;
 }
+
+/* Responsive for smaller screens */
+@media (max-width: 900px) {
+  .theme-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .theme-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 /* THEME TILE */
 .theme-tile {
@@ -115,6 +129,15 @@
 }
 .theme-tile.gold .theme-bar {
   background: linear-gradient(90deg, #eab308, #facc15);
+}
+.theme-tile.cherry .theme-bar {
+  background: linear-gradient(90deg, #e11d48, #fb7185);
+}
+.theme-tile.green .theme-bar {
+  background: linear-gradient(90deg, #16a34a, #4ade80);
+}
+.theme-tile.orange .theme-bar {
+  background: linear-gradient(90deg, #f97316, #fdba74);
 }
 
 /* GRADIENT PREVIEW */

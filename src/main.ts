@@ -35,7 +35,7 @@ bootstrapApplication(App, {
       authorizationParams: {
         redirect_uri: window.location.origin,
         audience: 'https://api.bezohminds.com',
-        scope: 'openid profile email offline_access'
+        scope: 'openid profile email'
       },
       cacheLocation: 'localstorage',
       useRefreshTokens: true,

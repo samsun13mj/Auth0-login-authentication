@@ -10,7 +10,7 @@ export interface AppTheme {
 
 const DEFAULT_THEME: AppTheme = {
   primary: '#3B82F6',
-  accent: '#9333EA',
+  accent: '#3B82F6',
   background: '#ffffff',
   highlight: '#2563eb'
 };

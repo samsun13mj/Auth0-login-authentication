@@ -9,7 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 
 import { NotificationService } from '../../../service/notification-container/notification-service';
-import { AuthService } from '@auth0/auth0-angular'; // ✅ FIXED
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-toolbar',
@@ -31,13 +31,51 @@ export class ToolbarComponent implements OnInit {
   notifications: any[] = [];
   unreadCount = 0;
 
+  userName = '';
+  userEmail = '';
+  userPicture = '';
+  userLetter = '';
+  hasRealPicture = false;
+
   constructor(
     private notify: NotificationService,
     private router: Router,
-    private auth: AuthService   // ✅ AUTH0
+    public auth: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.auth.user$.subscribe(user => {
+      if (user) {
+
+        // ✅ Show name before @gmail.com
+        this.userName = user.email
+          ? user.email.split('@')[0]
+          : user.name || 'User';
+
+        // ✅ Email
+        this.userEmail = user.email || '';
+
+        const picture = user.picture || '';
+
+        // ✅ Google profile photo
+        if (picture.includes('googleusercontent')) {
+          this.userPicture = picture.replace('s96-c', 's400-c');
+          this.hasRealPicture = true;
+        }
+        // ✅ Gravatar real photo
+        else if (picture.includes('gravatar') && !picture.includes('d=')) {
+          this.userPicture = picture;
+          this.hasRealPicture = true;
+        }
+        // ✅ No photo → Gmail letter avatar
+        else {
+          this.hasRealPicture = false;
+          this.userLetter = this.userName.charAt(0).toUpperCase();
+        }
+      }
+    });
+
+    // ✅ Notifications
     this.notify.notifications$.subscribe(res => {
       this.notifications = res;
     });
@@ -53,8 +91,11 @@ export class ToolbarComponent implements OnInit {
     if (!n.read) {
       this.notify.markAsRead(n.id).subscribe();
     }
-
     this.router.navigate(['/app/notifications']);
+  }
+
+  login() {
+    this.auth.loginWithRedirect();
   }
 
   logout() {
