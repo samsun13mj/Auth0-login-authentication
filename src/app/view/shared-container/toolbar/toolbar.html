@@ -4,12 +4,15 @@
 
   <!-- 🔔 NOTIFICATION -->
   <button mat-icon-button class="notification-btn" [matMenuTriggerFor]="notificationMenu">
+  <span class="icon-wrapper">
     <mat-icon>notifications</mat-icon>
 
     @if (unreadCount > 0) {
       <span class="badge">{{ unreadCount }}</span>
     }
-  </button>
+  </span>
+</button>
+
 
   <mat-menu #notificationMenu="matMenu" class="notification-menu">
     @if (notifications.length === 0) {
