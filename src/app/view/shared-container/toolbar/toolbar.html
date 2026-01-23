@@ -1,0 +1,85 @@
+<mat-toolbar class="custom-toolbar">
+  <span class="brand">Bezohminds</span>
+  <span class="spacer"></span>
+
+  <!-- 🔔 NOTIFICATION -->
+  <button mat-icon-button class="notification-btn" [matMenuTriggerFor]="notificationMenu">
+    <mat-icon>notifications</mat-icon>
+
+    @if (unreadCount > 0) {
+      <span class="badge">{{ unreadCount }}</span>
+    }
+  </button>
+
+  <mat-menu #notificationMenu="matMenu" class="notification-menu">
+    @if (notifications.length === 0) {
+      <div class="empty">No notifications</div>
+    }
+
+    @for (n of notifications; track n.id) {
+      <button mat-menu-item (click)="openNotification(n)">
+        <span class="dot" [class.unread]="!n.read"></span>
+        {{ n.message }}
+      </button>
+    }
+
+    <mat-divider></mat-divider>
+
+    <button mat-menu-item routerLink="/app/notifications">
+      View all notifications
+    </button>
+  </mat-menu>
+
+  <!-- 🔑 LOGIN BUTTON -->
+  @if (!(auth.isAuthenticated$ | async)) {
+    <button mat-button (click)="login()">Login</button>
+  }
+
+  <!-- ✅ SPACE BETWEEN NOTIFICATION & PROFILE -->
+  <div class="toolbar-gap"></div>
+
+  <!-- 👤 PROFILE ICON -->
+  @if (auth.isAuthenticated$ | async) {
+    <div class="profile-container" [matMenuTriggerFor]="profileMenu">
+      <div class="profile-avatar">
+        @if (hasRealPicture) {
+          <img [src]="userPicture" alt="profile" />
+        } @else {
+          <span class="letter">{{ userLetter }}</span>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- 👤 PROFILE DROPDOWN -->
+  <mat-menu #profileMenu="matMenu" class="profile-menu">
+
+    <div class="profile-header">
+      <div class="avatar">
+        @if (hasRealPicture) {
+          <img [src]="userPicture" />
+        } @else {
+          <span class="letter">{{ userLetter }}</span>
+        }
+      </div>
+
+      <div class="user-info">
+        <div class="username">{{ userName }}</div>
+        <div class="email">{{ userEmail }}</div>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <button mat-menu-item routerLink="/app/profile">
+      <mat-icon>person</mat-icon>
+      Profile
+    </button>
+
+    <button mat-menu-item class="logout" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+
+  </mat-menu>
+</mat-toolbar>

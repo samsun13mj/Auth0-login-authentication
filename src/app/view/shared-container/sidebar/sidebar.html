@@ -1,0 +1,77 @@
+<mat-nav-list class="sidebar-nav">
+
+  <!-- Main Section -->
+  <a mat-list-item routerLink="/app/dashboard" routerLinkActive="active-link">
+    <mat-icon>dashboard</mat-icon>
+    <span>Dashboard</span>
+  </a>
+
+  <a mat-list-item routerLink="/app/profile" routerLinkActive="active-link">
+    <mat-icon>person</mat-icon>
+    <span>Profile</span>
+  </a>
+
+  <a mat-list-item routerLink="/app/messages" routerLinkActive="active-link">
+    <mat-icon>chat</mat-icon>
+    <span>Messages</span>
+  </a>
+
+  <a mat-list-item routerLink="/app/notifications" routerLinkActive="active-link">
+    <mat-icon>notifications</mat-icon>
+    <span>Notifications</span>
+  </a>
+
+  <!-- Work Section -->
+  <a mat-list-item routerLink="/app/tasks" routerLinkActive="active-link">
+    <mat-icon>check_circle</mat-icon>
+    <span>Tasks</span>
+  </a>
+
+  <a mat-list-item routerLink="/app/projects" routerLinkActive="active-link">
+    <mat-icon>work_outline</mat-icon>
+    <span>Project Users</span>
+  </a>
+
+  <a mat-list-item routerLink="/app/calendar" routerLinkActive="active-link">
+    <mat-icon>calendar_today</mat-icon>
+    <span>Calendar</span>
+  </a>
+
+  <!-- Data Section (ADMIN ONLY) -->
+  <a
+    mat-list-item
+    routerLink="/app/analytics"
+    routerLinkActive="active-link"
+    *ngIf="roleService.isAdmin$ | async"
+  >
+    <mat-icon>analytics</mat-icon>
+    <span>Analytics</span>
+  </a>
+
+  <a
+    mat-list-item
+    routerLink="/app/reports"
+    routerLinkActive="active-link"
+    *ngIf="roleService.isAdmin$ | async"
+  >
+    <mat-icon>bar_chart</mat-icon>
+    <span>Reports</span>
+  </a>
+
+  <a mat-list-item routerLink="/app/files" routerLinkActive="active-link">
+    <mat-icon>folder</mat-icon>
+    <span>Files</span>
+  </a>
+
+  <!-- Support Section -->
+  <a mat-list-item routerLink="/app/settings" routerLinkActive="active-link">
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
+  </a>
+
+  <a mat-list-item routerLink="/app/diagram" routerLinkActive="active-link">
+    <mat-icon>account_tree</mat-icon>
+    <span>Diagram</span>
+  </a>
+
+</mat-nav-list>

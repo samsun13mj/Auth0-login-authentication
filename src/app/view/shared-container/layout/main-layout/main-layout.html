@@ -1,0 +1,42 @@
+<mat-sidenav-container class="dashboard-container">
+
+  <!-- LEFT SIDEBAR -->
+  <mat-sidenav mode="side" opened class="sidebar">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+
+  <!-- MAIN CONTENT -->
+  <mat-sidenav-content class="content-area">
+
+    <!-- FIXED TOOLBAR -->
+    <app-toolbar></app-toolbar>
+
+    <!-- PAGE CONTENT (SCROLL OWNER) -->
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+
+  <!-- RIGHT SIDENAV -->
+  <mat-sidenav
+    #userDetailsSidenav
+    mode="over"
+    position="end"
+    class="user-details-sidenav">
+
+    <div class="sidenav-wrapper">
+      <div class="close-row">
+        <button mat-icon-button (click)="closeUserSidenav()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <app-user-details-sidenav
+        [user]="_sidenavUser">
+      </app-user-details-sidenav>
+    </div>
+
+  </mat-sidenav>
+
+</mat-sidenav-container>

@@ -1,0 +1,178 @@
+/* ===================================== */
+/* ANGULAR MATERIAL M3 BASE THEME        */
+/* ===================================== */
+
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$blue-palette,
+      tertiary: mat.$red-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+/* ===================================== */
+/* APP DESIGN TOKENS (SINGLE SOURCE)     */
+/* ===================================== */
+
+:root {
+  --app-primary: #3B82F6;
+  --app-accent: #3B82F6;
+  --app-background: #ffffff;
+  --app-highlight: #2563eb;
+
+  /* MATERIAL M3 TOKEN BRIDGE */
+  --mat-sys-primary: var(--app-primary);
+  --mat-sys-secondary: var(--app-accent);
+
+  --mat-sys-background: var(--app-background);
+  --mat-sys-surface: var(--app-background);
+  --mat-sys-surface-container: var(--app-background);
+  --mat-sys-surface-container-high: var(--app-background);
+  --mat-sys-surface-container-low: var(--app-background);
+
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-on-surface: #111827;
+}
+
+/* ===================================== */
+/* GLOBAL RESET                          */
+/* ===================================== */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--app-background);
+  color: var(--mat-sys-on-surface);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ===================================== */
+/* GLOBAL LINKS                          */
+/* ===================================== */
+
+a,
+.active,
+.highlight {
+  color: var(--app-highlight);
+}
+
+/* ===================================== */
+/* MATERIAL BASE LAYOUTS                 */
+/* ===================================== */
+
+mat-sidenav-container,
+mat-sidenav-content,
+.mat-mdc-drawer,
+.mat-mdc-drawer-content,
+.mat-mdc-dialog-container,
+.mat-mdc-menu-panel {
+  background-color: var(--app-background);
+}
+
+mat-card {
+  background-color: var(--app-background);
+  color: var(--mat-sys-on-surface);
+}
+
+/* ===================================== */
+/* TOOLBAR THEME                         */
+/* ===================================== */
+
+mat-toolbar,
+.mat-mdc-toolbar {
+  background: linear-gradient(
+    90deg,
+    var(--app-primary),
+    var(--app-accent)
+  ) !important;
+  color: #ffffff !important;
+}
+
+mat-toolbar mat-icon {
+  color: #ffffff;
+}
+
+/* ===================================== */
+/* SIDENAV THEME                         */
+/* ===================================== */
+
+mat-sidenav,
+.mat-mdc-drawer {
+  background-color: var(--app-background) !important;
+  color: var(--mat-sys-on-surface);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+mat-sidenav a,
+mat-sidenav button {
+  color: var(--mat-sys-on-surface);
+}
+
+mat-sidenav .active {
+  background-color: color-mix(
+    in srgb,
+    var(--app-primary) 15%,
+    transparent
+  );
+  color: var(--app-primary);
+}
+
+/* ===================================== */
+/* DARK MODE                             */
+/* ===================================== */
+
+body.dark-mode {
+  --app-background: #0f172a;
+
+  --mat-sys-background: #0f172a;
+  --mat-sys-surface: #111827;
+
+  --mat-sys-surface-container: #111827;
+  --mat-sys-surface-container-high: #1f2937;
+
+  --mat-sys-on-surface: #e5e7eb;
+}
+
+/* DARK TOOLBAR */
+body.dark-mode mat-toolbar {
+  background: #020617 !important;
+  color: #e5e7eb !important;
+}
+
+/* DARK SIDENAV */
+body.dark-mode mat-sidenav {
+  background-color: #020617 !important;
+  color: #e5e7eb;
+}
+
+/* ===================================== */
+/* MATERIAL MENU (WHITE / DARK SAFE)     */
+/* ===================================== */
+
+.mat-mdc-menu-panel {
+  --mdc-menu-container-color: var(--mat-sys-surface);
+  --mdc-menu-item-label-text-color: var(--mat-sys-on-surface);
+  --mdc-menu-item-leading-icon-color: var(--mat-sys-on-surface);
+
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  padding: 6px 0;
+}
+
+.mat-mdc-menu-item.logout {
+  color: #dc2626;
+}
+
+.mat-mdc-menu-item.logout mat-icon {
+  color: #dc2626;
+}

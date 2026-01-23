@@ -1,0 +1,15 @@
+<div class="user-details-container" *ngIf="user">
+  <div class="header">
+    <h2>{{ user.name }}</h2>
+  </div>
+
+  <div class="info">
+    <p><strong>ID:</strong> {{ user.id }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Role:</strong> {{ user.role }}</p>
+  </div>
+
+
+<div class="no-user" *ngIf="!user">
+  <p>Select a user to view details</p>
+</div>

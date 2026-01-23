@@ -1,0 +1,125 @@
+/* ============================= */
+/* WRAPPER (SCOPES THE LOADER)  */
+/* ============================= */
+.profile-wrapper {
+  position: relative;
+  min-height: calc(100vh - 64px); /* below fixed navbar */
+}
+
+/* ============================= */
+/* LOADER OVERLAY               */
+/* ============================= */
+.spinner-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2;
+}
+
+/* ============================= */
+/* PROFILE CONTENT              */
+/* ============================= */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ============================= */
+/* HEADER CARD                  */
+/* ============================= */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 30px;
+  background: #fcfcfc;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.profile-pic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #1e39e9;
+    margin-bottom: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  img:hover {
+    transform: scale(1.05);
+  }
+
+  button {
+    font-size: 14px;
+    border-radius: 20px;
+    padding: 6px 16px;
+  }
+}
+
+.profile-info {
+  h2 {
+    margin: 0 0 10px;
+    font-size: 1.8rem;
+    color: #333;
+  }
+
+  p {
+    margin: 6px 0;
+    font-size: 15px;
+    color: #555;
+
+    strong {
+      color: #222;
+    }
+  }
+}
+
+/* ============================= */
+/* SECTIONS                     */
+/* ============================= */
+.profile-section {
+  padding: 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+
+  h3 {
+    margin-bottom: 12px;
+    color: #1e39e9;
+    font-size: 1.2rem;
+  }
+
+  p,
+  ul {
+    font-size: 15px;
+    color: #444;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      background: #e3f2fd;
+      margin: 6px 0;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<div class="analytics-card">
+
+  <!-- HEADER -->
+  <div class="analytics-header">
+    <div>
+      <h2>Timesheet Analytics</h2>
+      <p class="subtitle">Employee work hours by date</p>
+    </div>
+
+    <div class="header-actions">
+      <button
+        class="danger-btn"
+        (click)="clearChart()"
+        [disabled]="!chart">
+        Clear Chart
+      </button>
+
+      <button
+        class="danger-outline-btn"
+        (click)="deleteDateData()"
+        [disabled]="!selectedDate">
+        Delete Data
+      </button>
+    </div>
+  </div>
+
+  <!-- DATE SELECTOR -->
+  <div class="date-selector-wrapper">
+    <div class="date-selector">
+      <button
+        *ngFor="let d of dates"
+        class="date-pill"
+        [class.active]="selectedDate === d"
+        (click)="selectDate(d)">
+        {{ d }}
+      </button>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="analytics-content">
+    <canvas #chartCanvas></canvas>
+
+    <div *ngIf="!chart" class="empty-state">
+      📊 Select a date to view analytics
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,131 @@
+<div class="settings-wrapper">
+
+  <!-- HEADER -->
+  <div class="settings-header">
+    <h2>Appearance</h2>
+    <p>Personalize colors, themes, and display preferences</p>
+  </div>
+
+  <!-- PRESET THEMES -->
+  <section class="settings-section">
+    <div class="section-header">
+      <h3>Preset Themes</h3>
+      <span>Quickly switch between curated themes</span>
+    </div>
+
+    <div class="theme-grid">
+      <div class="theme-tile default" (click)="applyPreset('default')">
+        <div class="theme-bar"></div>
+        <div class="theme-info">
+          <strong>Default</strong>
+          <small>Clean & balanced</small>
+        </div>
+      </div>
+
+      <div class="theme-tile ocean" (click)="applyPreset('ocean')">
+        <div class="theme-bar"></div>
+        <div class="theme-info">
+          <strong>Ocean Blue</strong>
+          <small>Cool & focused</small>
+        </div>
+      </div>
+
+      <div class="theme-tile gold" (click)="applyPreset('gold')">
+        <div class="theme-bar"></div>
+        <div class="theme-info">
+          <strong>Treasure Gold</strong>
+          <small>Premium feel</small>
+        </div>
+      </div>
+
+      <div class="theme-tile cherry" (click)="applyPreset('cherry')">
+        <div class="theme-bar"></div>
+        <div class="theme-info">
+          <strong>Cherry</strong>
+          <small>Bold & energetic</small>
+        </div>
+      </div>
+
+      <div class="theme-tile green" (click)="applyPreset('green')">
+        <div class="theme-bar"></div>
+        <div class="theme-info">
+          <strong>Green Nature</strong>
+          <small>Fresh & calm</small>
+        </div>
+      </div>
+
+      <div class="theme-tile orange" (click)="applyPreset('orange')">
+        <div class="theme-bar"></div>
+        <div class="theme-info">
+          <strong>Orange Sunset</strong>
+          <small>Warm & vibrant</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOM THEME -->
+  <section class="settings-section glass">
+    <div class="section-header">
+      <h3>Custom Theme</h3>
+      <span>Design your own color palette</span>
+    </div>
+
+    <div
+      class="gradient-preview"
+      [style.background]="
+        'linear-gradient(90deg,' +
+        customTheme.primary + ',' +
+        customTheme.accent + ')'
+      "
+    ></div>
+
+    <div class="color-picker-grid">
+      <div class="picker">
+        <label>Primary</label>
+        <input type="color" [(ngModel)]="customTheme.primary" />
+        <code>{{ customTheme.primary }}</code>
+      </div>
+
+      <div class="picker">
+        <label>Accent</label>
+        <input type="color" [(ngModel)]="customTheme.accent" />
+        <code>{{ customTheme.accent }}</code>
+      </div>
+
+      <div class="picker">
+        <label>Background</label>
+        <input type="color" [(ngModel)]="customTheme.background" />
+        <code>{{ customTheme.background }}</code>
+      </div>
+
+      <div class="picker">
+        <label>Highlight</label>
+        <input type="color" [(ngModel)]="customTheme.highlight" />
+        <code>{{ customTheme.highlight }}</code>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button mat-raised-button class="apply-btn" (click)="applyCustom()">
+        Apply Theme
+      </button>
+    </div>
+  </section>
+
+  <!-- DARK MODE -->
+  <section class="settings-section compact">
+    <div class="toggle-row">
+      <div>
+        <h3>Dark Mode</h3>
+        <span>Optimized for low-light environments</span>
+      </div>
+
+      <mat-slide-toggle
+        [(ngModel)]="darkMode"
+        (change)="toggleDark()"
+      ></mat-slide-toggle>
+    </div>
+  </section>
+
+</div>
