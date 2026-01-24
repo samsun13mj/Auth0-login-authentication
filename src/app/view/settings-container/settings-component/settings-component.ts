@@ -8,14 +8,17 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { ThemeService, AppTheme } from '../../../service/theme-container/theme-service';
 
-/** ✅ Explicit preset keys */
+/**  Explicit preset keys */
 type PresetKey =
   | 'default'
   | 'ocean'
   | 'gold'
   | 'cherry'
   | 'green'
-  | 'orange';
+  | 'orange'
+  | 'purple'
+  | 'teal'
+  | 'indigo';
 
 @Component({
   selector: 'app-settings',
@@ -34,7 +37,6 @@ export class SettingsComponent {
 
   darkMode = localStorage.getItem('dark-mode') === 'true';
 
-  /** ✅ Typed presets */
   presets: Record<PresetKey, AppTheme> = {
     default: {
       primary: '#3B82F6',
@@ -71,16 +73,34 @@ export class SettingsComponent {
       accent: '#FDBA74',
       background: '#FFF7ED',
       highlight: '#C2410C'
+    },
+    purple: {
+      primary: '#7C3AED',
+      accent: '#A78BFA',
+      background: '#F5F3FF',
+      highlight: '#5B21B6'
+    },
+    teal: {
+      primary: '#0D9488',
+      accent: '#2DD4BF',
+      background: '#F0FDFA',
+      highlight: '#115E59'
+    },
+    indigo: {
+      primary: '#4338CA',
+      accent: '#818CF8',
+      background: '#EEF2FF',
+      highlight: '#312E81'
     }
   };
 
-  /** ✅ Default custom theme */
+  /**  Default custom theme */
   customTheme: AppTheme = { ...this.presets.default };
 
   constructor(private themeService: ThemeService) {}
 
   applyPreset(key: PresetKey): void {
-    this.customTheme = { ...this.presets[key] }; // update picker UI also
+    this.customTheme = { ...this.presets[key] };
     this.themeService.setTheme(this.presets[key]);
   }
 

@@ -14,96 +14,162 @@
     </div>
 
     <div class="theme-grid">
+
       <div class="theme-tile default" (click)="applyPreset('default')">
-        <div class="theme-bar"></div>
         <div class="theme-info">
           <strong>Default</strong>
           <small>Clean & balanced</small>
         </div>
+        <div class="theme-colors">
+          <span class="color-dot dot-primary"></span>
+          <span class="color-dot dot-accent"></span>
+        </div>
       </div>
 
       <div class="theme-tile ocean" (click)="applyPreset('ocean')">
-        <div class="theme-bar"></div>
         <div class="theme-info">
           <strong>Ocean Blue</strong>
           <small>Cool & focused</small>
         </div>
+        <div class="theme-colors">
+          <span class="color-dot dot-primary"></span>
+          <span class="color-dot dot-accent"></span>
+        </div>
       </div>
 
       <div class="theme-tile gold" (click)="applyPreset('gold')">
-        <div class="theme-bar"></div>
         <div class="theme-info">
           <strong>Treasure Gold</strong>
           <small>Premium feel</small>
         </div>
+        <div class="theme-colors">
+          <span class="color-dot dot-primary"></span>
+          <span class="color-dot dot-accent"></span>
+        </div>
       </div>
 
       <div class="theme-tile cherry" (click)="applyPreset('cherry')">
-        <div class="theme-bar"></div>
         <div class="theme-info">
           <strong>Cherry</strong>
           <small>Bold & energetic</small>
         </div>
+        <div class="theme-colors">
+          <span class="color-dot dot-primary"></span>
+          <span class="color-dot dot-accent"></span>
+        </div>
       </div>
 
       <div class="theme-tile green" (click)="applyPreset('green')">
-        <div class="theme-bar"></div>
         <div class="theme-info">
           <strong>Green Nature</strong>
           <small>Fresh & calm</small>
         </div>
+        <div class="theme-colors">
+          <span class="color-dot dot-primary"></span>
+          <span class="color-dot dot-accent"></span>
+        </div>
       </div>
 
       <div class="theme-tile orange" (click)="applyPreset('orange')">
-        <div class="theme-bar"></div>
         <div class="theme-info">
           <strong>Orange Sunset</strong>
           <small>Warm & vibrant</small>
         </div>
+        <div class="theme-colors">
+          <span class="color-dot dot-primary"></span>
+          <span class="color-dot dot-accent"></span>
+        </div>
       </div>
+
+      <div class="theme-tile purple" (click)="applyPreset('purple')">
+        <div class="theme-info">
+          <strong>Purple Night</strong>
+          <small>Creative & modern</small>
+        </div>
+        <div class="theme-colors">
+          <span class="color-dot dot-primary"></span>
+          <span class="color-dot dot-accent"></span>
+        </div>
+      </div>
+
+      <div class="theme-tile teal" (click)="applyPreset('teal')">
+        <div class="theme-info">
+          <strong>Teal Mint</strong>
+          <small>Fresh & elegant</small>
+        </div>
+        <div class="theme-colors">
+          <span class="color-dot dot-primary"></span>
+          <span class="color-dot dot-accent"></span>
+        </div>
+      </div>
+
+      <div class="theme-tile indigo" (click)="applyPreset('indigo')">
+        <div class="theme-info">
+          <strong>Indigo Sky</strong>
+          <small>Deep & professional</small>
+        </div>
+        <div class="theme-colors">
+          <span class="color-dot dot-primary"></span>
+          <span class="color-dot dot-accent"></span>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- CUSTOM THEME -->
-  <section class="settings-section glass">
+  <!-- CUSTOM THEME (NEW PREMIUM UI) -->
+  <section class="settings-section glass custom-theme-modern">
     <div class="section-header">
       <h3>Custom Theme</h3>
       <span>Design your own color palette</span>
     </div>
 
-    <div
-      class="gradient-preview"
-      [style.background]="
-        'linear-gradient(90deg,' +
-        customTheme.primary + ',' +
-        customTheme.accent + ')'
-      "
-    ></div>
+    <div class="custom-theme-grid">
 
-    <div class="color-picker-grid">
-      <div class="picker">
-        <label>Primary</label>
+      <div class="custom-item">
+        <div class="custom-left">
+          <span class="custom-dot" [style.background]="customTheme.primary"></span>
+          <div class="custom-text">
+            <strong>Primary</strong>
+            <small>{{ customTheme.primary }}</small>
+          </div>
+        </div>
         <input type="color" [(ngModel)]="customTheme.primary" />
-        <code>{{ customTheme.primary }}</code>
       </div>
 
-      <div class="picker">
-        <label>Accent</label>
+      <div class="custom-item">
+        <div class="custom-left">
+          <span class="custom-dot" [style.background]="customTheme.accent"></span>
+          <div class="custom-text">
+            <strong>Accent</strong>
+            <small>{{ customTheme.accent }}</small>
+          </div>
+        </div>
         <input type="color" [(ngModel)]="customTheme.accent" />
-        <code>{{ customTheme.accent }}</code>
       </div>
 
-      <div class="picker">
-        <label>Background</label>
+      <div class="custom-item">
+        <div class="custom-left">
+          <span class="custom-dot" [style.background]="customTheme.background"></span>
+          <div class="custom-text">
+            <strong>Background</strong>
+            <small>{{ customTheme.background }}</small>
+          </div>
+        </div>
         <input type="color" [(ngModel)]="customTheme.background" />
-        <code>{{ customTheme.background }}</code>
       </div>
 
-      <div class="picker">
-        <label>Highlight</label>
+      <div class="custom-item">
+        <div class="custom-left">
+          <span class="custom-dot" [style.background]="customTheme.highlight"></span>
+          <div class="custom-text">
+            <strong>Highlight</strong>
+            <small>{{ customTheme.highlight }}</small>
+          </div>
+        </div>
         <input type="color" [(ngModel)]="customTheme.highlight" />
-        <code>{{ customTheme.highlight }}</code>
       </div>
+
     </div>
 
     <div class="actions">
