@@ -23,7 +23,8 @@ export class CalendarComponent implements OnInit {
   calendarOptions: any;
   events: CalendarEvent[] = [];
 
-  years = Array.from({ length: 10 }, (_, i) => 2022 + i);
+  currentYear = new Date().getFullYear();
+  years = Array.from({ length: 21 }, (_, i) => this.currentYear - 10 + i);
 
   constructor(private calendarService: CalendarService) {}
 
@@ -56,13 +57,15 @@ export class CalendarComponent implements OnInit {
         dayMaxEvents: true,
         height: 'auto',
 
-        events: this.events.map(e => ({
-          ...e,
-          classNames: ['fc-event-pro']
-        })),
+        events: this.events,
 
         dateClick: this.onDateClick.bind(this),
       };
+
+      //  FIX DATE MISSING BUG
+      setTimeout(() => {
+        this.calendarRef?.getApi().render();
+      });
     });
   }
 

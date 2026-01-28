@@ -1,1 +1,68 @@
-<p>reports-component works!</p>
+<div class="reports-container">
+
+  <h2>📊 Reports Dashboard</h2>
+
+  <!-- Summary Cards -->
+  <div class="cards">
+    <div class="card">
+      <h3>Total Reports</h3>
+      <p>{{ totalReports }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Total Tasks</h3>
+      <p>{{ totalTasks }}</p>
+    </div>
+
+    <div class="card success">
+      <h3>Completed Tasks</h3>
+      <p>{{ completedTasks }}</p>
+    </div>
+
+    <div class="card warning">
+      <h3>Pending Tasks</h3>
+      <p>{{ pendingTasks }}</p>
+    </div>
+  </div>
+
+  <!-- Reports Table -->
+ <table class="reports-table">
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Action</th> <!-- ✅ NEW -->
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (r of reports; track r.id) {
+      <tr>
+        <td>{{ r.userId }}</td>
+
+        <td>{{ r.title }}</td>
+
+        <td>
+          <span class="status" [class.completed]="r.status === 'COMPLETED'">
+            {{ r.status }}
+          </span>
+        </td>
+
+        <td>{{ r.createdAt | date:'medium' }}</td>
+
+        <!-- 🗑️ DELETE BUTTON -->
+        <td>
+           <button mat-icon-button class="delete-btn" (click)="deleteReport(r.id)">
+           <mat-icon>delete</mat-icon>
+           </button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+
+
+</div>

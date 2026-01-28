@@ -7,10 +7,18 @@
       <p>Manage tasks and events</p>
     </div>
 
-    <!-- Quick Year Selector -->
-    <div class="calendar-actions">
-      <select class="year-select" (change)="changeYear($event)">
-        <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    <!-- Premium Year Selector -->
+    <div class="year-box">
+      <span class="year-label">Year</span>
+
+      <select
+        class="year-select"
+        [value]="currentYear"
+        (change)="changeYear($event)"
+      >
+        <option *ngFor="let y of years" [value]="y">
+          {{ y }}
+        </option>
       </select>
     </div>
   </div>

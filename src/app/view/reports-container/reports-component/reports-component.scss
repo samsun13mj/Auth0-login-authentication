@@ -1,0 +1,92 @@
+.reports-container {
+  padding: 20px;
+}
+
+/* SUMMARY CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  text-align: center;
+
+  h3 {
+    font-size: 14px;
+    color: #666;
+  }
+
+  p {
+    font-size: 28px;
+    font-weight: bold;
+  }
+}
+
+.success {
+  border-left: 5px solid #2ecc71;
+}
+
+.warning {
+  border-left: 5px solid #f39c12;
+}
+
+/* REPORTS TABLE */
+.reports-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  th,
+  td {
+    padding: 12px 14px;
+    text-align: left;
+  }
+
+  th {
+    background: #f4f6f8;
+  }
+
+  tr:hover {
+    background: #f9fbff;
+  }
+}
+
+/* STATUS STYLE */
+.status.completed {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+/* DELETE BUTTON (ICON ONLY) */
+.delete-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+/* ICON COLOR + SIZE */
+.delete-btn mat-icon {
+  color: #dc2626;
+  font-size: 22px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* HOVER EFFECT */
+.delete-btn:hover mat-icon {
+  color: #b91c1c;
+  transform: scale(1.15);
+}

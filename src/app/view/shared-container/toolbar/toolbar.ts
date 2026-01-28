@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 
@@ -10,6 +10,7 @@ import { MatDividerModule } from '@angular/material/divider';
 
 import { NotificationService } from '../../../service/notification-container/notification-service';
 import { AuthService } from '@auth0/auth0-angular';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
@@ -26,7 +27,7 @@ import { AuthService } from '@auth0/auth0-angular';
   templateUrl: './toolbar.html',
   styleUrls: ['./toolbar.scss']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit, OnDestroy {
 
   notifications: any[] = [];
   unreadCount = 0;
@@ -37,6 +38,8 @@ export class ToolbarComponent implements OnInit {
   userLetter = '';
   hasRealPicture = false;
 
+  private subs = new Subscription(); // ✅ avoid memory leak
+
   constructor(
     private notify: NotificationService,
     private router: Router,
@@ -44,30 +47,27 @@ export class ToolbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.auth.user$.subscribe(user => {
+
+    // ================= AUTH USER =================
+    const authSub = this.auth.user$.subscribe(user => {
       if (user) {
 
-        //  Show name before @gmail.com
         this.userName = user.email
           ? user.email.split('@')[0]
           : user.name || 'User';
 
-        //  Email
         this.userEmail = user.email || '';
 
         const picture = user.picture || '';
 
-        //  Google profile photo
         if (picture.includes('googleusercontent')) {
           this.userPicture = picture.replace('s96-c', 's400-c');
           this.hasRealPicture = true;
         }
-        //  Gravatar real photo
         else if (picture.includes('gravatar') && !picture.includes('d=')) {
           this.userPicture = picture;
           this.hasRealPicture = true;
         }
-        //  No photo → Gmail letter avatar
         else {
           this.hasRealPicture = false;
           this.userLetter = this.userName.charAt(0).toUpperCase();
@@ -75,16 +75,32 @@ export class ToolbarComponent implements OnInit {
       }
     });
 
-    //  Notifications
-    this.notify.notifications$.subscribe(res => {
+    this.subs.add(authSub);
+
+    // ================= NOTIFICATIONS =================
+
+    const notiSub = this.notify.notifications$.subscribe(res => {
       this.notifications = res;
+      console.log('🔔 Notifications loaded:', res); // ✅ DEBUG
     });
 
-    this.notify.unreadCount$.subscribe(count => {
+    const unreadSub = this.notify.unreadCount$.subscribe(count => {
       this.unreadCount = count;
+      console.log('🔔 Unread count:', count); // ✅ DEBUG
     });
 
+    this.subs.add(notiSub);
+    this.subs.add(unreadSub);
+
+    // ✅ FIRST LOAD (IMPORTANT)
     this.notify.load();
+
+    // ✅ AUTO REFRESH (json-server fix)
+    const intervalSub = interval(2000).subscribe(() => {
+      this.notify.load();
+    });
+
+    this.subs.add(intervalSub);
   }
 
   openNotification(n: any): void {
@@ -104,5 +120,9 @@ export class ToolbarComponent implements OnInit {
         returnTo: window.location.origin
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe(); // ✅ cleanup
   }
 }

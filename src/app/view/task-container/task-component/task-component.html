@@ -39,22 +39,28 @@
   <!-- RIGHT COLUMN -->
   <div class="right">
 
-    <!-- STATS -->
+    <!-- ✅ INSIGHTS DASHBOARD -->
     <div class="stats">
 
       <div class="stat-card">
-        <h3>Total Tasks</h3>
-        <p>{{ tasks.length }}</p>
+        <h3>Active Users</h3>
+        <p>{{ activeUsersCount }}</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Latest Task</h3>
+        <p style="font-size:14px;font-weight:500;color:#374151;">
+          {{ latestTaskTitle }}
+        </p>
       </div>
 
       <div class="stat-card completed">
-        <h3>Completed</h3>
-        <p>{{ completedCount }}</p>
-      </div>
+        <h3>Productivity</h3>
+        <p>{{ productivityPercent }}%</p>
 
-      <div class="stat-card pending">
-        <h3>Pending</h3>
-        <p>{{ pendingCount }}</p>
+        <div class="progress-bar">
+          <div class="progress-fill" [style.width.%]="productivityPercent"></div>
+        </div>
       </div>
 
     </div>

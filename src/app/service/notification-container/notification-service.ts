@@ -9,25 +9,17 @@ export class NotificationService {
 
   private api = 'http://localhost:3000/notifications';
 
-  /* ========================= */
-  /* STATE                     */
-  /* ========================= */
   private _notifications = new BehaviorSubject<any[]>([]);
   notifications$ = this._notifications.asObservable();
 
-  /* ========================= */
-  /* UNREAD COUNT (TOOLBAR)    */
-  /* ========================= */
   unreadCount$ = this.notifications$.pipe(
     map(list => list.filter(n => !n.read).length)
   );
 
   constructor(private http: HttpClient) {}
 
-  /* ========================= */
-  /* LOAD (ON APP START / REFRESH) */
-  /* ========================= */
-  load(userId?: number): void {
+  // ✅ LOAD NOTIFICATIONS
+  load(userId?: string | number): void {
     const url = userId
       ? `${this.api}?userId=${userId}`
       : this.api;
@@ -43,26 +35,27 @@ export class NotificationService {
     });
   }
 
-  /* ========================= */
-  /* CREATE NOTIFICATION       */
-  /* ========================= */
+  // ✅ CREATE NOTIFICATION
   create(notification: any) {
-    return this.http.post<any>(this.api, {
+    const payload = {
+      id: crypto.randomUUID(), // ✅ important
       ...notification,
       read: false,
       createdAt: new Date().toISOString()
-    }).pipe(
+    };
+
+    return this.http.post<any>(this.api, payload).pipe(
       tap(created => {
         const updated = [created, ...this._notifications.value];
         this._notifications.next(updated);
+
+        // ✅ FORCE RELOAD FROM DB
+        this.load();
       })
     );
   }
 
-  /* ========================= */
-  /* MARK AS READ              */
-  /* ========================= */
-  markAsRead(id: number) {
+  markAsRead(id: string) {
     return this.http.patch(`${this.api}/${id}`, { read: true }).pipe(
       tap(() => {
         const updated = this._notifications.value.map(n =>
@@ -73,15 +66,11 @@ export class NotificationService {
     );
   }
 
-  /* ========================= */
-  /* DELETE NOTIFICATION       */
-  /* ========================= */
-  delete(id: number) {
+  delete(id: string) {
     return this.http.delete(`${this.api}/${id}`).pipe(
       tap(() => {
         const updated =
           this._notifications.value.filter(n => n.id !== id);
-
         this._notifications.next(updated);
       })
     );

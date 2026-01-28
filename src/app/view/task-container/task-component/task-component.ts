@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TaskService } from '../../../service/task-container/task-service';
 import { NotificationService } from '../../../service/notification-container/notification-service';
+import { AnalyticsService } from '../../../service/report-service-container/report-service';
 
 @Component({
   selector: 'app-task',
@@ -19,13 +20,14 @@ export class TaskComponent implements OnInit {
   task = {
     title: '',
     description: '',
-    assignedTo: null as number | null,
+    assignedTo: null as string | null, // ✅ FIXED (string)
     completed: false
   };
 
   constructor(
     private taskService: TaskService,
-    private notify: NotificationService
+    private notify: NotificationService,
+    private analyticsService: AnalyticsService
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +55,24 @@ export class TaskComponent implements OnInit {
     return this.tasks.filter(t => !t.completed).length;
   }
 
-  //  TASK ASSIGN (WITH PAYLOAD)
+  get activeUsersCount(): number {
+    if (!this.tasks.length) return 0;
+    const ids = this.tasks.map(t => t.assignedTo);
+    return new Set(ids).size;
+  }
+
+  get latestTaskTitle(): string {
+    return this.tasks.length
+      ? this.tasks[this.tasks.length - 1].title
+      : 'No tasks yet';
+  }
+
+  get productivityPercent(): number {
+    if (!this.tasks.length) return 0;
+    return Math.round((this.completedCount / this.tasks.length) * 100);
+  }
+
+  // ================= ASSIGN TASK =================
   assignTask(): void {
     if (!this.task.title || !this.task.assignedTo) {
       alert('Please fill all fields');
@@ -61,11 +80,24 @@ export class TaskComponent implements OnInit {
     }
 
     const assignedUser = this.users.find(
-      u => u.id === this.task.assignedTo
+      u => String(u.id) === String(this.task.assignedTo) // ✅ FIX
     );
 
-    this.taskService.createTask(this.task).subscribe(() => {
+    this.taskService.createTask(this.task).subscribe((createdTask: any) => {
 
+      const analytics = {
+        taskId: createdTask.id,
+        title: createdTask.title,
+        description: createdTask.description,
+        assignedTo: assignedUser?.name,
+        userId: createdTask.assignedTo,
+        status: 'ASSIGNED',
+        createdAt: new Date().toISOString()
+      };
+
+      this.analyticsService.addAnalytics(analytics).subscribe();
+
+      // ✅ NOTIFICATION
       this.notify.create({
         userId: this.task.assignedTo,
         type: 'TASK',
@@ -75,7 +107,9 @@ export class TaskComponent implements OnInit {
           description: this.task.description,
           assignedTo: assignedUser?.name
         }
-      }).subscribe();
+      }).subscribe(() => {
+        console.log('✅ Notification sent');
+      });
 
       this.task = {
         title: '',
@@ -88,17 +122,30 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  //  TASK COMPLETE (WITH PAYLOAD)
+  // ================= COMPLETE TASK =================
   finishTask(id: number): void {
     const task = this.tasks.find(t => t.id === id);
     if (!task) return;
 
     const assignedUser = this.users.find(
-      u => u.id === task.assignedTo
+      u => String(u.id) === String(task.assignedTo) // ✅ FIX
     );
 
     this.taskService.updateTask(id, { completed: true }).subscribe(() => {
 
+      const analytics = {
+        taskId: task.id,
+        title: task.title,
+        description: task.description,
+        assignedTo: assignedUser?.name,
+        userId: task.assignedTo,
+        status: 'COMPLETED',
+        createdAt: new Date().toISOString()
+      };
+
+      this.analyticsService.addAnalytics(analytics).subscribe();
+
+      // ✅ NOTIFICATION
       this.notify.create({
         userId: task.assignedTo,
         type: 'DONE',
@@ -108,7 +155,9 @@ export class TaskComponent implements OnInit {
           description: task.description,
           assignedTo: assignedUser?.name
         }
-      }).subscribe();
+      }).subscribe(() => {
+        console.log('✅ Notification sent');
+      });
 
       this.loadTasks();
     });

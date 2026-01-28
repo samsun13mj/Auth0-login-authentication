@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import * as XLSX from 'xlsx';
@@ -11,7 +11,7 @@ import { ApiService } from '../../../service/api-container/api-service';
   templateUrl: './files-component.html',
   styleUrls: ['./files-component.scss']
 })
-export class FilesComponent {
+export class FilesComponent implements OnInit {
 
   selectedFile: File | null = null;
   loading = false;
@@ -19,15 +19,54 @@ export class FilesComponent {
   errorMessage = '';
   isDragging = false;
 
+  previewData: any[] = [];
+  rawRows: any[] = [];
+  totalEmployees = 0;
+  totalHours = 0;
+  totalProjects = 0;
+  recentUploads: any[] = [];
+
+  uploadConfirmed = false;
+
   constructor(private api: ApiService) {}
 
-  /* FILE INPUT */
+  // ✅ RESTORE DATA WHEN PAGE LOADS
+  ngOnInit() {
+    const saved = sessionStorage.getItem('timesheetState');
+    if (saved) {
+      const data = JSON.parse(saved);
+
+      this.previewData = data.previewData || [];
+      this.rawRows = data.rawRows || [];
+      this.totalEmployees = data.totalEmployees || 0;
+      this.totalHours = data.totalHours || 0;
+      this.totalProjects = data.totalProjects || 0;
+      this.successMessage = data.successMessage || '';
+      this.uploadConfirmed = data.uploadConfirmed || false;
+    }
+  }
+
+  // ✅ SAVE STATE
+  saveState() {
+    sessionStorage.setItem(
+      'timesheetState',
+      JSON.stringify({
+        previewData: this.previewData,
+        rawRows: this.rawRows,
+        totalEmployees: this.totalEmployees,
+        totalHours: this.totalHours,
+        totalProjects: this.totalProjects,
+        successMessage: this.successMessage,
+        uploadConfirmed: this.uploadConfirmed
+      })
+    );
+  }
+
   onFileUpload(event: any) {
     const file = event.target.files[0];
     if (file) this.handleFile(file);
   }
 
-  /* DRAG & DROP */
   onDragOver(event: DragEvent) {
     event.preventDefault();
     if (!this.loading) this.isDragging = true;
@@ -47,12 +86,11 @@ export class FilesComponent {
     if (file) this.handleFile(file);
   }
 
-  /* HANDLE FILE */
   handleFile(file: File) {
 
-    this.loading = false;
     this.errorMessage = '';
     this.successMessage = '';
+    this.uploadConfirmed = false;
 
     if (!file.name.match(/\.(xls|xlsx)$/)) {
       this.errorMessage = 'Only Excel files (.xls, .xlsx) are allowed';
@@ -60,7 +98,6 @@ export class FilesComponent {
     }
 
     this.selectedFile = file;
-    this.loading = true;
 
     const reader = new FileReader();
 
@@ -72,27 +109,34 @@ export class FilesComponent {
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
 
-        /*  FIX: Explicit headers */
         const jsonData: any[] = XLSX.utils.sheet_to_json(sheet, {
           header: ['employeeId', 'date', 'hoursWorked', 'project'],
           defval: '',
           raw: true
         });
 
-        /* remove empty rows */
-        const cleanedData = jsonData.filter(
-          r => r.employeeId && r.date
-        );
+        const cleanedData = jsonData.filter(r => r.employeeId && r.date);
+        const filteredData = cleanedData.filter(
+         r => r.employeeId !== 'employeeId'
+       );
 
-        if (!cleanedData.length) {
-          throw new Error('Empty or invalid Excel structure');
-        }
+        this.rawRows = filteredData;
+        this.previewData = filteredData; // show all rows
 
-        this.processTimesheet(cleanedData);
 
-      } catch (err) {
-        console.error(err);
-        this.loading = false;
+        if (!cleanedData.length) throw new Error();
+
+        this.rawRows = cleanedData;
+        this.previewData = cleanedData; // show all rows
+
+        this.totalEmployees = new Set(cleanedData.map(r => r.employeeId)).size;
+        this.totalHours = cleanedData.reduce((sum, r) => sum + Number(r.hoursWorked), 0);
+        this.totalProjects = new Set(cleanedData.map(r => r.project)).size;
+
+        //  SAVE STATE
+        this.saveState();
+
+      } catch {
         this.errorMessage = 'Invalid Excel file structure';
       }
     };
@@ -100,7 +144,6 @@ export class FilesComponent {
     reader.readAsArrayBuffer(file);
   }
 
-  /* DATE FIX */
   excelDateToISO(value: any): string {
     if (typeof value === 'string') return value;
 
@@ -111,7 +154,39 @@ export class FilesComponent {
     return jsDate.toISOString().split('T')[0];
   }
 
-  /* PROCESS DATA */
+  confirmUpload() {
+    if (!this.rawRows.length || this.uploadConfirmed) return;
+
+    this.loading = true;
+    this.uploadConfirmed = true;
+
+    this.processTimesheet(this.rawRows);
+  }
+
+  cancelUpload() {
+    this.resetPage();
+  }
+
+  clearPage() {
+    this.resetPage();
+  }
+
+  resetPage() {
+    this.selectedFile = null;
+    this.previewData = [];
+    this.rawRows = [];
+    this.totalEmployees = 0;
+    this.totalHours = 0;
+    this.totalProjects = 0;
+    this.errorMessage = '';
+    this.successMessage = '';
+    this.loading = false;
+    this.uploadConfirmed = false;
+
+    // ✅ CLEAR SESSION STORAGE
+    sessionStorage.removeItem('timesheetState');
+  }
+
   processTimesheet(rows: any[]) {
 
     const uploadDate = this.excelDateToISO(rows[0].date);
@@ -147,8 +222,10 @@ export class FilesComponent {
         });
 
         this.loading = false;
-        this.successMessage =
-          `Timesheet for ${uploadDate} uploaded successfully`;
+        this.successMessage = `Timesheet for ${uploadDate} uploaded successfully`;
+
+        // ✅ SAVE STATE AFTER UPLOAD
+        this.saveState();
       });
     });
   }
