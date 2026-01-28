@@ -106,3 +106,28 @@
   background: #f9fafb;
   border-radius: 10px;
 }
+
+/* 🚫 REMOVE MATERIAL + BROWSER BORDER / OUTLINE */
+.close-btn {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* 🚫 REMOVE FOCUS BORDER */
+.close-btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 🚫 REMOVE MATERIAL RIPPLE EFFECT BORDER */
+::ng-deep .mat-mdc-icon-button .mdc-button__ripple {
+  display: none !important;
+}
+
+/* 🚫 REMOVE MATERIAL FOCUS RING */
+::ng-deep .mat-mdc-icon-button .mat-mdc-focus-indicator {
+  display: none !important;
+}
+
+
