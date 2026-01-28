@@ -53,7 +53,7 @@ export class TaskComponent implements OnInit {
     return this.tasks.filter(t => !t.completed).length;
   }
 
-  // ✅ TASK ASSIGN (WITH PAYLOAD)
+  //  TASK ASSIGN (WITH PAYLOAD)
   assignTask(): void {
     if (!this.task.title || !this.task.assignedTo) {
       alert('Please fill all fields');
@@ -88,7 +88,7 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  // ✅ TASK COMPLETE (WITH PAYLOAD)
+  //  TASK COMPLETE (WITH PAYLOAD)
   finishTask(id: number): void {
     const task = this.tasks.find(t => t.id === id);
     if (!task) return;

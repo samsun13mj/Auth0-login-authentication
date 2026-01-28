@@ -1,6 +1,174 @@
+/* =========================
+   🎨 THEME VARIABLES (SYNC WITH APP THEME)
+========================= */
+:root {
+  --primary: #2563eb;
+  --primary-soft: #eff6ff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --bg: #ffffff;
+}
+
+/* =========================
+   📄 PAGE LAYOUT
+========================= */
+.calendar-page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* =========================
+   🧭 HEADER BAR
+========================= */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 2px;
+}
+
+.calendar-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text);
+}
+
+.calendar-header p {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.calendar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.year-select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 12px;
+  outline: none;
+  background: var(--bg);
+}
+
+/* =========================
+   📦 CALENDAR CONTAINER
+========================= */
 .calendar-wrapper {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  background: var(--bg);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  padding: 10px;
+}
+
+/* =========================
+   🔝 TOOLBAR (PRO LOOK)
+========================= */
+:host ::ng-deep .fc-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+:host ::ng-deep .fc-toolbar-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* =========================
+   🔘 BUTTONS
+========================= */
+:host ::ng-deep .fc-button {
+  border-radius: 8px !important;
+  border: 1px solid var(--border) !important;
+  background: transparent !important;
+  color: var(--text) !important;
+  font-size: 12px;
+  padding: 4px 10px !important;
+  transition: 0.15s ease;
+}
+
+:host ::ng-deep .fc-button:hover {
+  background: var(--primary-soft) !important;
+  color: var(--primary) !important;
+}
+
+:host ::ng-deep .fc-button-active {
+  background: var(--primary) !important;
+  color: white !important;
+  border-color: var(--primary) !important;
+}
+
+/* =========================
+    GRID STYLE
+========================= */
+:host ::ng-deep .fc-theme-standard td,
+:host ::ng-deep .fc-theme-standard th {
+  border: 1px solid var(--border);
+}
+
+:host ::ng-deep .fc-col-header-cell {
+  background: #f9fafb;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* =========================
+    TODAY
+========================= */
+:host ::ng-deep .fc-day-today {
+  background: var(--primary-soft) !important;
+}
+
+/* =========================
+   📆 DAY NUMBER
+========================= */
+:host ::ng-deep .fc-daygrid-day-number {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* =========================
+    EVENTS (ENTERPRISE STYLE)
+========================= */
+:host ::ng-deep .fc-event-pro {
+  background: var(--primary) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 2px 6px !important;
+  font-size: 11px;
+  font-weight: 500;
+  color: white !important;
+}
+
+/* =========================
+    YEAR VIEW STYLE
+========================= */
+:host ::ng-deep .fc-multimonth {
+  gap: 14px;
+}
+
+:host ::ng-deep .fc-multimonth-month {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px;
+}
+
+/* =========================
+    RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  :host ::ng-deep .fc-toolbar {
+    flex-direction: column;
+    gap: 8px;
+  }
 }

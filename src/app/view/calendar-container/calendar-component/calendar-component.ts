@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FullCalendarModule } from '@fullcalendar/angular';
+import { FullCalendarModule, FullCalendarComponent } from '@fullcalendar/angular';
 
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import multiMonthPlugin from '@fullcalendar/multimonth';
 
 import { CalendarService, CalendarEvent } from '../../../service/calendar-container/calendar-service';
 
@@ -17,38 +18,70 @@ import { CalendarService, CalendarEvent } from '../../../service/calendar-contai
 })
 export class CalendarComponent implements OnInit {
 
+  @ViewChild('calendarRef') calendarRef!: FullCalendarComponent;
+
   calendarOptions: any;
   events: CalendarEvent[] = [];
+
+  years = Array.from({ length: 10 }, (_, i) => 2022 + i);
 
   constructor(private calendarService: CalendarService) {}
 
   ngOnInit() {
     this.calendarService.getEvents().subscribe(events => {
       this.events = events;
+
       this.calendarOptions = {
-        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, multiMonthPlugin],
+
         initialView: 'dayGridMonth',
+
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          right: 'multiMonthYear,dayGridMonth,timeGridWeek,timeGridDay'
         },
+
+        views: {
+          multiMonthYear: {
+            type: 'multiMonth',
+            duration: { months: 12 },
+            buttonText: 'Year'
+          }
+        },
+
         selectable: true,
-        events: this.events,
-        dateClick: this.onDateClick.bind(this)
+        editable: true,
+        nowIndicator: true,
+        dayMaxEvents: true,
+        height: 'auto',
+
+        events: this.events.map(e => ({
+          ...e,
+          classNames: ['fc-event-pro']
+        })),
+
+        dateClick: this.onDateClick.bind(this),
       };
     });
   }
 
   onDateClick(info: any) {
     const title = prompt('Enter event title');
-
     if (title) {
       this.calendarService.addEvent({
         id: Date.now().toString(),
         title,
         start: info.dateStr
       });
+    }
+  }
+
+  changeYear(event: any) {
+    const year = event.target.value;
+    const calendarApi = this.calendarRef?.getApi();
+    if (calendarApi) {
+      calendarApi.gotoDate(year + '-01-01');
     }
   }
 }

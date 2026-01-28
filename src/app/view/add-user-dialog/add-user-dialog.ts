@@ -38,7 +38,7 @@ export class AddUserDialogComponent {
     });
   }
 
-  /** ✅ 6-DIGIT NUMERIC STRING (json-server safe) */
+  /** ✅ 6-DIGIT NUMERIC STRING */
   private generateSixDigitId(): string {
     return String(Math.floor(100000 + Math.random() * 900000));
   }

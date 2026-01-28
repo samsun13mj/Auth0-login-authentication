@@ -21,6 +21,6 @@ export class SidenavService {
   }
 
   close() {
-    this._payload$.next({ open: false });
+    this._payload$.next({ open: false, user: null });
   }
 }

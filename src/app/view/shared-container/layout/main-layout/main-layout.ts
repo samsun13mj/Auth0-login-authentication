@@ -56,17 +56,17 @@ export class MainLayoutComponent
 
   ngAfterViewInit(): void {
 
-    /* 🔴 TEMP DEBUG — SEE JWT TOKEN */
+    /*  TEMP DEBUG — SEE JWT TOKEN */
     this.auth.getAccessTokenSilently().subscribe(token => {
       console.log('JWT ACCESS TOKEN:', token);
     });
 
-    /* 🔴 TEMP DEBUG — SEE AUTH0 USER OBJECT */
+    /*  TEMP DEBUG — SEE AUTH0 USER OBJECT */
     this.auth.user$.subscribe(user => {
       console.log('AUTH0 USER OBJECT:', user);
     });
 
-    /* ✅ EXISTING CODE — DO NOT CHANGE */
+    /*  EXISTING CODE — DO NOT CHANGE */
     const s = this.sidenavService.payload$.subscribe(payload => {
       this._sidenavUser = payload.user || null;
 

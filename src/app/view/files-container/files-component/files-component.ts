@@ -72,7 +72,7 @@ export class FilesComponent {
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
 
-        /* 🔥 FIX: Explicit headers */
+        /*  FIX: Explicit headers */
         const jsonData: any[] = XLSX.utils.sheet_to_json(sheet, {
           header: ['employeeId', 'date', 'hoursWorked', 'project'],
           defval: '',

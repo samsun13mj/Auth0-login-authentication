@@ -1,3 +1,23 @@
-<div class="calendar-wrapper">
-  <full-calendar [options]="calendarOptions"></full-calendar>
+<div class="calendar-page">
+
+  <!-- Top Header -->
+  <div class="calendar-header">
+    <div>
+      <h2>Project Calendar</h2>
+      <p>Manage tasks and events</p>
+    </div>
+
+    <!-- Quick Year Selector -->
+    <div class="calendar-actions">
+      <select class="year-select" (change)="changeYear($event)">
+        <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Calendar -->
+  <div class="calendar-wrapper">
+    <full-calendar #calendarRef [options]="calendarOptions"></full-calendar>
+  </div>
+
 </div>

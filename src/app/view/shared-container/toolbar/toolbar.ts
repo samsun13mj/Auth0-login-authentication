@@ -47,27 +47,27 @@ export class ToolbarComponent implements OnInit {
     this.auth.user$.subscribe(user => {
       if (user) {
 
-        // ✅ Show name before @gmail.com
+        //  Show name before @gmail.com
         this.userName = user.email
           ? user.email.split('@')[0]
           : user.name || 'User';
 
-        // ✅ Email
+        //  Email
         this.userEmail = user.email || '';
 
         const picture = user.picture || '';
 
-        // ✅ Google profile photo
+        //  Google profile photo
         if (picture.includes('googleusercontent')) {
           this.userPicture = picture.replace('s96-c', 's400-c');
           this.hasRealPicture = true;
         }
-        // ✅ Gravatar real photo
+        //  Gravatar real photo
         else if (picture.includes('gravatar') && !picture.includes('d=')) {
           this.userPicture = picture;
           this.hasRealPicture = true;
         }
-        // ✅ No photo → Gmail letter avatar
+        //  No photo → Gmail letter avatar
         else {
           this.hasRealPicture = false;
           this.userLetter = this.userName.charAt(0).toUpperCase();
@@ -75,7 +75,7 @@ export class ToolbarComponent implements OnInit {
       }
     });
 
-    // ✅ Notifications
+    //  Notifications
     this.notify.notifications$.subscribe(res => {
       this.notifications = res;
     });

@@ -1,10 +1,10 @@
 .dialog-container {
-  width: 100%;            // ✅ never hardcode smaller than dialog
-  max-width: 480px;       // ✅ matches dialog width
+  width: 100%;            //  never hardcode smaller than dialog
+  max-width: 480px;       //  matches dialog width
   padding: 24px 26px;
   background: #ffffff;
   border-radius: 16px;
-  box-sizing: border-box; // ✅ critical
+  box-sizing: border-box; //  critical
 }
 
 /* TITLE */

@@ -10,7 +10,7 @@ import { routes } from './app/app.routes';
 import { App } from './app/app';
 import { ThemeService } from './app/service/theme-container/theme-service';
 
-/** 🔥 Theme init factory */
+/**  Theme init factory */
 function initTheme(themeService: ThemeService) {
   return () => themeService.init();
 }
@@ -21,7 +21,7 @@ bootstrapApplication(App, {
     provideHttpClient(),
     provideAnimations(),
 
-    /** 🔥 FORCE THEME INIT BEFORE APP LOAD */
+    /**  FORCE THEME INIT BEFORE APP LOAD */
     {
       provide: APP_INITIALIZER,
       useFactory: initTheme,

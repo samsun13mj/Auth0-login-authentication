@@ -128,7 +128,7 @@
 
 .notification-btn {
   position: relative;
-  overflow: visible !important; /* ✅ fix clipping */
+  overflow: visible !important; /* clipping */
 }
 
 /* Icon wrapper */
@@ -152,7 +152,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;   /* ✅ always on top */
+  z-index: 9999;   /*  always on top */
   // box-shadow: 0 0 0 2px #1e38fa; /*  border like Gmail */
 }
 
@@ -191,7 +191,7 @@
 
 /* Space between notification and profile */
 .toolbar-gap {
-  width: 8px;   /* 👈 change value if you want more/less space */
+  width: 8px;   /*  change value if you want more/less space */
 }
 
 /* Optional: better spacing look like Google */

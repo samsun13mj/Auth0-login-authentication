@@ -8,34 +8,29 @@
   <!-- MAIN CONTENT -->
   <mat-sidenav-content class="content-area">
 
-    <!-- FIXED TOOLBAR -->
+    <!-- TOOLBAR -->
     <app-toolbar></app-toolbar>
 
-    <!-- PAGE CONTENT (SCROLL OWNER) -->
+    <!-- PAGE CONTENT -->
     <div class="main-content">
       <router-outlet></router-outlet>
     </div>
 
   </mat-sidenav-content>
 
-  <!-- RIGHT SIDENAV -->
+  <!-- RIGHT SIDENAV (USER DETAILS) -->
   <mat-sidenav
     #userDetailsSidenav
     mode="over"
     position="end"
-    class="user-details-sidenav">
+    class="user-details-sidenav"
+    [disableClose]="true">
 
-    <div class="sidenav-wrapper">
-      <div class="close-row">
-        <button mat-icon-button (click)="closeUserSidenav()">
-          <mat-icon>close</mat-icon>
-        </button>
-      </div>
+    <!-- ❌ REMOVED EXTRA CLOSE BUTTON HERE -->
 
-      <app-user-details-sidenav
-        [user]="_sidenavUser">
-      </app-user-details-sidenav>
-    </div>
+    <app-user-details-sidenav
+      [user]="_sidenavUser">
+    </app-user-details-sidenav>
 
   </mat-sidenav>
 

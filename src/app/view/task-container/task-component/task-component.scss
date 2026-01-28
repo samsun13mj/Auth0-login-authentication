@@ -140,7 +140,7 @@ button:hover {
   transition: all 0.3s ease;
 }
 
-/* ✅ COMPLETED TASK EFFECT */
+/*  COMPLETED TASK EFFECT */
 .task-list li.completed-task {
   opacity: 0.65;
   background: #ecfdf5;
@@ -175,7 +175,7 @@ button:hover {
   transition: all 0.3s ease;
 }
 
-/* ✅ FADE EFFECT AFTER FINISH */
+/* FADE EFFECT AFTER FINISH */
 .done-btn:disabled {
   opacity: 0.35;
   cursor: not-allowed;

@@ -33,15 +33,15 @@
     </button>
   </mat-menu>
 
-  <!-- 🔑 LOGIN BUTTON -->
+  <!--  LOGIN BUTTON -->
   @if (!(auth.isAuthenticated$ | async)) {
     <button mat-button (click)="login()">Login</button>
   }
 
-  <!-- ✅ SPACE BETWEEN NOTIFICATION & PROFILE -->
+  <!--  SPACE BETWEEN NOTIFICATION & PROFILE -->
   <div class="toolbar-gap"></div>
 
-  <!-- 👤 PROFILE ICON -->
+  <!--  PROFILE ICON -->
   @if (auth.isAuthenticated$ | async) {
     <div class="profile-container" [matMenuTriggerFor]="profileMenu">
       <div class="profile-avatar">
@@ -54,7 +54,7 @@
     </div>
   }
 
-  <!-- 👤 PROFILE DROPDOWN -->
+  <!--  PROFILE DROPDOWN -->
   <mat-menu #profileMenu="matMenu" class="profile-menu">
 
     <div class="profile-header">

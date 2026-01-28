@@ -26,7 +26,7 @@ export class ThemeService {
 
   constructor() {} // ❌ NO side effects here
 
-  /** 🔥 CALLED BY APP_INITIALIZER */
+  /**  CALLED BY APP_INITIALIZER */
   init(): void {
     const theme = this.loadTheme();
     this.themeSubject.next(theme);

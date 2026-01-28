@@ -1,15 +1,41 @@
 <div class="user-details-container" *ngIf="user">
+
+  <!-- HEADER -->
   <div class="header">
-    <h2>{{ user.name }}</h2>
+
+    <div class="title">
+      {{ user.name }}
+    </div>
+
+    <!-- ✅ SINGLE CLOSE BUTTON -->
+    <button class="close-btn" (click)="closeSidenav()">
+      <mat-icon>close</mat-icon>
+    </button>
+
   </div>
 
+  <!-- USER INFO -->
   <div class="info">
-    <p><strong>ID:</strong> {{ user.id }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Role:</strong> {{ user.role }}</p>
+
+    <div class="info-row">
+      <span>ID</span>
+      <span>{{ user.id }}</span>
+    </div>
+
+    <div class="info-row">
+      <span>Email</span>
+      <span>{{ user.email }}</span>
+    </div>
+
+    <div class="info-row">
+      <span>Role</span>
+      <span>{{ user.role }}</span>
+    </div>
+
   </div>
 
+</div>
 
 <div class="no-user" *ngIf="!user">
-  <p>Select a user to view details</p>
+  Select a user to view details
 </div>

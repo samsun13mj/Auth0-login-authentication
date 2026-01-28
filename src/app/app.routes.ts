@@ -19,11 +19,11 @@ export const routes: Routes = [
   {
     path: 'app',
     component: MainLayoutComponent,
-    canActivate: [authGuardFn], // ✅ CORRECT USAGE
+    canActivate: [authGuardFn], //  CORRECT USAGE
 
     children: [
 
-      // ❌ NO EMPTY REDIRECT HERE
+      //  NO EMPTY REDIRECT HERE
       // { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
       { path: 'dashboard', component: DashboardComponent },

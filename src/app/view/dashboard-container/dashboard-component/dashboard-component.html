@@ -2,19 +2,30 @@
 
   <!-- HEADER -->
   <div class="table-header">
+
     <h2>Dashboard</h2>
 
     <div class="header-actions">
-      <div class="search-box">
-        <mat-icon class="search-icon">search</mat-icon>
+
+      <!-- 🚀 Modern Clean Search Bar -->
+      <div class="search-box" [class.active]="showSearch">
+
+        <!-- Search Icon -->
+        <mat-icon class="search-icon" (click)="toggleSearch()">search</mat-icon>
 
         <input
           type="text"
-          placeholder="Search by name"
+          placeholder="Search users..."
           (keyup)="applyFilter($event)"
         />
+
+        <!-- Close Icon -->
+        <mat-icon class="close-icon" (click)="toggleSearch()">close</mat-icon>
+
       </div>
+
     </div>
+
   </div>
 
   <!-- LOADER -->
@@ -22,7 +33,7 @@
     <mat-spinner diameter="36"></mat-spinner>
   </div>
 
-  <!-- TABLE + PAGINATOR (DO NOT USE *ngIf HERE) -->
+  <!-- TABLE + PAGINATOR -->
   <div [hidden]="loading">
 
     <table mat-table [dataSource]="dataSource" class="user-table">

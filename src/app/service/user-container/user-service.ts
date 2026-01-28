@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-/** ✅ json-server SAFE MODEL */
+/**  json-server SAFE MODEL */
 export interface User {
   id: string;          // 🔑 MUST BE STRING
   name: string;

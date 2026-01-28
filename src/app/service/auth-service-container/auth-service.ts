@@ -13,22 +13,22 @@ import { map } from 'rxjs/operators';
 export class AuthService {
   constructor(private auth: Auth) {}
 
-  // 🔐 Login
+  //  Login
   login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 
-  // 🆕 Signup
+  //  Signup
   signup(email: string, password: string) {
     return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
-  // 🚪 Logout
+  //  Logout
   logout() {
     return signOut(this.auth);
   }
 
-  // ✅ SAFE auth state observable
+  // SAFE auth state observable
   isLoggedIn$(): Observable<boolean> {
     return authState(this.auth).pipe(
       map(user => !!user)

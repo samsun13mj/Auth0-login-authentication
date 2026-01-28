@@ -61,8 +61,50 @@
       "role": "User"
     }
   ],
-  "tasks": [],
+  "tasks": [
+    {
+      "id": "7480",
+      "title": "Development",
+      "description": "Develop the report",
+      "assignedTo": "883602",
+      "completed": false
+    },
+    {
+      "id": "e1bb",
+      "title": "Development",
+      "description": "Develop the message",
+      "assignedTo": "280783",
+      "completed": false
+    }
+  ],
   "profiles": [],
   "reports": [],
-  "notifications": []
+  "notifications": [
+    {
+      "id": "4b09",
+      "userId": "883602",
+      "type": "TASK",
+      "message": "New task assigned: Development",
+      "payload": {
+        "title": "Development",
+        "description": "Develop the report",
+        "assignedTo": "Luffy"
+      },
+      "read": true,
+      "createdAt": "2026-01-27T10:06:46.921Z"
+    },
+    {
+      "id": "8527",
+      "userId": "280783",
+      "type": "TASK",
+      "message": "New task assigned: Development",
+      "payload": {
+        "title": "Development",
+        "description": "Develop the message",
+        "assignedTo": "Zoro"
+      },
+      "read": true,
+      "createdAt": "2026-01-27T10:07:15.382Z"
+    }
+  ]
 }
