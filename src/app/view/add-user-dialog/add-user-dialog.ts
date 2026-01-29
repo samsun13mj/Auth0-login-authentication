@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators,
-  FormGroup
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { UserService, User } from '../../service/user-container/user-service';
 import { NotificationService } from '../../service/notification-container/notification-service';
@@ -38,7 +33,7 @@ export class AddUserDialogComponent {
     });
   }
 
-  /** ✅ 6-DIGIT NUMERIC STRING */
+  /**  6-DIGIT NUMERIC STRING */
   private generateSixDigitId(): string {
     return String(Math.floor(100000 + Math.random() * 900000));
   }

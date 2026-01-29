@@ -18,7 +18,7 @@ export class NotificationService {
 
   constructor(private http: HttpClient) {}
 
-  // ✅ LOAD NOTIFICATIONS
+  //  LOAD NOTIFICATIONS
   load(userId?: string | number): void {
     const url = userId
       ? `${this.api}?userId=${userId}`
@@ -35,10 +35,10 @@ export class NotificationService {
     });
   }
 
-  // ✅ CREATE NOTIFICATION
+  //  CREATE NOTIFICATION
   create(notification: any) {
     const payload = {
-      id: crypto.randomUUID(), // ✅ important
+      id: crypto.randomUUID(), 
       ...notification,
       read: false,
       createdAt: new Date().toISOString()
@@ -49,7 +49,7 @@ export class NotificationService {
         const updated = [created, ...this._notifications.value];
         this._notifications.next(updated);
 
-        // ✅ FORCE RELOAD FROM DB
+        //  FORCE RELOAD FROM DB
         this.load();
       })
     );

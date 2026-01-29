@@ -1,9 +1,4 @@
-import {
-  Component,
-  ViewChild,
-  OnInit,
-  AfterViewInit
-} from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -12,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
-
 import { UserService } from '../../../service/user-container/user-service';
 import { SidenavService } from '../../../service/sidenav-container/sidenav-service';
 
@@ -38,7 +32,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<any>([]);
   loading = false;
 
-  // ✅ Search toggle state
+  // Search toggle state
   showSearch = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -53,17 +47,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   this.fetchUsers();
 
-  // ✅ Listen URL changes always
+  //  Listen URL changes always
   this.route.queryParams.subscribe(params => {
     const userId = params['userId'];
 
     if (!userId) {
-      // ✅ If URL has no userId → close sidenav
+      //  If URL has no userId → close sidenav
       this.sidenavService.close();
       return;
     }
 
-    // ✅ If URL has userId → open sidenav
+    // If URL has userId → open sidenav
     const user = this.dataSource.data.find(u => String(u.id) === String(userId));
     if (user) {
       this.sidenavService.openWithUser(user);
@@ -87,7 +81,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
       this.loading = false;
 
-      // ✅ Trigger URL logic after data loads
+      // Trigger URL logic after data loads
       const userId = this.route.snapshot.queryParamMap.get('userId');
       if (userId) {
         const user = users.find(u => String(u.id) === String(userId));
@@ -119,7 +113,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.showSearch = !this.showSearch;
   }
 
-  // ✅ OPEN USER + UPDATE URL
+  // OPEN USER + UPDATE URL
   openUserDetails(user: any): void {
     this.sidenavService.openWithUser(user);
 

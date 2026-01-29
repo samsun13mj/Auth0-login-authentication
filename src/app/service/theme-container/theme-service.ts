@@ -24,7 +24,7 @@ export class ThemeService {
 
   theme$ = this.themeSubject.asObservable();
 
-  constructor() {} // ❌ NO side effects here
+  constructor() {} 
 
   /**  CALLED BY APP_INITIALIZER */
   init(): void {

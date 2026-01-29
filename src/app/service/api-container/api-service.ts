@@ -28,7 +28,7 @@ export class ApiService {
     return this.http.get<any[]>(this.baseUrl + '/reports?date=' + date);
   }
 
-  /*  FIXED: id is STRING */
+  /* id is STRING */
   deleteReportById(id: string) {
     return this.http.delete(this.baseUrl + '/reports/' + id);
   }

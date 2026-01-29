@@ -20,7 +20,7 @@ export class TaskComponent implements OnInit {
   task = {
     title: '',
     description: '',
-    assignedTo: null as string | null, // ✅ FIXED (string)
+    assignedTo: null as string | null, 
     completed: false
   };
 
@@ -80,7 +80,7 @@ export class TaskComponent implements OnInit {
     }
 
     const assignedUser = this.users.find(
-      u => String(u.id) === String(this.task.assignedTo) // ✅ FIX
+      u => String(u.id) === String(this.task.assignedTo) 
     );
 
     this.taskService.createTask(this.task).subscribe((createdTask: any) => {
@@ -97,7 +97,7 @@ export class TaskComponent implements OnInit {
 
       this.analyticsService.addAnalytics(analytics).subscribe();
 
-      // ✅ NOTIFICATION
+      //  NOTIFICATION
       this.notify.create({
         userId: this.task.assignedTo,
         type: 'TASK',
@@ -122,13 +122,13 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  // ================= COMPLETE TASK =================
+  // COMPLETE TASK 
   finishTask(id: number): void {
     const task = this.tasks.find(t => t.id === id);
     if (!task) return;
 
     const assignedUser = this.users.find(
-      u => String(u.id) === String(task.assignedTo) // ✅ FIX
+      u => String(u.id) === String(task.assignedTo) 
     );
 
     this.taskService.updateTask(id, { completed: true }).subscribe(() => {
@@ -145,7 +145,7 @@ export class TaskComponent implements OnInit {
 
       this.analyticsService.addAnalytics(analytics).subscribe();
 
-      // ✅ NOTIFICATION
+      //  NOTIFICATION
       this.notify.create({
         userId: task.assignedTo,
         type: 'DONE',

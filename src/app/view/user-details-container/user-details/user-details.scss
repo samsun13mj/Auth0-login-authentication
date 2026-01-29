@@ -25,7 +25,7 @@
   color: #111827;
 }
 
-/*  PERFECT CIRCLE CLOSE BUTTON */
+/* CIRCLE CLOSE BUTTON */
 .close-btn {
   width: 36px;
   height: 36px;
@@ -42,7 +42,7 @@
   transition: all 0.2s ease;
 }
 
-/*  PERFECT ICON CENTER FIX */
+/*  ICON CENTER FIX */
 .close-btn mat-icon {
   font-size: 20px;
   line-height: 1;
@@ -107,25 +107,25 @@
   border-radius: 10px;
 }
 
-/* 🚫 REMOVE MATERIAL + BROWSER BORDER / OUTLINE */
+/* REMOVE MATERIAL + BROWSER BORDER / OUTLINE */
 .close-btn {
   outline: none !important;
   box-shadow: none !important;
   border: none !important;
 }
 
-/* 🚫 REMOVE FOCUS BORDER */
+/*REMOVE FOCUS BORDER */
 .close-btn:focus {
   outline: none !important;
   box-shadow: none !important;
 }
 
-/* 🚫 REMOVE MATERIAL RIPPLE EFFECT BORDER */
+/* REMOVE MATERIAL RIPPLE EFFECT BORDER */
 ::ng-deep .mat-mdc-icon-button .mdc-button__ripple {
   display: none !important;
 }
 
-/* 🚫 REMOVE MATERIAL FOCUS RING */
+/* REMOVE MATERIAL FOCUS RING */
 ::ng-deep .mat-mdc-icon-button .mat-mdc-focus-indicator {
   display: none !important;
 }

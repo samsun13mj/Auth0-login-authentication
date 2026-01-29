@@ -59,16 +59,156 @@
       "name": "Jinbei",
       "email": "jinbei@gmail.com",
       "role": "User"
-    },
-    {
-      "id": "939740",
-      "name": "verveverv",
-      "email": "ervrev@weevwev",
-      "role": "ververv"
     }
   ],
-  "tasks": [],
-  "analytics": [],
+  "tasks": [
+    {
+      "id": "7966",
+      "title": "Report Component",
+      "description": "Developing the report component ",
+      "assignedTo": "280783",
+      "completed": true
+    },
+    {
+      "id": "56c0",
+      "title": "Message Component",
+      "description": "Developing the message component ",
+      "assignedTo": "268257",
+      "completed": false
+    },
+    {
+      "id": "cdc1",
+      "title": "Sidebar In and Out Button",
+      "description": "developing the sidebar in and out button if click that button the side bar get inside only the icon visible ",
+      "assignedTo": "818610",
+      "completed": false
+    },
+    {
+      "id": "4a9d",
+      "title": "Responsive View",
+      "description": "Make all components to mobile view still work is on",
+      "assignedTo": "371669",
+      "completed": false
+    }
+  ],
+  "analytics": [
+    {
+      "id": "e3e9",
+      "taskId": "7966",
+      "title": "Report Component",
+      "description": "Developing the report component ",
+      "assignedTo": "Zoro",
+      "userId": "280783",
+      "status": "ASSIGNED",
+      "createdAt": "2026-01-28T12:28:04.347Z"
+    },
+    {
+      "id": "8aa9",
+      "taskId": "7966",
+      "title": "Report Component",
+      "description": "Developing the report component ",
+      "assignedTo": "Zoro",
+      "userId": "280783",
+      "status": "COMPLETED",
+      "createdAt": "2026-01-28T12:28:18.088Z"
+    },
+    {
+      "id": "e1f5",
+      "taskId": "56c0",
+      "title": "Message Component",
+      "description": "Developing the message component ",
+      "assignedTo": "Vinsmoke Sanji",
+      "userId": "268257",
+      "status": "ASSIGNED",
+      "createdAt": "2026-01-28T12:28:55.148Z"
+    },
+    {
+      "id": "1e6d",
+      "taskId": "cdc1",
+      "title": "Sidebar In and Out Button",
+      "description": "developing the sidebar in and out button if click that button the side bar get inside only the icon visible ",
+      "assignedTo": "Nami",
+      "userId": "818610",
+      "status": "ASSIGNED",
+      "createdAt": "2026-01-28T12:35:28.136Z"
+    },
+    {
+      "id": "7848",
+      "taskId": "4a9d",
+      "title": "Responsive View",
+      "description": "Make all components to mobile view still work is on",
+      "assignedTo": "Tony Tony Chopper",
+      "userId": "371669",
+      "status": "ASSIGNED",
+      "createdAt": "2026-01-28T12:37:46.446Z"
+    }
+  ],
   "reports": [],
-  "notifications": []
+  "notifications": [
+    {
+      "id": "e4e616d2-9a95-4c68-a7f2-d9d44d3d89ed",
+      "userId": "280783",
+      "type": "TASK",
+      "message": "New task assigned: Report Component",
+      "payload": {
+        "title": "Report Component",
+        "description": "Developing the report component ",
+        "assignedTo": "Zoro"
+      },
+      "read": false,
+      "createdAt": "2026-01-28T12:28:04.348Z"
+    },
+    {
+      "id": "c5e36a6d-04ef-4bea-9f24-2c7f1fe103f8",
+      "userId": "280783",
+      "type": "DONE",
+      "message": "Task completed: Report Component",
+      "payload": {
+        "title": "Report Component",
+        "description": "Developing the report component ",
+        "assignedTo": "Zoro"
+      },
+      "read": false,
+      "createdAt": "2026-01-28T12:28:18.089Z"
+    },
+    {
+      "id": "abbb8556-7c07-485c-b01a-ba25fd3bdebf",
+      "userId": "268257",
+      "type": "TASK",
+      "message": "New task assigned: Message Component",
+      "payload": {
+        "title": "Message Component",
+        "description": "Developing the message component ",
+        "assignedTo": "Vinsmoke Sanji"
+      },
+      "read": false,
+      "createdAt": "2026-01-28T12:28:55.149Z"
+    },
+    {
+      "id": "681d8fd2-394c-46bd-a1c8-b771a8db159e",
+      "userId": "818610",
+      "type": "TASK",
+      "message": "New task assigned: Sidebar In and Out Button",
+      "payload": {
+        "title": "Sidebar In and Out Button",
+        "description": "developing the sidebar in and out button if click that button the side bar get inside only the icon visible ",
+        "assignedTo": "Nami"
+      },
+      "read": false,
+      "createdAt": "2026-01-28T12:35:28.137Z"
+    },
+    {
+      "id": "a025de00-3b30-4927-acbc-d74956bbd5da",
+      "userId": "371669",
+      "type": "TASK",
+      "message": "New task assigned: Responsive View",
+      "payload": {
+        "title": "Responsive View",
+        "description": "Make all components to mobile view still work is on",
+        "assignedTo": "Tony Tony Chopper"
+      },
+      "read": false,
+      "createdAt": "2026-01-28T12:37:46.446Z"
+    }
+  ]
 }

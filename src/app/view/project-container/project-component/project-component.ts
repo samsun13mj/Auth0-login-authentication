@@ -1,19 +1,8 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators,
-  FormGroup
-} from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { CommonModule, NgIf } from '@angular/common';
+import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { finalize } from 'rxjs/operators';
-
 import { UserService, User } from '../../../service/user-container/user-service';
 import { AddUserDialogComponent } from '../../add-user-dialog/add-user-dialog';
 
@@ -23,7 +12,8 @@ import { AddUserDialogComponent } from '../../add-user-dialog/add-user-dialog';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    NgIf
   ],
   templateUrl: './project-component.html',
   styleUrls: ['./project-component.scss']

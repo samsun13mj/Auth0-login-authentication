@@ -32,7 +32,6 @@ export class NotificationComponent implements OnInit {
     }
   }
 
-  //  THIS METHOD WAS MISSING
   markRead(n: any): void {
     this.notify.markAsRead(n.id).subscribe(() => {
       n.read = true;

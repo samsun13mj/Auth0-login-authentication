@@ -33,7 +33,7 @@
       <th>Title</th>
       <th>Status</th>
       <th>Date</th>
-      <th>Action</th> <!-- ✅ NEW -->
+      <th>Action</th> 
     </tr>
   </thead>
 
@@ -52,7 +52,7 @@
 
         <td>{{ r.createdAt | date:'medium' }}</td>
 
-        <!-- 🗑️ DELETE BUTTON -->
+        <!-- DELETE BUTTON -->
         <td>
            <button mat-icon-button class="delete-btn" (click)="deleteReport(r.id)">
            <mat-icon>delete</mat-icon>

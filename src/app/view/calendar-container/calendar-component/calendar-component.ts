@@ -62,7 +62,6 @@ export class CalendarComponent implements OnInit {
         dateClick: this.onDateClick.bind(this),
       };
 
-      //  FIX DATE MISSING BUG
       setTimeout(() => {
         this.calendarRef?.getApi().render();
       });

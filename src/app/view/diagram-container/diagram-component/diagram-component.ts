@@ -109,7 +109,7 @@ export class DiagramComponent implements AfterViewInit {
     link.addTo(this.graph);
   }
 
-  //  PROFESSIONAL ORG CHART LAYOUT 
+  //  ORG CHART LAYOUT 
   async loadUsersAndBuildDiagram() {
     const res = await fetch('http://localhost:3000/users');
     const users: User[] = await res.json();
@@ -122,7 +122,7 @@ export class DiagramComponent implements AfterViewInit {
     const paperWidth = this.paper.options.width as number;
 
     // =========================
-    //  ADMIN NODE (CENTER)
+    //  ADMIN NODE 
     // =========================
     const nodeWidth = 200;
     const adminX = paperWidth / 2 - nodeWidth / 2;

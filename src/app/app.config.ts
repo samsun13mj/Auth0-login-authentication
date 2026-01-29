@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimations(),
 
-    //  Auth0 official setup
+    //  Auth0 setup
     provideAuth0({
       domain: environment.auth0.domain,
       clientId: environment.auth0.clientId,

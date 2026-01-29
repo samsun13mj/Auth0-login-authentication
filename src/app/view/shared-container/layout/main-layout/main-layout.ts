@@ -1,21 +1,13 @@
-import {
-  Component,
-  ViewChild,
-  AfterViewInit,
-  OnDestroy
-} from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
-
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-
 import { AuthService } from '@auth0/auth0-angular';
-
 import { SidebarComponent } from '../../sidebar/sidebar';
 import { UserDetailsSidenavComponent } from '../../../user-details-container/user-details/user-details';
 import { SidenavService } from '../../../../service/sidenav-container/sidenav-service';
@@ -27,7 +19,6 @@ import { ToolbarComponent } from '../../toolbar/toolbar';
   imports: [
     CommonModule,
     RouterModule,
-
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
@@ -66,7 +57,6 @@ export class MainLayoutComponent
       console.log('AUTH0 USER OBJECT:', user);
     });
 
-    /*  EXISTING CODE — DO NOT CHANGE */
     const s = this.sidenavService.payload$.subscribe(payload => {
       this._sidenavUser = payload.user || null;
 

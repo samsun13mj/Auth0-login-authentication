@@ -1,13 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
-
 import { NotificationService } from '../../../service/notification-container/notification-service';
 import { AuthService } from '@auth0/auth0-angular';
 import { Subscription, interval } from 'rxjs';
@@ -38,7 +36,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   userLetter = '';
   hasRealPicture = false;
 
-  private subs = new Subscription(); // ✅ avoid memory leak
+  private subs = new Subscription(); 
 
   constructor(
     private notify: NotificationService,
@@ -48,7 +46,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    // ================= AUTH USER =================
+    // AUTH USER 
     const authSub = this.auth.user$.subscribe(user => {
       if (user) {
 
@@ -77,25 +75,25 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     this.subs.add(authSub);
 
-    // ================= NOTIFICATIONS =================
+    // NOTIFICATIONS 
 
     const notiSub = this.notify.notifications$.subscribe(res => {
       this.notifications = res;
-      console.log('🔔 Notifications loaded:', res); // ✅ DEBUG
+      console.log('🔔 Notifications loaded:', res); 
     });
 
     const unreadSub = this.notify.unreadCount$.subscribe(count => {
       this.unreadCount = count;
-      console.log('🔔 Unread count:', count); // ✅ DEBUG
+      console.log('🔔 Unread count:', count); 
     });
 
     this.subs.add(notiSub);
     this.subs.add(unreadSub);
 
-    // ✅ FIRST LOAD (IMPORTANT)
+    //  FIRST LOAD 
     this.notify.load();
 
-    // ✅ AUTO REFRESH (json-server fix)
+    // AUTO REFRESH (json-server)
     const intervalSub = interval(2000).subscribe(() => {
       this.notify.load();
     });
@@ -123,6 +121,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subs.unsubscribe(); // ✅ cleanup
+    this.subs.unsubscribe();
   }
 }

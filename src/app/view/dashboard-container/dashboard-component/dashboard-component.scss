@@ -27,13 +27,13 @@
 }
 
 /* ========================= */
-/* 🚀 Clean Modern Search Bar */
+/* Search Bar */
 /* ========================= */
 .search-box {
   display: flex;
   align-items: center;
   height: 42px;
-  width: 46px; /* icon visible when closed */
+  width: 46px; 
   background: #ffffff;
   border-radius: 10px;
   padding: 0 10px;
@@ -54,6 +54,7 @@
   font-size: 20px;
   color: #1976d2;
   cursor: pointer;
+  margin-top: 5px;
   flex-shrink: 0;
   transition: 0.2s;
 }
@@ -91,6 +92,7 @@
   color: #9ca3af;
   cursor: pointer;
   margin-left: 8px;
+  margin-top: 8px;
   opacity: 0;
   transition: 0.2s;
 }

@@ -1,6 +1,4 @@
-/* ===================================== */
 /* ANGULAR MATERIAL M3 BASE THEME        */
-/* ===================================== */
 
 @use '@angular/material' as mat;
 
@@ -15,9 +13,7 @@ html {
   ));
 }
 
-/* ===================================== */
 /* APP DESIGN TOKENS (SINGLE SOURCE)     */
-/* ===================================== */
 
 :root {
   --app-primary: #3B82F6;
@@ -39,9 +35,7 @@ html {
   --mat-sys-on-surface: #111827;
 }
 
-/* ===================================== */
 /* GLOBAL RESET                          */
-/* ===================================== */
 
 html,
 body {
@@ -56,9 +50,8 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ===================================== */
+
 /* GLOBAL LINKS                          */
-/* ===================================== */
 
 a,
 .active,
@@ -66,9 +59,7 @@ a,
   color: var(--app-highlight);
 }
 
-/* ===================================== */
 /* MATERIAL BASE LAYOUTS                 */
-/* ===================================== */
 
 mat-sidenav-container,
 mat-sidenav-content,
@@ -84,9 +75,7 @@ mat-card {
   color: var(--mat-sys-on-surface);
 }
 
-/* ===================================== */
 /* TOOLBAR THEME                         */
-/* ===================================== */
 
 mat-toolbar,
 .mat-mdc-toolbar {
@@ -102,9 +91,7 @@ mat-toolbar mat-icon {
   color: #ffffff;
 }
 
-/* ===================================== */
 /* SIDENAV THEME                         */
-/* ===================================== */
 
 mat-sidenav,
 .mat-mdc-drawer {
@@ -127,9 +114,7 @@ mat-sidenav .active {
   color: var(--app-primary);
 }
 
-/* ===================================== */
 /* DARK MODE                             */
-/* ===================================== */
 
 body.dark-mode {
   --app-background: #0f172a;
@@ -155,9 +140,8 @@ body.dark-mode mat-sidenav {
   color: #e5e7eb;
 }
 
-/* ===================================== */
+
 /* MATERIAL MENU (WHITE / DARK SAFE)     */
-/* ===================================== */
 
 .mat-mdc-menu-panel {
   --mdc-menu-container-color: var(--mat-sys-surface);

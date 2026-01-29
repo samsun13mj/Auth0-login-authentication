@@ -1,14 +1,12 @@
-/* ============================= */
 /* WRAPPER (SCOPES THE LOADER)  */
-/* ============================= */
+
 .profile-wrapper {
   position: relative;
   min-height: calc(100vh - 64px); /* below fixed navbar */
 }
 
-/* ============================= */
 /* LOADER OVERLAY               */
-/* ============================= */
+
 .spinner-overlay {
   position: absolute;
   inset: 0;
@@ -21,9 +19,8 @@
   z-index: 2;
 }
 
-/* ============================= */
 /* PROFILE CONTENT              */
-/* ============================= */
+
 .profile-container {
   display: flex;
   flex-direction: column;
@@ -33,9 +30,8 @@
   margin: 0 auto;
 }
 
-/* ============================= */
 /* HEADER CARD                  */
-/* ============================= */
+
 .profile-header {
   display: flex;
   align-items: center;
@@ -90,9 +86,8 @@
   }
 }
 
-/* ============================= */
 /* SECTIONS                     */
-/* ============================= */
+
 .profile-section {
   padding: 20px;
   border-radius: 12px;

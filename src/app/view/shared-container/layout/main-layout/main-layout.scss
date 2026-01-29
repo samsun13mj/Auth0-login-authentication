@@ -1,6 +1,5 @@
-/* ============================= */
 /* ROOT LAYOUT                  */
-/* ============================= */
+
 .dashboard-container {
   height: 100vh;
   overflow: hidden;
@@ -11,9 +10,8 @@ mat-sidenav-content {
   height: 100vh;
 }
 
-/* ============================= */
 /* SIDEBAR                      */
-/* ============================= */
+
 .sidebar {
   width: 250px;
   height: 100%;
@@ -27,9 +25,8 @@ mat-sidenav-content {
   border-radius: 0 !important;
 }
 
-/* ============================= */
 /* TOOLBAR (app-toolbar)        */
-/* ============================= */
+
 app-toolbar {
   position: fixed;
   top: 0;
@@ -39,9 +36,8 @@ app-toolbar {
   z-index: 1000;
 }
 
-/* ============================= */
 /* MAIN CONTENT (SCROLL OWNER)  */
-/* ============================= */
+
 .main-content {
   margin-left: 20px;
   padding: 16px;
@@ -69,9 +65,8 @@ app-toolbar {
   background: rgba(0, 0, 0, 0.55);
 }
 
-/* ============================= */
 /* USER DETAILS SIDENAV         */
-/* ============================= */
+
 .user-details-sidenav {
   position: fixed !important;
   top: 0;
@@ -98,9 +93,8 @@ app-toolbar {
   overflow-y: auto;
 }
 
-/* ============================= */
 /* USER DETAILS CLOSE BUTTON    */
-/* ============================= */
+
 .close-row {
   position: absolute;
   top: 16px;

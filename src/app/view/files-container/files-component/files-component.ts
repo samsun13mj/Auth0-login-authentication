@@ -30,7 +30,7 @@ export class FilesComponent implements OnInit {
 
   constructor(private api: ApiService) {}
 
-  // ✅ RESTORE DATA WHEN PAGE LOADS
+  // RESTORE DATA WHEN PAGE LOADS
   ngOnInit() {
     const saved = sessionStorage.getItem('timesheetState');
     if (saved) {
@@ -46,7 +46,7 @@ export class FilesComponent implements OnInit {
     }
   }
 
-  // ✅ SAVE STATE
+  //  SAVE STATE
   saveState() {
     sessionStorage.setItem(
       'timesheetState',
@@ -121,13 +121,13 @@ export class FilesComponent implements OnInit {
        );
 
         this.rawRows = filteredData;
-        this.previewData = filteredData; // show all rows
+        this.previewData = filteredData; 
 
 
         if (!cleanedData.length) throw new Error();
 
         this.rawRows = cleanedData;
-        this.previewData = cleanedData; // show all rows
+        this.previewData = cleanedData; 
 
         this.totalEmployees = new Set(cleanedData.map(r => r.employeeId)).size;
         this.totalHours = cleanedData.reduce((sum, r) => sum + Number(r.hoursWorked), 0);
@@ -183,7 +183,7 @@ export class FilesComponent implements OnInit {
     this.loading = false;
     this.uploadConfirmed = false;
 
-    // ✅ CLEAR SESSION STORAGE
+    //  CLEAR SESSION STORAGE
     sessionStorage.removeItem('timesheetState');
   }
 
@@ -224,7 +224,7 @@ export class FilesComponent implements OnInit {
         this.loading = false;
         this.successMessage = `Timesheet for ${uploadDate} uploaded successfully`;
 
-        // ✅ SAVE STATE AFTER UPLOAD
+        //  SAVE STATE AFTER UPLOAD
         this.saveState();
       });
     });

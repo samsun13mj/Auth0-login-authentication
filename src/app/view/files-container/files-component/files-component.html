@@ -42,7 +42,7 @@
         <strong>{{ selectedFile.name }}</strong>
       </p>
 
-      <!-- ✅ CONFIRM / CANCEL BEFORE UPLOAD -->
+      <!-- CONFIRM / CANCEL BEFORE UPLOAD -->
       <div class="action-buttons" *ngIf="selectedFile && previewData.length && !successMessage">
         <button class="confirm-btn"
                 (click)="confirmUpload()"
@@ -57,7 +57,7 @@
         </button>
       </div>
 
-      <!-- ✅ CLEAR AFTER UPLOAD -->
+      <!--  CLEAR AFTER UPLOAD -->
       <div class="action-buttons" *ngIf="successMessage">
         <button class="clear-btn" (click)="clearPage()">
           Clear
