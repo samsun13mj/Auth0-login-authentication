@@ -1,1 +1,38 @@
-<p>message-component works!</p>
+<div class="chat-wrapper">
+
+  <!-- HEADER -->
+  <div class="chat-header">
+    <div class="title">
+      <span class="status"></span>
+      <div>
+        <h4>Support Chat</h4>
+        <small>Online</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAT BODY -->
+  <div class="chat-body">
+    <div
+      class="bubble"
+      *ngFor="let msg of messages$ | async"
+      [class.me]="msg.sender === 'me'"
+      [class.other]="msg.sender === 'other'">
+
+      <p>{{ msg.text }}</p>
+      <span class="time">{{ msg.time }}</span>
+    </div>
+  </div>
+
+  <!-- INPUT -->
+  <div class="chat-input">
+    <input
+      type="text"
+      placeholder="Type your message..."
+      [(ngModel)]="messageText"
+      (keydown.enter)="send()" />
+
+    <button (click)="send()">➤</button>
+  </div>
+
+</div>

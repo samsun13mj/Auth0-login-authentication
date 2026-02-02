@@ -74,7 +74,7 @@
       "title": "Message Component",
       "description": "Developing the message component ",
       "assignedTo": "268257",
-      "completed": false
+      "completed": true
     },
     {
       "id": "cdc1",
@@ -141,6 +141,16 @@
       "userId": "371669",
       "status": "ASSIGNED",
       "createdAt": "2026-01-28T12:37:46.446Z"
+    },
+    {
+      "id": "7b58",
+      "taskId": "56c0",
+      "title": "Message Component",
+      "description": "Developing the message component ",
+      "assignedTo": "Vinsmoke Sanji",
+      "userId": "268257",
+      "status": "COMPLETED",
+      "createdAt": "2026-02-02T09:05:48.045Z"
     }
   ],
   "reports": [],
@@ -209,6 +219,19 @@
       },
       "read": false,
       "createdAt": "2026-01-28T12:37:46.446Z"
+    },
+    {
+      "id": "b83a2200-6f65-44a2-ac8b-6a62f4722125",
+      "userId": "268257",
+      "type": "DONE",
+      "message": "Task completed: Message Component",
+      "payload": {
+        "title": "Message Component",
+        "description": "Developing the message component ",
+        "assignedTo": "Vinsmoke Sanji"
+      },
+      "read": false,
+      "createdAt": "2026-02-02T09:05:48.046Z"
     }
   ]
 }

@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { authGuardFn } from '@auth0/auth0-angular';
-
 import { MainLayoutComponent } from './view/shared-container/layout/main-layout/main-layout';
 import { DashboardComponent } from './view/dashboard-container/dashboard-component/dashboard-component';
 import { adminGuard } from './core/guards/admin-container/admin-guard';
@@ -39,7 +38,7 @@ export const routes: Routes = [
         path: 'messages',
         loadComponent: () =>
           import('./view/message-container/message-component/message-component')
-            .then(m => m.MessageComponent)
+            .then(m => m.ChatComponent)
       },
 
       {
