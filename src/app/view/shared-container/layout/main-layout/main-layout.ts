@@ -39,7 +39,6 @@ export class MainLayoutComponent
 
   private subs = new Subscription();
   _sidenavUser: any = null;
-
   constructor(
     private sidenavService: SidenavService,
     private auth: AuthService

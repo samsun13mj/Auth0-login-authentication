@@ -3,9 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { APP_INITIALIZER } from '@angular/core';
-
 import { provideAuth0 } from '@auth0/auth0-angular';
-
 import { routes } from './app/app.routes';
 import { App } from './app/app';
 import { ThemeService } from './app/service/theme-container/theme-service';

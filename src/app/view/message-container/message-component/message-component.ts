@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
-
 import { ChatService } from '../../../service/chat-container/chat-service';
 import { ChatMessage } from '../../../service/chat-container/chat-model';
 

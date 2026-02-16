@@ -31,37 +31,37 @@ export class ChatService {
     const msg = userText.toLowerCase().trim();
     let replyText = '';
 
-    // 👋 Greetings
+    //  Greetings
     if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey')) {
       replyText = 'Hello 👋 How can I help you today?';
     }
 
-    // 🙂 How are you
+    //  How are you
     else if (msg.includes('how are you')) {
       replyText = 'I am doing great 😊 Thanks for asking!';
     }
 
-    // 🙏 Thanks
+    //  Thanks
     else if (msg.includes('thank')) {
       replyText = 'You’re welcome! Happy to help 👍';
     }
 
-    // 🛠 Help
+    //  Help
     else if (msg.includes('help') || msg.includes('support')) {
       replyText = 'Sure! Please tell me what issue you are facing.';
     }
 
-    // 💰 Pricing
+    //  Pricing
     else if (msg.includes('price') || msg.includes('cost')) {
       replyText = 'Our pricing depends on the project. Can you share more details?';
     }
 
-    // 👤 Who are you
+    //  Who are you
     else if (msg.includes('who are you')) {
       replyText = 'I am Bezohminds Support Bot 🤖';
     }
 
-    // ❓ Fallback
+    //  Fallback
     else {
       replyText = 'I didn’t fully understand that 🤔 Can you explain a bit more?';
     }

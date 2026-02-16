@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { Auth0Callback } from './auth0-callback';
 
 describe('Auth0Callback', () => {

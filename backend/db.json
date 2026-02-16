@@ -123,26 +123,6 @@
       "createdAt": "2026-01-28T12:28:55.148Z"
     },
     {
-      "id": "1e6d",
-      "taskId": "cdc1",
-      "title": "Sidebar In and Out Button",
-      "description": "developing the sidebar in and out button if click that button the side bar get inside only the icon visible ",
-      "assignedTo": "Nami",
-      "userId": "818610",
-      "status": "ASSIGNED",
-      "createdAt": "2026-01-28T12:35:28.136Z"
-    },
-    {
-      "id": "7848",
-      "taskId": "4a9d",
-      "title": "Responsive View",
-      "description": "Make all components to mobile view still work is on",
-      "assignedTo": "Tony Tony Chopper",
-      "userId": "371669",
-      "status": "ASSIGNED",
-      "createdAt": "2026-01-28T12:37:46.446Z"
-    },
-    {
       "id": "7b58",
       "taskId": "56c0",
       "title": "Message Component",
@@ -165,7 +145,7 @@
         "description": "Developing the report component ",
         "assignedTo": "Zoro"
       },
-      "read": false,
+      "read": true,
       "createdAt": "2026-01-28T12:28:04.348Z"
     },
     {
@@ -178,7 +158,7 @@
         "description": "Developing the report component ",
         "assignedTo": "Zoro"
       },
-      "read": false,
+      "read": true,
       "createdAt": "2026-01-28T12:28:18.089Z"
     },
     {
@@ -191,34 +171,8 @@
         "description": "Developing the message component ",
         "assignedTo": "Vinsmoke Sanji"
       },
-      "read": false,
+      "read": true,
       "createdAt": "2026-01-28T12:28:55.149Z"
-    },
-    {
-      "id": "681d8fd2-394c-46bd-a1c8-b771a8db159e",
-      "userId": "818610",
-      "type": "TASK",
-      "message": "New task assigned: Sidebar In and Out Button",
-      "payload": {
-        "title": "Sidebar In and Out Button",
-        "description": "developing the sidebar in and out button if click that button the side bar get inside only the icon visible ",
-        "assignedTo": "Nami"
-      },
-      "read": false,
-      "createdAt": "2026-01-28T12:35:28.137Z"
-    },
-    {
-      "id": "a025de00-3b30-4927-acbc-d74956bbd5da",
-      "userId": "371669",
-      "type": "TASK",
-      "message": "New task assigned: Responsive View",
-      "payload": {
-        "title": "Responsive View",
-        "description": "Make all components to mobile view still work is on",
-        "assignedTo": "Tony Tony Chopper"
-      },
-      "read": false,
-      "createdAt": "2026-01-28T12:37:46.446Z"
     },
     {
       "id": "b83a2200-6f65-44a2-ac8b-6a62f4722125",
@@ -230,7 +184,7 @@
         "description": "Developing the message component ",
         "assignedTo": "Vinsmoke Sanji"
       },
-      "read": false,
+      "read": true,
       "createdAt": "2026-02-02T09:05:48.046Z"
     }
   ]

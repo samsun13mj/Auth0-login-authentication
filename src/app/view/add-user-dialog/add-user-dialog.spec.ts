@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AddUserDialogComponent } from './add-user-dialog';
 
 describe('AddUserDialog', () => {

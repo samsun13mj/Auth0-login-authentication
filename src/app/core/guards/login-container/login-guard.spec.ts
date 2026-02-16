@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
-
 import { LoginGuard } from './login-guard';
 import { AuthService } from '../../../service/auth-service-container/auth-service';
 
